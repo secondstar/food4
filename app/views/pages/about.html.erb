@@ -1,0 +1,43 @@
+<%= content_for :title, 'About Us' %><br />
+<% content_for :side do -%>
+	<%# render :partial => "/shared/sidebar" %>
+<% end -%>
+
+<% content_for :title_section do -%>
+	<ul class="cols col1">
+		<!-- <a href="http://shine.yahoo.com/channel/health/how-to-break-a-habit-in-12-steps-2532888/" class="img"><img src="http://l.yimg.com/jn/util/anysize/310*275c-86400,http%3A%2F%2Fl.yimg.com%2Fa%2Fi%2Fus%2Fshine%2Fhealth%2F200382537-001.jpg" alt="Quit your bad habits—for good!" height="275" width="310"></a> -->
+		<div class="attr">
+
+			<h1><a href="" class="lnk"><%= yield(:title) ? yield(:title) : "Eateries" %></a></h1>
+		    
+		    </p>
+		</div>
+
+	</ul>
+<% end -%>
+<!--  -->
+		<div class="doc cls" id="ylf-blog">
+			<div id="ylf-blog-main" class="main">
+				<div class="cls" id="ylf-blogpost">
+					<div class="post-body cls">
+						<p><strong>Why was this site built?</strong><br />
+						The Walt Disney World experience is one of the most unique travel experiences around, and it's 
+						not just about rides.  You gotta eat, and you might as well eat well.  This site, actually a 
+						web application, is here to give you a quick "heads-up," and show you where you can learn 
+						more.  We heavily rely upon the expertise at <a href="http://touringplans.com">Touring Plans</a> 
+						and <a href="http://www.disneyfoodblog.com/">The Disney Food Blog</a>.  Each service can help make a 
+						good vacation great!</p>
+
+						<p>
+						<strong>Who is Capt. Proton Webworks?</strong><br />
+							<a href='http://home.captproton.com/'>Capt. Proton Webworks</a> puts together innovative 
+							online solutions, like this web application!  If you have any feedback about this website, 
+							please shoot us a tweet on <a href="http://twitter.com">Twitter</a>, or contact 
+							<a href="https://plus.google.com/101449212307497040120">+Carl Tanner</a> on Google Plus.
+						</p>
+						
+					</div>
+				</div>
+			</div>
+			<div class="side"></div>
+		</div>
