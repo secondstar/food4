@@ -4,7 +4,8 @@ require 'ostruct'
 
 describe Notebook do
   before do
-    @it = Notebook.new
+    @entries =[]
+    @it = Notebook.new(->{@entries})
   end
   
   it "has no entries" do
@@ -34,10 +35,10 @@ describe Notebook do
     end
   end
   describe "#add_entry" do
-    it "should add the eatery to the notebook" do
-      entry = Object.new
+    it "should add the entry to the notebook" do
+      entry = stub!
+      mock(entry).save
       @it.add_entry(entry)
-      @it.entries.must_include(entry)
     end
   end
   
