@@ -53,4 +53,30 @@ describe Eatery do
       @it.publish
     end
   end
+  
+  describe "#published_at" do
+    describe "before publishing" do
+      it "should be blank" do
+        @it.published_at.must_be_nil
+      end
+    end
+    
+    describe "after publishing" do
+      before do
+        @clock = stub!
+        @now = DateTime.parse("2011-09-11T02:56")
+        stub(@clock).now(){@now}
+        @it.notebook = stub!
+        @it.publish(@clock)
+      end
+      
+      it "should be a datetime" do
+        @it.published_at.class.must_equal(DateTime)
+      end
+      
+      it "should be the current time" do
+        @it.published_at.must_equal(@now)
+      end
+    end
+  end
 end
