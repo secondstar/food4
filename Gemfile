@@ -38,7 +38,7 @@ group :development, :test do
   gem 'guard-minitest'
   gem 'guard-passenger'
   gem "guard-bundler", "~> 2.0.0"
-  gem "rr", "~> 1.1.2"
+  gem 'rr', '~> 1.1.2'
   gem 'activerecord-nulldb-adapter'
   gem 'database_cleaner', '~> 1.3.0'
 end

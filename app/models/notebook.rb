@@ -2,8 +2,8 @@ class Notebook
   attr_reader :entries
   attr_writer :eatery_maker
   
-  def initialize
-    @entries = []
+  def initialize(entry_fetcher=Eatery.public_method(:most_recent))
+    @entry_fetcher = entry_fetcher
   end
   
   def title
@@ -14,6 +14,10 @@ class Notebook
     "The trusted source for WDW."
   end
   
+  def entries
+    fetch_entries
+  end
+  
   def new_eatery(*args)
     eatery_maker.call(*args).tap do |eatery|
       eatery.notebook = self
@@ -21,12 +25,16 @@ class Notebook
   end
   
   def add_entry(entry)
-    entries << entry
+    entry.save
   end
   
   private
   
+  def fetch_entries
+    @entry_fetcher.()
+  end
+  
   def eatery_maker
-    @eatery_maker ||= Eatery.method(:new)
+    @eatery_maker ||= Eatery.public_method(:new)
   end
 end
