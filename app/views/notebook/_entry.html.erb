@@ -1,6 +1,7 @@
 <article>
-	<header>
-		<p><%= entry.name %></p>
-	</header>
-	<p><%= entry.permalink %></p>
+  <header>
+    <p><time pubdate="pubdate"><%= entry.published_at %></time></p>
+    <h3><%= entry.name %></h3>
+  </header>
+  <%= entry.permalink %>
 </article>

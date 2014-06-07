@@ -1,0 +1,10 @@
+<h1>Eatery#new</h1>
+<p>Find me in app/views/eatery/new.html.erb</p>
+<h1>New Eatery</h1>
+<%= form_for @eatery do |f| %>
+  <%# f.error_messages %>
+  <%= f.text_field :name %>
+  <%= f.text_area :permalink %>
+
+  <%= f.submit %>
+<% end %>
