@@ -34,6 +34,6 @@ class Notebook
     @entry_fetcher.()
   end
   def eatery_maker
-    @eatery_maker ||= Eatery.method(:new)
+    @eatery_maker ||= Eatery.public_method(:new)
   end
 end
