@@ -3,6 +3,8 @@ require 'minitest/autorun'
 require 'rr'
 require 'ostruct'
 
+ActiveRecord::Migration.maintain_test_schema!
+
 class MiniTest::Unit::TestCase
   # include RR::Adapters::MiniTest
 end

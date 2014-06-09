@@ -1,0 +1,53 @@
+<%# title 'Food at Walt Disney World' %>
+<% content_for :title_section do -%>
+	<ul class="cols col1">
+		<!-- <a href="http://shine.yahoo.com/channel/health/how-to-break-a-habit-in-12-steps-2532888/" class="img"><img src="http://l.yimg.com/jn/util/anysize/310*275c-86400,http%3A%2F%2Fl.yimg.com%2Fa%2Fi%2Fus%2Fshine%2Fhealth%2F200382537-001.jpg" alt="Quit your bad habits—for good!" height="275" width="310"></a> -->
+		<div class="attr">
+
+			<h1><a style="text-decoration:none;" href="/" class="lnk"><%= content_for?(:title) ? yield(:title) : "Food at Walt Disney World" %></a></h1>
+			<p>&nbsp;</p>
+			<cite>Restaurant listings powered by <strong><a href="http://touringplans.com">TouringPlans.com</a> and <a href="http://disneyfoodblog.com">The Disney Food Blog</a>.</strong> </cite>
+		    
+		    </p>
+		</div>
+
+	</ul>
+	<% unless (params[:search_location]).blank? %>
+		<%= render :partial => '/shared/park_listing2', :locals => {:park_name => params[:search_location], :photo_search => params[:search_location] } %>
+	  
+	<% end %>
+	
+	
+
+	
+<% end -%>
+<% content_for :side do -%>
+	<%= render :partial => "/shared/sidebar" %>
+<% end -%>
+<!--  -->
+
+<!--  -->
+<% if params[:search_location].blank? %>
+<div class="cls col-bg">
+
+<div class="col">
+
+
+  <%# for district in @parks %>
+	  <%# render :partial => "/shared/park_listing", :object => district, :locals => {:last_listing => 'false', :column_number => '1'} %>
+  <%# end %>
+	
+	
+</div>
+
+<div class="col-c">
+  <%# for district in @lodgings %>
+	<%# if district.eateries.exists? %>
+	  <%# render :partial => "/shared/park_listing", :object => district, :locals => {:last_listing => 'false', :column_number => '1'} %>
+	<%# end %>
+  <%# end %>
+</div>
+</div>
+
+<!--  -->
+<% end %>

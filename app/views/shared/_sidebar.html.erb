@@ -1,0 +1,126 @@
+<div class="side">
+   	<div id="ylf-you" class="mod">
+			</div>
+    		<div id="ylf-pick" class="mod line">
+				<div class="hd"><h2>today's pictures</h2></div>
+				<div class="bd">
+					<ul class="thumbs">
+						<% if !@photos.blank? %>
+						  <% for photo in @photos.last(2) %>
+							<li>
+								<%= image_tag "http://farm#{photo['farm']}.static.flickr.com/#{photo['server']}/#{photo['flickr_id']}_#{photo['secret']}_m.jpg" %><br />
+								<%= photo.title %><br /><%= link_to "photo credit", "http://www.flickr.com/photos/#{photo['owner']}/#{photo['flickr_id']}" %>
+							</li>
+						  <% end %>
+						<% else %>
+						  <li>no photos found</li>
+						<% end %>
+
+						<!-- <li><img src="http://farm'.$a->farm.'.static.flickr.com/'.
+						$a->server.'/'.$a->id.'_'.$a->secret.'.jpg"></li> -->
+					</ul>
+					</ul>
+				</div>
+				<div class="ft"></div>
+			</div>
+<!--  -->
+<%= render :partial => '/shared/facebook_recommendation_section' %>
+
+<!-- 	 -->
+			<div id="ylf-vitality" class="mod line">
+				<div class="hd"><h2>Updates <span>Chatter about WDW&hellip;</span></h2></div>
+				<div class="bd">
+					<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+					<script>
+					new TWTR.Widget({
+					  version: 2,
+					  type: 'search',
+					  search: '<%= @tweet_search_term %>',
+					  interval: 6000,
+					  title: '<%= @tweet_search_term %>',
+					  subject: 'let\'s eat',
+					  width: 250,
+					  height: 300,
+					  theme: {
+					    shell: {
+					      background: '#8ec1da',
+					      color: '#ffffff'
+					    },
+					    tweets: {
+					      background: '#ffffff',
+					      color: '#444444',
+					      links: '#1985b5'
+					    }
+					  },
+					  features: {
+					    scrollbar: false,
+					    loop: true,
+					    live: true,
+					    hashtags: true,
+					    timestamp: true,
+					    avatars: true,
+					    toptweets: true,
+					    behavior: 'default'
+					  }
+					}).render().start();
+					</script>
+		
+				</div>
+				<div class="ft"><!-- <a href="/chatter/;_ylt=Aopon1nld16X.lGwAIyj2DZabqU5" class="more">See More Chatter &raquo;</a> --></div>
+			</div>
+    
+			<!-- <div id="ylf-pick" class="mod line">
+				<div class="hd"><h2>video of the day</h2></div>
+				<%# if !@video.first.blank? %>
+				    <%# @video_id = @video.first['id'] -%>
+				<%# else %>
+				  <%# @video_id ='Dla0huPbdDg' -%>
+				<%# end %>
+				
+				<div class="bd">
+					<iframe width="293" height="226" src="http://www.youtube.com/embed/<%# @video_id %>" frameborder="0" allowfullscreen></iframe>
+					<h3><a href="" ><%# @video.first['title'] %></a></h3>
+				</div>
+				<div class="ft"></div>
+			</div> -->
+			<!-- <div id="ylf-discover" class="mod line">
+				<div class="hd"><h2>More on WDW Hub</h2></div>
+				<div class="bd">
+					<ul class="thumbs">
+			
+						<li>
+							<a href="http://us.lrd.yahoo.com/_ylt=AmvuwqaFp3tg1Y8D30bTnxRabqU5/SIG=117k9r69c/**http%3A//dogandcatanswers.yahoo.com/" class="img"><img width="74" height="74" alt="All your dog & cat questions answered" src="http://l.yimg.com/jn/images/20110810215142/lz.png" class="lz"/></a>
+							<div class="txt">
+								<h4><a href="http://us.lrd.yahoo.com/_ylt=Ao99heTAjC_tvKT_Z85B2ERabqU5/SIG=117k9r69c/**http%3A//dogandcatanswers.yahoo.com/" class="title">All your dog & cat questions answered</a></h4>
+								<a href="http://us.lrd.yahoo.com/_ylt=AtTIWCiK8GKyWpNgAjy_ZOdabqU5/SIG=117k9r69c/**http%3A//dogandcatanswers.yahoo.com/" class="more">Read more &raquo;</a>
+							</div>
+						</li>
+						<li>
+							<a href="http://us.lrd.yahoo.com/_ylt=ApS2rKpVy41b6Y4TNI8UhuNabqU5/SIG=11fae85oa/**http%3A//movies.yahoo.com/showtimes-tickets/" class="img"><img width="74" height="74" alt="Get movie times and tickets" src="http://l.yimg.com/jn/images/20110810215142/lz.png" class="lz"/></a>
+							<div class="txt">
+								<h4><a href="http://us.lrd.yahoo.com/_ylt=AnVZExgZF_WoloXQjD34ErdabqU5/SIG=11fae85oa/**http%3A//movies.yahoo.com/showtimes-tickets/" class="title">Get movie times and tickets</a></h4>
+								<a href="http://us.lrd.yahoo.com/_ylt=AhAA_mIRq6Cj5RLiwnK7VRFabqU5/SIG=11fae85oa/**http%3A//movies.yahoo.com/showtimes-tickets/" class="more">Yahoo! Movies &raquo;</a>
+							</div>
+						</li>
+						<li>
+							<a href="http://us.lrd.yahoo.com/_ylt=AjGi5DjAyr6.AhZbaCvFMoZabqU5/SIG=13db48k2u/**http%3A//www.appolicious.com/shine/articles/9099-back-to-school-iphone-apps-from-elementary-to-grad-school" class="img"><img width="74" height="74" alt="Back-to-school iPhone apps" src="http://l.yimg.com/jn/images/20110810215142/lz.png" class="lz"/></a>
+							<div class="txt">
+								<h4><a href="http://us.lrd.yahoo.com/_ylt=Ap40inksw6zBfHbFM4ZSGz1abqU5/SIG=13db48k2u/**http%3A//www.appolicious.com/shine/articles/9099-back-to-school-iphone-apps-from-elementary-to-grad-school" class="title">Back-to-school iPhone apps</a></h4>
+								<a href="http://us.lrd.yahoo.com/_ylt=Am4iswB6RZ6a12tVTus8.YxabqU5/SIG=13db48k2u/**http%3A//www.appolicious.com/shine/articles/9099-back-to-school-iphone-apps-from-elementary-to-grad-school" class="more">See more apps &raquo;</a>
+							</div>
+						</li>
+						<li>
+							<a href="http://shine.yahoo.com/search/recipes;_ylt=AujE_gNyxzgvjIui0wHCsqFabqU5?p=ice+cream&owner=betterhomesgardens" class="img"><img width="74" height="74" alt="Top ice cream treats" src="http://l.yimg.com/jn/images/20110810215142/lz.png" class="lz"/></a>
+							<div class="txt">
+								<h4><a href="http://shine.yahoo.com/search/recipes;_ylt=Ari6IU9io8Go1AIWfLxRC3NabqU5?p=ice+cream&owner=betterhomesgardens" class="title">Top ice cream treats</a></h4>
+								<a href="http://shine.yahoo.com/search/recipes;_ylt=AgXP6Jmx1fcWiE6deCZ1.mpabqU5?p=ice+cream&owner=betterhomesgardens" class="more">For more recipes &raquo;</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="ft"></div>
+			</div>
+
+			<script type="text/javascript" charset="UTF-8">YAHOO.Lifestyles.ImageLoader.delayByView({el:"ylf-discover", cl:"lz", imgs:["http://l.yimg.com/jn/util/anysize/74*74c-86400,http%3A%2F%2Fl.yimg.com%2Fa%2Fi%2Fus%2Fshine%2Fmoreon%2F74.dog_cat.jpg","http://l.yimg.com/jn/util/anysize/74*74c-86400,http%3A%2F%2Fl.yimg.com%2Fa%2Fi%2Fus%2Fshine%2Fmoreon%2F73.popcorn_girl.jpg","http://l.yimg.com/jn/util/anysize/74*74c-86400,http%3A%2F%2Fl.yimg.com%2Fa%2Fi%2Fus%2Fshine%2Fmoreon%2F74.backtoschool.jpg","http://l.yimg.com/jn/util/anysize/74*74c-86400,http%3A%2F%2Fl.yimg.com%2Fa%2Fi%2Fus%2Fshine%2Fmoreon%2F74.ice_cream.jpg"]});</script> -->
+
+</div>
