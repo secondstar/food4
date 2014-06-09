@@ -1,0 +1,23 @@
+ <meta property="fb:app_id"      content="226894317368369"> 
+ <meta property="og:type"        content="wdwfood:eatery"> 
+ <meta property="og:url"         content="<%= request.url %>"> 
+<% unless @eatery.blank? %>
+	<meta property="og:title"       content="WDW Food: Get a taste of your upcoming vacation to Walt Disney World - Food on the WDW Hub!"> 
+	<meta property="og:description" content="WDW Food provides a look ahead for those dining at Walt Disney World."> 	
+<% end %>
+ <meta property="og:image"       content="https://s-static.ak.fbcdn.net/images/devsite/attachment_blank.png">
+
+<script type="text/javascript">
+function postCook()
+{
+    FB.api('/me/wdwfood:recommend' + 
+                '?eatery=<%= request.url %>','post',
+                function(response) {
+        if (!response || response.error) {
+                alert('Error occured');
+        } else {
+            alert('Post was successful! Action ID: ' + response.id);
+            }
+    });
+}
+</script>
