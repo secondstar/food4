@@ -1,6 +1,7 @@
 require 'httparty'
 require "retries"
 require 'logger'
+require_relative './touring_plans_com_feed'
 
 class WorldHarvester
   attr_accessor :notebook
@@ -16,22 +17,21 @@ class WorldHarvester
   format :json
   # --- Parks --- #
   # http://touringplans.com/magic-kingdom/dining.json
-  def self.find_park_eateries_list_by_permalink(district_permalink)
-    get("/#{district_permalink}/dining.json")
+  def self.find_park_eateries_list_by_permalink(district)
+    # get("/#{district_permalink}/dining.json")
+    TouringPlansComFeed.new(district, "","").fetch_listing
   end
     
-  def self.find_park_eateries_list_by_permalink_hash(district_permalink)
-    self.find_park_eateries_list_by_permalink(district_permalink).parsed_response
-  end
     
   # --- Lodging --- #
   # http://touringplans.com/walt-disney-world/resort-dining.json
   def self.find_list_of_lodging_districts
-    get('/walt-disney-world/resort-dining.json').parsed_response
+    TouringPlansComFeed.new("resorts", "","").fetch_listing
   end
 
   # http://touringplans.com/walt-disney-world/resort-dining.json
-  def self.find_resort_eateries_list_by_permalink(lodging_districts, resort_permalink)
+  def self.find_resort_eateries_list_by_permalink(resort_permalink)
+    lodging_districts = TouringPlansComFeed.new("resorts", "","").fetch_listing
     @resort_name_permalink_and_eateries = lodging_districts.select {|x| x['permalink'] == resort_permalink }
     @resort_eatery_names_and_permalinks = @resort_name_permalink_and_eateries[0]['dinings']
     return @resort_eatery_names_and_permalinks
@@ -45,9 +45,10 @@ class WorldHarvester
   
   # --- Menus at TouringPlans.com --- #
   # http://touringplans.com/magic-kingdom/dining/aloha-isle/menus/all-day-menu.json
-  def self.find_menu_by_permalink(eatery_permalink, menu_type_permalink)
-    @menu = get("/magic-kingdom/dining/#{eatery_permalink}/menus/#{menu_type_permalink}.json").parsed_response
-    return @menu    
+  def self.find_menu_by_permalink(district,eatery_permalink, menu_type_permalink)
+    # @menu = get("/magic-kingdom/dining/#{eatery_permalink}/menus/#{menu_type_permalink}.json").parsed_response
+    # return @menu    
+    TouringPlansComFeed.new(district, eatery_permalink,menu_type_permalink).get_menu_details_by_permalink
   end
   
 end
