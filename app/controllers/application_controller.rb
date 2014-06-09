@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   
   def init_notebook
     @notebook =  THE_NOTEBOOK
+    @world_harvester = THE_WORLD_HARVESTER
   end
   
   
