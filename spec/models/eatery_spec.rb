@@ -10,9 +10,6 @@ describe Eatery do
   end
   
 
-
-
-
   
   it "should support the reading and writing a notebook reference" do
     notebook = Object.new
