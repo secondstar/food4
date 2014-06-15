@@ -4,8 +4,17 @@ require 'ostruct'
 
 describe WorldHarvester do
   describe "find_park_eateries_list_by_permalink" do
-    let(:district) {"Magic Kingdom"}
-    subject { WorldHarvester.find_park_eateries_list_by_permalink(district) }
+    let(:district) {
+        OpenStruct.new(:publish_on => Date.new(2012, 3, 7),
+        :xyz_category_prefix => 'abc',
+        :kind => 'magic_unicorn',
+        :personal? => false,
+        :match => 1337,
+        :name => "Magic Kingdom")
+      }
+    
+    
+    subject { WorldHarvester.find_park_eateries_list_by_permalink(district.name) }
   
     it "works" do
       subject.must_equal [[{"name"=>"Aloha Isle", "permalink"=>"aloha-isle"}, 
@@ -185,21 +194,26 @@ describe WorldHarvester do
   end
   
   describe "find_eatery_by_permalink" do
-    let(:permalink) {"chuck-wagon"}
-    subject { WorldHarvester.find_eatery_by_permalink(permalink) }
+    let(:district_name) {"Animal Kingdom"}
+    let(:eatery_permalink) {"pizzafari"}
+    subject { WorldHarvester.find_eatery_by_permalink(district_name, eatery_permalink) }
     
     it "works" do
-      subject.size.must_equal 47
-      subject['permalink'].must_equal 'chuck-wagon'
+      subject.size.must_equal 45
+      subject['permalink'].must_equal 'pizzafari'
+      subject['name'].must_equal 'Pizzafari'
+      subject['cuisine'].must_equal 'American'
     end
   end
   
   describe "find_menu_by_permalink" do
+    
     # http://touringplans.com/magic-kingdom/dining/aloha-isle/menus/all-day-menu.json
-    let(:district) {"Magic Kingdom"}
+    let(:district_name) {"Magic Kingdom"}
     let(:eatery_permalink) {"aloha-isle"}
     let(:menu_type_permalink) {"all-day-menu"}
-    subject { WorldHarvester.find_menu_by_permalink(district,eatery_permalink, menu_type_permalink) }
+    
+    subject { WorldHarvester.find_menu_by_permalink(district_name, eatery_permalink, menu_type_permalink) }
     
     it "works" do
       subject.must_equal [{"menu"=>{"kids"=>false, "gratuity_included"=>false, "fixed_price_only"=>false, "adult_price"=>nil, "sales_tax_included"=>false, "description"=>"", "child_price"=>nil, "buffet"=>false, "name"=>"All Day Menu", "drinks"=>false, "verified_date"=>"May 21, 2014", "character_meal"=>false}}, {"dining"=>{"category_code"=>"counter_service", "short_name"=>"Aloha Isle"}}, {"menu_links"=>[{"links"=>[{"description"=>"", "price"=>"$3.29", "snack_credit"=>true, "name"=>"Fresh-cut Pineapple Spear", "market_price"=>false}, {"description"=>"", "price"=>"$2.99", "snack_credit"=>true, "name"=>"Assorted Chips", "market_price"=>false}, {"description"=>"", "price"=>"$3.29", "snack_credit"=>true, "name"=>"Fresh-cut Pineapple Spear", "market_price"=>false}], "group"=>"Snack"}, {"links"=>[{"description"=>"your choice of Pineapple, Vanilla, or Orange Dole Whip", "price"=>"$3.79", "snack_credit"=>true, "name"=>"Dole Whip Cup", "market_price"=>false}, {"description"=>"Your chioce of 2 flavors Pineapple, Vanilla, or Orange", "price"=>"$3.79", "snack_credit"=>true, "name"=>"Dole Whip Twist Cup", "market_price"=>false}, {"description"=>"Vanilla, Pineapple, or Orange Dole Whip with Pineapple Juice", "price"=>"$4.99", "snack_credit"=>true, "name"=>"Pineapple Float", "market_price"=>false}, {"description"=>"your chioce of Pineapple, Vanilla, or Orange Dole Whip", "price"=>"$4.49", "snack_credit"=>true, "name"=>"Fountain Beverage Float", "market_price"=>false}], "group"=>"Dessert"}, {"links"=>[{"description"=>nil, "price"=>"$4.00", "snack_credit"=>true, "name"=>"Smartwater", "market_price"=>false}, {"description"=>"", "price"=>"$2.50", "snack_credit"=>true, "name"=>"Dasani Bottled Water", "market_price"=>false}, {"description"=>"", "price"=>"$2.69", "snack_credit"=>true, "name"=>"Pineapple Juice", "market_price"=>false}, {"description"=>"", "price"=>"$3.79", "snack_credit"=>true, "name"=>"Simply Orange Orange Juice", "market_price"=>false}, {"description"=>"", "price"=>"$2.59", "snack_credit"=>true, "name"=>"Minute Maid Apple Juice", "market_price"=>false}, {"description"=>"", "price"=>"$2.29", "snack_credit"=>true, "name"=>"Hot Tea", "market_price"=>false}, {"description"=>"", "price"=>"$2.29", "snack_credit"=>true, "name"=>"Nestle Hot Cocoa", "market_price"=>false}, {"description"=>"regular or decaf", "price"=>"$2.29", "snack_credit"=>true, "name"=>"Coffee", "market_price"=>false}, {"description"=>"Coca-Cola, Diet Coke, Sprite, Minute Maid Light, Barq's Root Beer", "price"=>"$2.99", "snack_credit"=>true, "name"=>"Assorted Fountain Beverage - Regular", "market_price"=>false}, {"description"=>"Coca-Cola, Diet Coke, Sprite, Minute Maid Light, Barq's Root Beer", "price"=>"$3.19", "snack_credit"=>true, "name"=>"Assorted Fountain Beverage - Large", "market_price"=>false}], "group"=>"Beverage"}]}]

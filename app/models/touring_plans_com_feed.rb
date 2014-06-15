@@ -1,14 +1,14 @@
 require 'httparty'
 require "retries"
 require 'logger'
+require 'ostruct'
 
 class TouringPlansComFeed
 
-  attr_reader :district, :permalink, :menu_type_permalink
-  def initialize(district, permalink, menu_type_permalink) #Each park seperately lists its eateries, but all the resorts are in one feed.
+  attr_reader :district, :eatery
+  def initialize(district, eatery) #Each park seperately lists its eateries, but all the resorts are in one feed.
     @district = district
-    @permalink = permalink
-    @menu_type_permalink = menu_type_permalink
+    @eatery = eatery
   end
 
   include HTTParty
@@ -21,8 +21,8 @@ class TouringPlansComFeed
   #fetch a listing of all eateries in district
   def fetch_listing
     districts = district_name_and_permalink_hash 
-    district_permalink = districts.fetch(district) { 
-      raise "Whoa, cannot fetch listing,-- #{district} --  not a park or general listing of resorts." 
+    district_permalink = districts.fetch(district.name) { 
+      raise "Whoa, cannot fetch listing,-- #{district.name} --  not a park or general listing of resorts." 
     }
 
     # Technical:  Class (self) instead of an instance variable is used to access HTTParty params
@@ -43,7 +43,8 @@ class TouringPlansComFeed
   # --- Eatery Details --- #
   def get_eatery_details_by_permalink
     # http://touringplans.com/walt-disney-world/dining/chuck-wagon.json
-    @eatery = TouringPlansComFeed.get("/walt-disney-world/dining/#{permalink}.json").parsed_response
+    link = construct_eatery_permalink
+    @eatery = TouringPlansComFeed.get(link).parsed_response
   end
   
   # --- Menus at TouringPlans.com --- #
@@ -55,12 +56,12 @@ class TouringPlansComFeed
   end
   
   ################# ----- #################
-  private
+  # private
 
   def construct_eatery_permalink
     eatery_permalink = []
     eatery_permalink << eatery_permalink_root
-    eatery_permalink << permalink
+    eatery_permalink << eatery.permalink
     "#{eatery_permalink.join('/')}.json"
     
   end
@@ -68,17 +69,17 @@ class TouringPlansComFeed
   def construct_menu_permalink
     menu_permalink = []
     menu_permalink << eatery_permalink_root
-    menu_permalink << permalink
+    menu_permalink << eatery.permalink
     menu_permalink << "menus"
-    menu_permalink << menu_type_permalink
+    menu_permalink << eatery.menu_type_permalink
     "#{menu_permalink.join('/')}.json"
   end
   
 
   def eatery_permalink_root
     districts = eatery_permalink_root_hash
-    permalink_root = districts.fetch(district) { 
-      raise "Whoa, cannot fetch listing,-- #{district} --  not a park or general listing of resorts." 
+    permalink_root = districts.fetch(district.name) { 
+      raise "Whoa, cannot fetch listing,-- #{district.name} --  not a park or general listing of resorts." 
     }
   end
   
