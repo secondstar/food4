@@ -194,12 +194,15 @@ describe WorldHarvester do
   end
   
   describe "find_eatery_by_permalink" do
-    let(:permalink) {"chuck-wagon"}
-    subject { WorldHarvester.find_eatery_by_permalink(permalink) }
+    let(:district_name) {"Animal Kingdom"}
+    let(:eatery_permalink) {"pizzafari"}
+    subject { WorldHarvester.find_eatery_by_permalink(district_name, eatery_permalink) }
     
     it "works" do
-      subject.size.must_equal 47
-      subject['permalink'].must_equal 'chuck-wagon'
+      subject.size.must_equal 45
+      subject['permalink'].must_equal 'pizzafari'
+      subject['name'].must_equal 'Pizzafari'
+      subject['cuisine'].must_equal 'American'
     end
   end
   

@@ -44,15 +44,16 @@ class WorldHarvester
   
   # --- Eatery Details --- #
   # http://touringplans.com/walt-disney-world/dining/chuck-wagon.json
-  def self.find_eatery_by_permalink(permalink)
-    @eatery = get("/walt-disney-world/dining/#{permalink}.json").parsed_response
+  def self.find_eatery_by_permalink(district_name, eatery_permalink)
+    district = OpenStruct.new(:name => district_name)
+    eatery   = OpenStruct.new(:permalink => eatery_permalink, :menu_type_permalink => "")
+    @eatery = TouringPlansComFeed.new(district, eatery).get_eatery_details_by_permalink
   end
   
   # --- Menus at TouringPlans.com --- #
   # http://touringplans.com/magic-kingdom/dining/aloha-isle/menus/all-day-menu.json
   def self.find_menu_by_permalink(district_name, eatery_permalink, menu_type_permalink)
     # @menu = get("/magic-kingdom/dining/#{eatery_permalink}/menus/#{menu_type_permalink}.json").parsed_response
-    # return @menu    
     district = OpenStruct.new(:name => district_name)
     eatery   = OpenStruct.new(:permalink => eatery_permalink, :menu_type_permalink => menu_type_permalink)
     TouringPlansComFeed.new(district, eatery).get_menu_details_by_permalink
