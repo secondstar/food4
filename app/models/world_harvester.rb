@@ -17,21 +17,26 @@ class WorldHarvester
   format :json
   # --- Parks --- #
   # http://touringplans.com/magic-kingdom/dining.json
-  def self.find_park_eateries_list_by_permalink(district)
+  def self.find_park_eateries_list_by_permalink(district_name)
     # get("/#{district_permalink}/dining.json")
-    TouringPlansComFeed.new(district, "","").fetch_listing
+    params = {name: district_name}
+    district = OpenStruct.new(params)
+    eatery = OpenStruct.new(params)
+    TouringPlansComFeed.new(district, eatery).fetch_listing
   end
     
     
   # --- Lodging --- #
   # http://touringplans.com/walt-disney-world/resort-dining.json
   def self.find_list_of_lodging_districts
-    TouringPlansComFeed.new("resorts", "","").fetch_listing
+    district = OpenStruct.new(:name => "resorts")
+    eatery = OpenStruct.new
+    TouringPlansComFeed.new(district, eatery).fetch_listing
   end
 
   # http://touringplans.com/walt-disney-world/resort-dining.json
   def self.find_resort_eateries_list_by_permalink(resort_permalink)
-    lodging_districts = TouringPlansComFeed.new("resorts", "","").fetch_listing
+    lodging_districts = self.find_list_of_lodging_districts
     @resort_name_permalink_and_eateries = lodging_districts.select {|x| x['permalink'] == resort_permalink }
     @resort_eatery_names_and_permalinks = @resort_name_permalink_and_eateries[0]['dinings']
     return @resort_eatery_names_and_permalinks
@@ -45,10 +50,16 @@ class WorldHarvester
   
   # --- Menus at TouringPlans.com --- #
   # http://touringplans.com/magic-kingdom/dining/aloha-isle/menus/all-day-menu.json
-  def self.find_menu_by_permalink(district,eatery_permalink, menu_type_permalink)
+  def self.find_menu_by_permalink(district_name, eatery_permalink, menu_type_permalink)
     # @menu = get("/magic-kingdom/dining/#{eatery_permalink}/menus/#{menu_type_permalink}.json").parsed_response
     # return @menu    
-    TouringPlansComFeed.new(district, eatery_permalink,menu_type_permalink).get_menu_details_by_permalink
+    district = OpenStruct.new(:name => district_name)
+    eatery   = OpenStruct.new(:permalink => eatery_permalink, :menu_type_permalink => menu_type_permalink)
+    TouringPlansComFeed.new(district, eatery).get_menu_details_by_permalink
   end
   
+  def self.take_snapshot_review_of
+    tp = TouringPlansComFeed.new(target).get_eatery_details_by_permalink
+    
+  end
 end
