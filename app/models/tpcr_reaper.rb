@@ -25,7 +25,7 @@ class TpcrReaper
         archived_at: clock.now,
         district_id: district_id
       }
-      save_new_review(params)
+      archive_new_review(params)
     end
   end
   
@@ -47,7 +47,7 @@ class TpcrReaper
               archived_at: clock.now,
               district_id: resort_district.id
             }
-            save_new_review(params)        
+            archive_new_review(params)
           end
           
         end
@@ -55,10 +55,19 @@ class TpcrReaper
     end
   end
   
-  def save_new_review(params)
+  def archive_new_review(params)
     new_review = TouringPlansComReview.new(params)
     new_review.notebook = @notebook
-    notebook.add_entry(new_review)    
+    notebook.add_entry(new_review)
+
+    @review = TouringPlansComReview.where(permalink: new_review['permalink']).last
+    @eatery = Eatery.find_or_initialize_by(permalink: new_review[:permalink])
+    if @eatery.name.blank?
+      @eatery.name = new_review['name']
+      @eatery.save!
+    end
+    @snapshot = @review.snapshots.create!(:review_permalink => @review.permalink, :eatery => @eatery)
+    return @snapshot
   end
   
   def find_or_create_parent_district(params)

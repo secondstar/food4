@@ -2,7 +2,9 @@ require 'date'
 require 'active_record'
 
 class TouringPlansComReview < ActiveRecord::Base
-  
+  # has_many :eateries, through: :snapshots
+  has_many :snapshots, as: :review
+
   attr_accessor :notebook
   
   def archive(clock=DateTime)

@@ -17,7 +17,20 @@ class TouringPlansComFeed
   default_params :output => 'json'
   format :json
   
-  
+  # This is the starting point
+  def district_name_and_permalink_hash
+    districts = {
+      "Magic Kingdom"=>"/magic-kingdom/dining.json", 
+      "Epcot"=>"/epcot/dining.json", 
+      "Disney's Hollywood Studios"=>"/hollywood-studios/dining.json", 
+      "Animal Kingdom"=>"/animal-kingdom/dining.json",
+      "Typhoon Lagoon"=>"/typhoon-lagoon/dining.json",
+      "Blizzard Beach"=>"/blizzard-beach/dining.json",
+      "resorts" => "/walt-disney-world/resort-dining.json"
+    } 
+    
+  end
+    
   #fetch a listing of all eateries in district
   def fetch_listing
     districts = district_name_and_permalink_hash 
@@ -83,25 +96,12 @@ class TouringPlansComFeed
     }
   end
   
-  def district_name_and_permalink_hash
-    districts = {
-      "Magic Kingdom"=>"/magic-kingdom/dining.json", 
-      "Epcot"=>"/epcot/dining.json", 
-      "Hollywood Studios"=>"/hollywood-studios/dining.json", 
-      "Animal Kingdom"=>"/animal-kingdom/dining.json",
-      "Typhoon Lagoon"=>"/typhoon-lagoon/dining.json",
-      "Blizzard Beach"=>"/blizzard-beach/dining.json",
-      "resorts" => "/walt-disney-world/resort-dining.json"
-    } 
-    
-  end
-  
 
   def eatery_permalink_root_hash
     districts = {
       "Magic Kingdom"=>"/magic-kingdom/dining", 
       "Epcot"=>"/epcot/dining/", 
-      "Hollywood Studios"=>"/hollywood-studios/dining", 
+      "Disney's Hollywood Studios"=>"/hollywood-studios/dining", 
       "Animal Kingdom"=>"/animal-kingdom/dining",
       "Typhoon Lagoon"=>"/typhoon-lagoon/dining",
       "Blizzard Beach"=>"/blizzard-beach/dining",

@@ -1,0 +1,9 @@
+class Snapshot < ActiveRecord::Base
+  # This model combines a has_many :through relationship with a a polymorphic join.
+  # There is one eatery to many reviews of different types, including touringplans and 
+  # Disney Food Blog.  If another review source is found, it can be easily added, polymorphically.
+  # The eatery only culls data from the latest of each source, and caches it in its own table.
+  belongs_to :eatery
+  belongs_to :review, polymorphic: true
+  
+end
