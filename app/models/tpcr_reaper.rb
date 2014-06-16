@@ -13,6 +13,7 @@ class TpcrReaper
   
   
   def reap_park(clock=DateTime)
+    district_id = District.where(name: district.name).first.id
     reviews = WorldHarvester.find_park_eateries_list_by_permalink(district.name)[0]
     reviews.each do |review|
       eatery_permalink = review['permalink']
@@ -21,7 +22,8 @@ class TpcrReaper
         permalink: review['permalink'], 
         created_at: review['created_at'], 
         updated_at: review["updated_at"],
-        archived_at: clock.now
+        archived_at: clock.now,
+        district_id: district_id
       }
       save_new_review(params)
     end
