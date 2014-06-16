@@ -63,4 +63,5 @@ class WorldHarvester
     tp = TouringPlansComFeed.new(target).get_eatery_details_by_permalink
     
   end
+  
 end
