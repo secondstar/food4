@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140609185904) do
+ActiveRecord::Schema.define(version: 20140616031829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,8 @@ ActiveRecord::Schema.define(version: 20140609185904) do
     t.string   "permalink"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "archived_at"
+    t.integer  "district_id"
   end
 
 end
