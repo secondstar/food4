@@ -63,7 +63,9 @@ class TpcrReaper
     @review = TouringPlansComReview.where(permalink: new_review['permalink']).last
     @eatery = Eatery.find_or_initialize_by(permalink: new_review[:permalink])
     if @eatery.name.blank?
+      puts "params are #{params}"
       @eatery.name = new_review['name']
+      @eatery.district_id = new_review['district_id']
       @eatery.save!
     end
     @snapshot = @review.snapshots.create!(:review_permalink => @review.permalink, :eatery => @eatery)

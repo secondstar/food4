@@ -119,9 +119,9 @@ window.onload = function()
 	</div></div></div></div>
 	    	<div id="ylf-nav" class="nav">
 		<ul class="cls">
-			<%# @parks.each do |park| %>
-				<li class="<%# park.id == @parks.first.id ? 'first' : '' %>" ><%# link_to park.name, district_path(park) %></li>
-			<%# end %>
+			<% @parks.each do |park| %>
+				<li class="<%= park.id == @parks.first.id ? 'first' : '' %>" ><%= link_to park.name, district_path(park) %></li>
+			<% end %>
 			<li><a href="/districts?search_location=resort-dining" >Resorts</a></li>
 			<li><a href="/districts/downtown-disney" >Downtown Disney</a></li>
 		</ul>

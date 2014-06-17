@@ -1,5 +1,10 @@
 class District < ActiveRecord::Base
-  validates :name, :presence => true
+  validates :name, :permalink, presence: true
+  # attr_accessible :permalink, :name
+  
+  def to_param
+    "#{permalink}"
+  end
   
   attr_accessor :notebook
   
