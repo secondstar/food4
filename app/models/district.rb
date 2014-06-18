@@ -1,6 +1,6 @@
 class District < ActiveRecord::Base
   validates :name, :permalink, presence: true
-  # attr_accessible :permalink, :name
+  has_many :eateries
   
   def to_param
     "#{permalink}"

@@ -59,4 +59,6 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  get '/:id' => 'eateries#show', :as => 'eatery_permalink'
+  
 end
