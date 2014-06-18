@@ -73,7 +73,7 @@ class TpcrReaper
   end
   
   def find_or_create_parent_district(params)
-    District.find_or_initialize_by(permalink: params[:permalink]) do |district| # test if resort district already exists
+    District.find_or_create_by(permalink: params[:permalink]) do |district| # test if resort district already exists
       district.name = params[:name]
       district.is_park = params[:is_park]
       district.credit = params[:credit]       
