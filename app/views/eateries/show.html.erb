@@ -1,0 +1,274 @@
+<%= content_for(:title, "#{@eatery.name}") %><br />
+<% content_for :side do -%>
+	<%= render :partial => "/shared/sidebar" %>
+<% end -%>
+<% content_for :title_section do -%>
+	<ul class="cols col1">
+		<% if !@head_photo.blank? %>
+			<li class="last">
+				<div id="head-photo" style="width:310px;">
+					
+				</div>
+				<%= image_tag "http://farm#{@head_photo['farm']}.static.flickr.com/#{@head_photo['server']}/#{@head_photo['flickr_id']}_#{@head_photo['secret']}_m.jpg", :width => '301' %><br />
+				<%= @head_photo.title %><br /><%= link_to "photo credit", "http://www.flickr.com/photos/#{@head_photo['owner']}/#{@head_photo['flickr_id']}" %>
+			</li>
+		<% else %>
+		  <li>no photos found</li>
+		<% end %>
+
+		<!-- <a href="http://shine.yahoo.com/channel/health/how-to-break-a-habit-in-12-steps-2532888/" class="img"><img src="http://l.yimg.com/jn/util/anysize/310*275c-86400,http%3A%2F%2Fl.yimg.com%2Fa%2Fi%2Fus%2Fshine%2Fhealth%2F200382537-001.jpg" alt="Quit your bad habits—for good!" height="275" width="310"></a> -->
+		<div class="attr">
+
+			<h1><a href="" class="lnk"><%= content_for?(:title) ? yield(:title) : "WDW Food" %></a></h1>
+			<p><%= h(@eatery.location.html_safe) if @eatery.location %></p>
+			<p><%= h(@eatery.cuisine) %></p>
+			<p>&nbsp;</p>
+			<cite>This page powered by <strong><a href="http://touringplans.com">TouringPlans.com</a> and <a href="http://disneyfoodblog.com">The Disney Food Blog</a>.</strong> </cite>
+			<p><%= "Friendliness #{@eatery.friendliness_rating};" if !@eatery.friendliness_rating.blank? %> <%= "Overall #{@eatery.overall_rating}" if !@eatery.overall_rating.blank? %><br />
+		    
+		    </p>
+		</div>
+
+		<div class="attr">
+		</div>
+	</ul>
+	
+<% end -%>
+<div class="cls col-bg">
+                <div class="col">
+
+ <div class="mod line" id="ylf-offerings">
+	<div class="hd cls">
+		<div id="ylf-logo"><!-- gd2-status-2 --><!-- SpaceID=967143002 loc=LOGO noad -->
+<script language="javascript">
+if(window.yzq_d==null)window.yzq_d=new Object();
+window.yzq_d['b5wrOUoGYrE-']='&amp;U=12c2v1jkg%2fN%3db5wrOUoGYrE-%2fC%3d-1%2fD%3dLOGO%2fB%3d-1%2fV%3d0';
+</script><noscript>&lt;img width=1 height=1 alt="" src="http://us.bc.yahoo.com/b?P=3AbdvkPDkwG4TyGmTlHiOBkVYtLIik5YJgcACipw&amp;T=1at8bv6er%2fX%3d1314399751%2fE%3d967143002%2fR%3dyliving%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3dYAHOO%2fF%3d2292901123%2fH%3dY29udGVudD0iO3JlZnVybF9zaGluZV95YWhvb19jb207IiByZWZ1cmw9InJlZnVybF9zaGluZV95YWhvb19jb20iIHNlcnZlSWQ9IjNBYmR2a1BEa3dHNFR5R21UbEhpT0JrVll0TElpazVZSmdjQUNpcHciIHNpdGVJZD0iNDQ1NzA1MSIgdFN0bXA9IjEzMTQzOTk3NTE2OTAzNTQiIA--%2fQ%3d-1%2fS%3d1%2fJ%3d9992C343&amp;U=12c2v1jkg%2fN%3db5wrOUoGYrE-%2fC%3d-1%2fD%3dLOGO%2fB%3d-1%2fV%3d0"&gt;</noscript><!--QYZ ,;;LOGO;967143002;2;--></div>
+		<h2> Recommendations</h2>
+	</div>
+	<div class="bd">
+		<%- if !@eatery.house_specialties.blank? -%>
+		<p><%= h(@eatery.house_specialties.html_safe) %> — <em><%= link_to "Touring Plans.com", "http://touringplans.com/#{@eatery.permalink}" %> </em></p>
+		<% end %>
+		<%- if !@eatery.famous_dishes.blank? -%>
+			<p><%= h(@eatery.famous_dishes.html_safe) %> — <em><%= link_to "The Disney Food Blog", "http://DisneyFoodBlog.com/#{@eatery.dfb_permalink}" %> </em></p>
+		<% end %>
+	</div>
+</div>
+
+                    
+<div id="ylf-ch-L2" class="mod channel ch-L2 line">
+	<div class="hd"><h2>Menus</h2></div>
+	<div class="bd">
+		<div class="title">
+		</div>
+		<ul class="blt">
+			<% if !@eatery.adult_breakfast_menu_url.blank? %>
+			<li><div class="cls">
+				<%= link_to "Adult Breakfast", @eatery.adult_breakfast_menu_url %>
+		    </div></li>
+			<% end %>
+			<% if !@eatery.child_breakfast_menu_url.blank? %>
+			<li><div class="cls">
+				<%= link_to "Child Breakfast", @eatery.child_breakfast_menu_url %>
+		    </div></li>
+			<% end %>
+			<% if !@eatery.adult_lunch_menu_url.blank? %>
+			<li><div class="cls">
+				<%= link_to "Adult Lunch", @eatery.adult_lunch_menu_url %>
+			</div></li>
+			<% end %>
+			<% if !@eatery.adult_dinner_menu_url.blank? %>
+			<li><div class="cls">
+				<%= link_to "Adult Dinner", @eatery.adult_dinner_menu_url %>
+			</div></li>
+			<% end %>
+			<% if !@eatery.child_breakfast_menu_url.blank? %>
+			<li><div class="cls">
+			    <%= link_to "Child Dinner", @eatery.child_breakfast_menu_url %><br />
+			</div></li>
+			<% end %>
+		</ul>
+	</div>
+	<div class="ft"><a class="more" href=""></a></div>
+</div>
+
+<div class="mod line" id="ylf-cheat-sheet">
+	<div class="hd cls">
+		<div id="ylf-logo"><!-- gd2-status-2 --><!-- SpaceID=967143002 loc=LOGO noad -->
+<script language="javascript">
+if(window.yzq_d==null)window.yzq_d=new Object();
+window.yzq_d['myXJSGKJiTs-']='&amp;U=12c0e9sr3%2fN%3dmyXJSGKJiTs-%2fC%3d-1%2fD%3dLOGO%2fB%3d-1%2fV%3d0';
+</script><noscript>&lt;img width=1 height=1 alt="" src="http://us.bc.yahoo.com/b?P=npTXdEPDkwG4TyGmTlHiOA.UYtLIik5wNsEABN0e&amp;T=18lf8jp5h%2fX%3d1315976897%2fE%3d967143002%2fR%3dyliving%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3dYAHOO%2fF%3d3814200968%2fH%3dY29udGVudD0iOzsiIHNlcnZlSWQ9Im5wVFhkRVBEa3dHNFR5R21UbEhpT0EuVVl0TElpazV3TnNFQUJOMGUiIHNpdGVJZD0iNDQ1NzA1MSIgdFN0bXA9IjEzMTU5NzY4OTczMjkzNTUiIA--%2fQ%3d-1%2fS%3d1%2fJ%3d9692C343&amp;U=12c0e9sr3%2fN%3dmyXJSGKJiTs-%2fC%3d-1%2fD%3dLOGO%2fB%3d-1%2fV%3d0"&gt;</noscript><!--QYZ ,;;LOGO;967143002;2;--></div>
+		<h2> Good to Know</h2>
+	</div>
+	<div class="bd">
+		<ol class="nums">
+			<% if !@eatery_dfb_tips.blank? %>
+					<% numcount = 0 %>
+		 	  <% @eatery_dfb_tips.each do |dfb_tip| %>
+					<% numcount += 1 %>
+					<li class="num<%= numcount %>"><span><!-- --></span><div><%= dfb_tip.description %></li>
+				<% end %>
+			<% else %>
+			  <li>No tips yet!</li>
+		 	<% end %>
+		 	
+		</ol>
+	</div>
+</div>
+<div id="ylf-ch-L2" class="mod channel ch-L2 line">
+	<div class="hd"><h2>You Might also Like</h2></div>
+	<div class="bd">
+		<div class="title">
+		</div>
+		<p><%= !@eatery.you_might_also_like.blank? ? h(@eatery.you_might_also_like.html_safe) : "Sorry I don't have that for you right now." %></p>
+	</div>
+	<div class="ft"><a class="more" href=""></a></div>
+</div>
+
+<div id="ylf-ch-L2" class="mod channel ch-L2 last">
+	<div class="hd"><h2>bloggings</h2></div>
+	<div class="bd">
+		<div class="title">
+		</div>
+		
+		<ul class="thumbs">
+			<% if !@eatery_dfb_links.blank? %>
+		 	  <% @eatery_dfb_links.each do |dfb_link| %>
+			 	    <% if !dfb_link.href.blank? %>
+						<li><%= link_to image_tag("exclamation.png", :size => "32x32", :class => "lz"), dfb_link.href, :class => 'img' %>
+							<div class="txt">
+								<%= link_to dfb_link.description, dfb_link.href, :class => 'title' %>
+								<cite><%= link_to dfb_link.source.gsub(/.com\/.*/, '.com').gsub(/http:\/\//, '').gsub(/www./, ''), dfb_link.href, :class => 'title' %>
+								</cite>
+
+							</div>
+						</li>
+					<% end %>
+				<% end %>
+			<% else %>
+			  <li>No bloggings yet!</li>
+		 	<% end %>
+		 	
+		</ul>		
+	</div>
+	<div class="ft"><a class="more" href=""></a></div>
+</div>
+
+<script charset="UTF-8" type="text/javascript">YAHOO.Lifestyles.ImageLoader.delayByView({el:"ylf-ch-L2", cl:"lz", imgs:["http://l.yimg.com/jn/util/anysize/300*172c-86400,http%3A%2F%2Fl.yimg.com%2Fa%2Fi%2Fus%2Fshine%2Flove%2Fbd7835-001.jpg"]});</script>
+
+                    
+<!-- <div class="mod channel cls" id="ylf-blurb">
+	<div class="hd"><h2><a href="http://shine.yahoo.com/channel/none/my-favorites-this-week-2512322/">community</a></h2></div>
+	<div class="bd sm-img">
+		<a class="img" href="http://shine.yahoo.com/channel/none/my-favorites-this-week-2512322/"><img width="92" height="110" class="lz" src="http://l.yimg.com/a/i/us/shine/community/stars_92x110.jpg" alt="User post roundup!"></a>
+		<div class="title">
+			<em>User post roundup!</em>
+			<p>It's been another great week of user contributions. <a href="http://shine.yahoo.com/channel/none/my-favorites-this-week-2512322/">Come check out my absolute favorites.</a></p>
+			<cite></cite>
+		</div>
+	</div>
+</div> -->
+
+<!-- <script>YAHOO.Lifestyles.ImageLoader.delayByView({el:"ylf-blurb", cl:"lz", imgs:["http://l.yimg.com/a/i/us/shine/community/stars_92x110.jpg"]});</script> -->
+
+                </div>
+                <div class="col-c">
+                    
+<div id="ylf-ch-C1" class="mod channel ch-C1 line">
+	<div class="hd"><h2>Hours</h2></div>
+	<div class="bd">
+				
+		<div class="title">
+			<cite> </cite>
+		</div>
+		<ul class="blt">
+			<%# if !@eatery.when_to_go.blank? %>
+				<li><div class="cls">When to go: <%# @eatery.when_to_go %></div></li>
+			<%# else %>
+			  
+			<%# end %>
+			<li><div class="cls">Breakfast: <%= !@eatery.breakfast_hours.blank? ?  @eatery.breakfast_hours : "Times currently not available"%></div></li>
+			<li><div class="cls">Lunch: <%= !@eatery.lunch_hours.blank? ?  @eatery.lunch_hours : "Times currently not available" %></div></li>
+			<li><div class="cls">Dinner: <%= !@eatery.dinner_hours.blank? ?  @eatery.dinner_hours : "Times currently not available" %></div></li>
+		</ul>
+	</div>
+	<div class="ft"><!-- <a class="more" href="">Similar Restaurants »</a> --></div>
+</div>
+
+<script charset="UTF-8" type="text/javascript">YAHOO.Lifestyles.ImageLoader.delayByView({el:"ylf-ch-C1", cl:"lz", imgs:["http://l.yimg.com/jn/util/anysize/300*172c-86400,http%3A%2F%2Fphugcus.zenfs.com%2Fphugc%2F51a3e0fca03962d27994ea85e8d3c53c%2Fphotos%2Fc8ac1bc599aadf798c5d37034f47eeaf%2Fmr_a63a67c65ee7ad.jpg"]});</script>
+
+                    
+<div id="ylf-ch-C2" class="mod channel ch-C2">
+	<div class="hd"><h2>money + value</h2></div>
+	<div class="bd">
+		
+		<ul class="thumbs">
+			<li><a class="img" href=""><img width="73" height="73" class="lz" alt="paid reservations" src="http://farm3.static.flickr.com/2524/5845268015_2a5da93ca5_s.jpg"></a><div class="txt"><h3><%= label = @eatery.requires_pre_payment == 't' ? "Paid reservations required." : "Pay when the check comes" %></h3> <cite> </cite></div></li>
+			<li><a class="img" href=""><img width="73" height="73" class="lz" alt="Tables in Wonderland" src="http://farm6.static.flickr.com/5293/5532871520_68f78551a8_s.jpg"></a><div class="txt"><h3><%= "A Tables in Wonderland Restaurant? #{@eatery.tables_in_wonderland}" %></h3> <cite> </cite></div></li>
+			<li><a class="img" href=""><img width="73" height="73" class="lz" alt="" src="http://l.yimg.com/jn/util/anysize/73*73c-86400,http%3A%2F%2Fl.yimg.com%2Fa%2Fi%2Fus%2Fshine%2Ffood%2F73.eating_peas.jpg"></a><div class="txt"><h3>Entree price range is <%= !@eatery.entree_range.blank? ? "#{@eatery.entree_range}" : "not stated." %></h3> <cite> </cite></div></li>
+			<li><a class="img" href=""><img width="73" height="73" class="lz" alt="" src="http://l.yimg.com/jn/util/anysize/73*73c-86400,http%3A%2F%2Fl.yimg.com%2Fa%2Fi%2Fus%2Fshine%2Ffood%2F73.pbj.jpg"></a><div class="txt"><h3>On the Disney Dining Plan?  <%= !@eatery.disney_dining_plan.blank? ? h(@eatery.disney_dining_plan.html_safe) : "Nope, not this year." %></h3> <cite> </cite></div></li>
+		</ul>
+	</div>
+	<div class="ft"><a class="more" href=""></a></div>
+</div>
+
+<script charset="UTF-8" type="text/javascript">YAHOO.Lifestyles.ImageLoader.delayByView({el:"ylf-ch-C2", cl:"lz", imgs:["http://l.yimg.com/jn/util/anysize/73*73c-86400,http://farm3.static.flickr.com/2524/5845268015_2a5da93ca5_s.jpg","http://l.yimg.com/jn/util/anysize/73*73c-86400,http://farm6.static.flickr.com/5293/5532871520_68f78551a8_s.jpg","http://l.yimg.com/jn/util/anysize/73*73c-86400,http%3A%2F%2Fl.yimg.com%2Fa%2Fi%2Fus%2Fshine%2Ffood%2F73.eating_peas.jpg","http://l.yimg.com/jn/util/anysize/73*73c-86400,http%3A%2F%2Fl.yimg.com%2Fa%2Fi%2Fus%2Fshine%2Ffood%2F73.pbj.jpg"]});</script>
+
+                </div>
+            </div>
+	<div role="contentinfo" class="yui-u first" >
+		<!-- <p>
+
+		    <strong>wine list</strong> <%= @eatery.wine_list %><br />
+		    <strong>dinner hours</strong> <%= @eatery.dinner_hours %><br />
+		    <strong>breakfast hours</strong> <%= @eatery.breakfast_hours %><br />
+		    <%= link_to "Adult Breakfast Menu", @eatery.adult_breakfast_menu_url %><br />
+		    <strong>requires pre payment</strong> <%= @eatery.requires_pre_payment %><br />
+		    <strong>dress</strong> <%= @eatery.dress %><br />
+		    <strong>overall rating</strong> <%= @eatery.overall_rating %><br />
+		    <strong>counter quality rating</strong> <%= @eatery.counter_quality_rating %><br />
+		    <strong>awards</strong> <%= @eatery.awards %><br />
+		    <strong>requires credit card</strong> <%= @eatery.requires_credit_card %><br />
+		    <strong>category code</strong> <%= @eatery.category_code %><br />
+		    <strong>phone number</strong> <%= @eatery.phone_number %><br />
+		    <strong>parking</strong> <%= @eatery.parking %><br />
+		    <strong>lunch hours</strong> <%= @eatery.lunch_hours %><br />
+		    <strong>counter value rating</strong> <%= @eatery.counter_value_rating %><br />
+		    <%= link_to "child dinner menu", @eatery.child_dinner_menu_url %><br />
+		    <strong>cuisine</strong> <%= @eatery.cuisine %><br />
+		    <strong>bar</strong> <%= @eatery.bar %><br />
+		    <strong>thumbs up</strong> <%= @eatery.thumbs_up %><br />
+		    <strong>table quality rating</strong> <%= @eatery.table_quality_rating %><br />
+		    <strong>service rating</strong> <%= @eatery.service_rating %><br />
+			<%= @eatery.extinct_on if @eatery.extinct_on  %>
+		    <strong>entree range</strong> <%= @eatery.entree_range %><br />
+		    <strong>cost code</strong> <%= @eatery.cost_code %><br />
+		    <%= link_to "Adult lunch menu", @eatery.adult_lunch_menu_url %><br />
+		    <strong>table value rating</strong> <%= @eatery.table_value_rating %><br />
+		
+		    <strong>opened_on</strong> <%= @eatery.opened_on %><br />
+		    <strong>friendliness rating</strong> <%= @eatery.friendliness_rating %><br />
+		    <strong>portion size</strong> <%= @eatery.portion_size %><br />
+		    <strong>district_id</strong> <%= @eatery.district_id %><br />
+		    <strong>credit</strong> <%= @eatery.credit %><br />
+		    <strong>disney_permalink</strong> <%= @eatery.disney_permalink %><br />
+		    <strong>code</strong> <%= @eatery.code %><br />
+		    <strong>short_name</strong> <%= @eatery.short_name %><br />
+		    <%# @eatery.service %><br />
+		    <strong>disney_dining_plan</strong> <%= h(@eatery.disney_dining_plan) %><br />
+		    <strong>tables_in_wonderland</strong> <%= h(@eatery.tables_in_wonderland) %><br />
+		    <strong>menu</strong> <%= @eatery.menu %><br />
+		    <strong>important_info</strong> <%= @eatery.important_info %><br />
+		    <strong>famous_dishes</strong> <%= @eatery.famous_dishes %><br />
+			<p><strong>You Might also Like:</strong> <%= h(@eatery.you_might_also_like) %></p>
+		    <strong>Disney Food Blog Posts Mentioning <%= @eatery.name %></strong> <%= @eatery.dfb_posts %><br />
+		    <strong>dfb_permalink</strong>  <%= @eatery.dfb_permalink %><br />
+		    <strong>location</strong> <%= h(@eatery.location) %><br />
+		    <strong>district</strong> <%= h(@eatery.district) %><br />
+
+		</p> -->
+
+	</div>
+	

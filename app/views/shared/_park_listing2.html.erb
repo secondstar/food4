@@ -1,72 +1,18 @@
 <%# @photo = Eatery.find_photos(params[:search_location], 1) %>
 
-<% if !@district.blank? && @district.name == 'Epcot'%>
-<div class="mod line" id="ylf-vitality">
-		<div class="hd">
-			<div class="title">
-				<h3>Future World</h3>
-			</div>
-		</div>
-		<div class="bd">
-			<ul class="thumbs">
-				<% if !Eatery.location_search('Future World').blank? %>
-				  <% for eatery in Eatery.location_search('Future World') %>
-				<li>
-					<a class="img" href="/blog/FTHLJXYVQHSNDKDK4IMEBDCUHQ/"><img src="/images/exclamation.png" width="32" height="32" class="lz" alt="default eatery icon"></a>
-					<div class="txt">
-						<%= link_to eatery.name, eatery_permalink_path(eatery), :class => 'title' %>
-						<cite><%= "Friendliness #{eatery.friendliness_rating};" if !eatery.friendliness_rating.blank? %> <%= "Overall #{eatery.overall_rating}" if !eatery.overall_rating.blank? %></cite>
-
-					</div>
-				</li>
-				  <% end %>
-				<% else %>
-				  <p>no listings yet!</p>
-				<% end %>
-
-
-			</ul>
-		</div>
-		<div class="ft"></div>
-<!--  -->
-<div class="title">
-	<h3>World Showcase</h3>
-</div>
-<div class="bd">
-	<ul class="thumbs">
-		<% if !Eatery.location_search('World Showcase').blank? %>
-		  <% for eatery in Eatery.location_search('World Showcase') %>
-		<li>
-			<a class="img" href="/blog/FTHLJXYVQHSNDKDK4IMEBDCUHQ/"><img src="/images/exclamation.png" width="32" height="32" class="lz" alt="default eatery icon"></a>
-			<div class="txt">
-				<%= link_to eatery.name, eatery_permalink_path(eatery), :class => 'title' %>
-				<cite><%= "Friendliness #{eatery.friendliness_rating};" if !eatery.friendliness_rating.blank? %> <%= "Overall #{eatery.overall_rating}" if !eatery.overall_rating.blank? %></cite>
-
-			</div>
-		</li>
-		  <% end %>
-		<% else %>
-		  <p>no listings yet!</p>
-		<% end %>
-
-
-	</ul>
-</div>
-<div class="ft"></div>
-
-	</div>
-<% else %>
+<%# if !@district.blank? && @district.name == 'Epcot'%>
+<%# else %>
   
 <div class="mod line" id="ylf-vitality">
-	<div class="hd"><h2><%= (params[:search_location]).blank? ? '  ' : params[:search_location] %></span></h2></div>
+	<div class="hd"><h2><%= (params[:search_location]).blank? ? '  ' : "Resorts" %></span></h2></div>
 	<div class="bd">
 		<ul class="thumbs">
 			<% if !@eateries.blank? %>
 			  <% @eateries.each do |eatery| %>
 			<li>
-				<%= link_to image_tag("exclamation.png", :size => "32x32", :class => "lz"), eatery_permalink_path(eatery), :class => 'img' %>
-				<div class="txt">
-					<%= link_to eatery.name, eatery_permalink_path(eatery), :class => 'title' %>
+				<%= link_to image_tag("exclamation.png", :size => "32x32", :class => "lz"), eatery_permalink_path(eatery.permalink), :class => 'img' %>
+				<div class="txt">					
+					<%= link_to eatery.name, eatery_permalink_path(eatery.permalink), :class => 'title' %>
 					<cite><%= "Friendliness #{eatery.friendliness_rating};" if !eatery.friendliness_rating.blank? %> <%= "Overall #{eatery.overall_rating}" if !eatery.overall_rating.blank? %></cite>
 
 				</div>
@@ -81,4 +27,4 @@
 	</div>
 	<div class="ft"></div>
 </div>		
-<% end %>
+<%# end %>

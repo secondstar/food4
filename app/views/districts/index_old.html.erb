@@ -13,26 +13,42 @@
 		</div>
 
 	</ul>
-	<% if (params[:search_location]) == "resort-dining" %>
-		<%= render :partial => '/shared/park_listing2', 
-		:locals => {:park_name => "Resorts", 
-			:photo_search => params[:search_location] } %>
+	<% unless (params[:search_location]).blank? %>
+		<%= render :partial => '/shared/park_listing2', :locals => {:park_name => params[:search_location], :photo_search => params[:search_location] } %>
 	  
 	<% end %>
-<% end -%>
+	
+	
 
+	
+<% end -%>
 <% content_for :side do -%>
 	<%= render :partial => "/shared/sidebar" %>
 <% end -%>
 <!--  -->
 
 <!--  -->
-<% if params[:search_location] == "resort-dining" %> 
-<%# nb: lodgings will be shown no matter what the search_location is %>
-	<%= render :partial => 'resort_and_eatery_listing' %>
+<% if params[:search_location].blank? %>
+<div class="cls col-bg">
 
-	<!--  -->
-<%- else -%>
-	<%= render :partial => 'park_and_resort_eateries_listing' %>
+<div class="col">
+
+
+  <% for district in @parks %>
+	  <%= render :partial => "/shared/park_listing", :object => district, :locals => {:last_listing => 'false', :column_number => '1'} %>
+  <% end %>
 	
+	
+</div>
+
+<div class="col-c">
+  <% for district in @lodgings %>
+	<% if district.eateries.exists? %>
+	  <%= render :partial => "/shared/park_listing", :object => district, :locals => {:last_listing => 'false', :column_number => '1'} %>
+	<% end %>
+  <% end %>
+</div>
+</div>
+
+<!--  -->
 <% end %>
