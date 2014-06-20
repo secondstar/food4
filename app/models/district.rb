@@ -8,12 +8,22 @@ class District < ActiveRecord::Base
   
   attr_accessor :notebook
   
+  scope :not_a_park,               -> { where(is_park: false) }
+  scope :resorts, -> { not_a_park.where("name != ?", "Downtown Disney") }  
+  
   def publish(clock=DateTime)
     return false unless valid?
     self.published_at = clock.now
     save!
   end
   
+  def self.search_location(search_location)
+    if search_location == "resorts"
+      self.resorts
+    else
+      self.all
+    end
+  end
   # Touringplans.com does not have a list of parks, so we generate and store one in districts
   def self.update_each
     @districts  = [{name: "Magic Kingdom", permalink:   "magic-kingdom", is_park:  true},

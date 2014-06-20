@@ -1,0 +1,22 @@
+<div class="cls col-bg">
+
+	<div class="col">
+	  <% for district in @parks %>
+		  <%= render :partial => "/shared/park_listing", 
+		  :object => district, 
+		  :locals => {:last_listing => 'false', 
+			  :column_number => '1'} %>
+	  <% end %>
+	</div>
+
+	<div class="col-c">
+	  <% for district in @lodgings %>
+		<% if district.eateries.exists? %>
+		  <%= render :partial => "/shared/park_listing", 
+		  :object => district, 
+		  :locals => {:last_listing => 'false', 
+			  :column_number => '1'} %>
+		<% end %>
+	  <% end %>
+	</div>
+</div>

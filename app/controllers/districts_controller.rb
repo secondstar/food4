@@ -3,8 +3,8 @@ class DistrictsController < ApplicationController
   # GET /districts
   # GET /districts.json
   def index
-    @districts = District.all
-    @eateries =  Eatery.location_search(params[:search_location])
+    @districts = District.search_location(params[:search_location])
+    
     # @photos   = Photo.all.shuffle!.first(3)
     # @photo    = @photos.first
     # @tweet_search_term = 'wdw Food'
