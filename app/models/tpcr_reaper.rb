@@ -66,7 +66,7 @@ class TpcrReaper
       puts "params are #{params}"
       @eatery.name = new_review['name']
       @eatery.district_id = new_review['district_id']
-      @eatery.save!
+      @eatery.publish
     end
     @snapshot = @review.snapshots.create!(:review_permalink => @review.permalink, :eatery => @eatery)
     return @snapshot
