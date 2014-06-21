@@ -30,6 +30,12 @@ class Notebook
     end
   end
 
+  def new_photo(*args)
+    photo_maker.call(*args).tap do |photo|
+      photo.notebook = self
+    end
+  end
+  
   def find_or_initialize_district(*args)
     district_maker.call(*args).tap do |d|
       d.notebook = self
@@ -53,6 +59,10 @@ class Notebook
 
   def eatery_maker
     @eatery_maker ||= Eatery.public_method(:new)
+  end
+  
+  def photo_maker
+    @photo_maker ||= Photo.public_method(:new)
   end
   
   def tpcr_maker
