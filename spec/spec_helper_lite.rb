@@ -1,9 +1,11 @@
 ENV['RAILS_ENV'] ||= 'test'
+require File.expand_path('../../config/environment', __FILE__)
 require 'minitest/autorun'
 require 'rr'
 require 'ostruct'
 
-ActiveRecord::Migration.maintain_test_schema!
+# ActiveRecord::Migration.maintain_test_schema! # to be delelted if the line below works
+ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
 class MiniTest::Unit::TestCase
   # include RR::Adapters::MiniTest
