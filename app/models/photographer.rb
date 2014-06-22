@@ -22,10 +22,16 @@ class Photographer
     
   end
   
-  def self.publish_district_photos(photo_search='Epcot', quantity=9)
-    district_id = District.find_by_name(photo_search).id
-    photos = Photographer.find_district_photos(photo_search, quantity)
+  def self.publish_photos(photo_search='Epcot', quantity=9, photogenic_type='District')
     @notebook = Notebook.new(entry_fetcher=Photo.public_method(:most_recent))
+    if photogenic_type == 'Eatery'
+      photogenic_id = Eatery.find_by_name(photo_search).id
+      photos = Photographer.find_photos(photo_search, quantity)
+    else
+      photogenic_type='District'
+      photogenic_id = District.find_by_name(photo_search).id
+      photos = Photographer.find_district_photos(photo_search, quantity)
+    end
     
     photos.each do |photo|
       url = "https://farm#{photo['farm']}.staticflickr.com/#{photo['server']}/#{photo['id']}_#{photo['secret']}.jpg"
@@ -35,8 +41,8 @@ class Photographer
         flickr_id: photo['id'],
         title: photo['title'],
         secret: photo['secret'],
-        photogenic_id: district_id,
-        photogenic_type: "District",
+        photogenic_id: photogenic_id,
+        photogenic_type: photogenic_type,
         url: url
         )
 

@@ -5,7 +5,7 @@ class DistrictsController < ApplicationController
   def index
     @districts = District.search_location(params[:search_location])
     
-    # @photos   = Photo.all.shuffle!.first(3)
+    @photos   = Photo.all.to_a.shuffle!.first(3)
     # @photo    = @photos.first
     # @tweet_search_term = 'wdw Food'
   end
@@ -18,6 +18,8 @@ class DistrictsController < ApplicationController
   def show
     @district = District.find_by_permalink(params[:id])
     @eateries = @district.eateries
+    @photos   = @district.photos.all.to_a.shuffle!.first(2)
+    @photo    = @district.photos.all.to_a.shuffle!.last(1)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @district }

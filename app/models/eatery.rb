@@ -4,6 +4,8 @@ require 'active_record'
 class Eatery < ActiveRecord::Base
   validates :name, :presence => true
   belongs_to :district
+  has_many :photos, :as => :photogenic
+
   attr_accessor :notebook
   
   def self.most_recent
