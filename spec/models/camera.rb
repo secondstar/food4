@@ -5,7 +5,7 @@ class Camera
   
   include HTTParty
   
-  def initialize(photo_target) #Each park seperately lists its eateries, but all the resorts are in one feed.
+  def initialize(photo_target)
     @photo_target = photo_target
   end
   

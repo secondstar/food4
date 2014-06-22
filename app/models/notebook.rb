@@ -1,6 +1,6 @@
 class Notebook
   attr_reader :entries
-  attr_writer :eatery_maker, :district_maker, :tpcr_maker
+  attr_writer :eatery_maker, :district_maker, :tpcr_maker, :photo_maker
   
   def initialize(entry_fetcher=Eatery.public_method(:most_recent))
     @entry_fetcher = entry_fetcher

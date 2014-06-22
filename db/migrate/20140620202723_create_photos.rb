@@ -6,7 +6,7 @@ class CreatePhotos < ActiveRecord::Migration
       t.string :server
       t.string :owner
       t.integer :photogenic_id
-      t.string :photogenic_kind
+      t.string :photogenic_type
       t.string :flickr_id
       t.string :title
 
