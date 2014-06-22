@@ -17,5 +17,15 @@ describe Photographer do
     subject.length.must_equal 9
   end
   
+  describe "search results less than one" do
+    let(:photo_search) { "Disney's Fort Wilderness Resort Cabins"}
+    let(:quantity) { 9 }
+    
+    subject { Photographer.find_photos(photo_search, quantity) }
+    
+    it "works" do
+      subject.must_equal "something"
+    end
+  end
   
 end
