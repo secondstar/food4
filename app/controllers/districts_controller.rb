@@ -6,7 +6,7 @@ class DistrictsController < ApplicationController
     @districts = District.search_location(params[:search_location])
     
     @photos   = Photo.all.to_a.shuffle!.first(3)
-    # @photo    = @photos.first
+    @photo    = Photo.all.to_a.shuffle!.last
     # @tweet_search_term = 'wdw Food'
   end
 
