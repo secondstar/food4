@@ -1,0 +1,44 @@
+<% park_name = park_listing.name %>
+<% park_name_class = 'mod ' %>
+<% column_number == 1 ? park_name_class : park_name_class += "mod channel ch-C3 "  %>
+<% last_listing == 'true' ? park_name_class  += "cls ": park_name_class += "line "  %>
+<%# @park_photo = park_listing.photos.first -%>
+
+<% if park_name == 'Epcot'%>
+<%# render :partial => 'epcot_listing' %>
+<% else %>
+  
+
+	<div id="<%= park_name %>" class="<%= park_name_class %>">
+		<!-- mod channel ch-C3 line -->
+		<div class="hd cls">
+			<h2> <%= link_to park_listing.name, district_path(park_listing) %> </h2>
+			<% if !@park_photo.blank? %>
+				<li class="last">
+					<%= image_tag "http://farm#{@park_photo.farm}.static.flickr.com/#{@park_photo.server}/#{@park_photo.flickr_id}_#{@park_photo.secret}_m.jpg", :title => "#{@park_photo.title}", :class => "class" %>
+					<br />
+					<%= @park_photo.title %><br /><%= link_to "photo credit", "http://www.flickr.com/photos/#{@park_photo.owner}/#{@park_photo.flickr_id}" %>
+				</li>
+			<% else %>
+			  <li>no photos found</li>
+			<% end %>
+		
+		</div>
+		<div class="bd">
+			<ul class="blt">
+				
+				
+				<% if !park_listing.eateries.blank? %>
+				  <% for eatery in park_listing.eateries %>
+					<li><div class="cls">
+						<%= link_to eatery.name, eatery_permalink_path(eatery.permalink), :class => 'title' %>
+					</div></li>				    
+				  <% end %>
+				<% else %>
+				  <p>no listings yet!</p>
+				<% end %>
+
+			</ul>
+		</div>
+	</div>
+<% end %>

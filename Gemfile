@@ -1,5 +1,11 @@
 source 'https://rubygems.org'
 
+gem 'httparty', '~> 0.13.1' # pull data from other sites, better than just curl or Nokogiri
+gem 'kaminari', '~> 0.15.1' #  # pagination
+gem 'high_voltage', '~> 2.1.0' # static pages
+gem 'crack', '~> 0.4.2'  #parsing xml and json, might be needed for a Rails app
+gem 'retries', '~> 0.0.5' # Assists in pulling or pushing to flakey connections and api's
+gem 'resque', '~> 1.25.2' # http://rubygems.org/gems/resque
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
@@ -23,17 +29,23 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
+group :development, :test do
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem 'minitest'
+  gem 'passenger'
+  gem 'guard'
+  gem 'guard-minitest'
+  gem 'guard-passenger'
+  gem "guard-bundler", "~> 2.0.0"
+  gem 'rr', '~> 1.1.2'
+  gem 'activerecord-nulldb-adapter'
+  gem 'database_cleaner', '~> 1.3.0'
+end
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
