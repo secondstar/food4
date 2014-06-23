@@ -24,6 +24,12 @@ class Notebook
     end
   end
   
+  def new_dfb_review(*args)
+    dfb_review_maker.call(*args).tap do |dfb_review|
+      dfb_review.notebook = self
+    end
+  end
+  
   def new_eatery(*args)
     eatery_maker.call(*args).tap do |eatery|
       eatery.notebook = self
@@ -67,6 +73,10 @@ class Notebook
   
   def tpcr_maker
     @tpcr_maker ||= TouringPlansComReview.public_method(:new)
+  end
+
+  def dfb_review_maker
+    @dfb_review_maker ||= DisneyfoodblogComReview.public_method(:new)
   end
   
 end
