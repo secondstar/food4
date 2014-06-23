@@ -6,7 +6,7 @@
 				<div class="bd">
 					<ul class="thumbs">
 						<% if !@photos.blank? %>
-						  <% for photo in @photos.last(2) %>
+						  <% for photo in @photos %>
 							<li>
 								<%= image_tag "http://farm#{photo['farm']}.static.flickr.com/#{photo['server']}/#{photo['flickr_id']}_#{photo['secret']}_m.jpg" %><br />
 								<%= photo.title %><br /><%= link_to "photo credit", "http://www.flickr.com/photos/#{photo['owner']}/#{photo['flickr_id']}" %>

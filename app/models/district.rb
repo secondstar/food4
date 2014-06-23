@@ -1,6 +1,7 @@
 class District < ActiveRecord::Base
   validates :name, :permalink, presence: true
   has_many :eateries
+  has_many :photos, :as => :photogenic
   
   def to_param
     "#{permalink}"

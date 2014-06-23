@@ -1,7 +1,7 @@
 require_relative '../spec_helper_lite'
 require_relative '../../app/models/district'
 
-describe Eatery do
+describe District do
   include SpecHelpers
   before do
     @it = District.new(:name => "NAME")

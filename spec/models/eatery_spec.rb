@@ -68,7 +68,7 @@ describe Eatery do
       it "should be a datetime" do
         assert(@it.published_at.is_a?(DateTime) || 
                @it.published_at.is_a?(ActiveSupport::TimeWithZone),
-               "pubdate must be a datetime of some kind")
+               "published_at must be a datetime of some kind")
       end
  
       

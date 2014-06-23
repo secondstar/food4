@@ -1,10 +1,6 @@
-require 'date'
 require 'active_record'
 
-class Eatery < ActiveRecord::Base
-  validates :name, :presence => true
-  belongs_to :district
-  has_many :photos, :as => :photogenic
+class Photo < ActiveRecord::Base
 
   attr_accessor :notebook
   
@@ -18,5 +14,6 @@ class Eatery < ActiveRecord::Base
     notebook.add_entry(self)
   end
 
-
+  belongs_to :photogenic, :polymorphic => true #photogenics include districts and eateries
+  
 end
