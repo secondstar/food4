@@ -56,9 +56,9 @@ class TpcrReaper
   end
   
   def archive_new_review(params)
-    new_review = TouringPlansComReview.new(params)
-    new_review.notebook = @notebook
-    notebook.add_entry(new_review)
+    @notebook = Notebook.new(entry_fetcher=TouringPlansComReview.public_method(:most_recent))
+    new_review = @notebook.new_tpcr(params)
+    new_review.archive
 
     @review = TouringPlansComReview.where(permalink: new_review['permalink']).last
     @eatery = Eatery.find_or_initialize_by(permalink: new_review[:permalink])

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140623025147) do
+ActiveRecord::Schema.define(version: 20140624054348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,20 @@ ActiveRecord::Schema.define(version: 20140623025147) do
     t.datetime "archived_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "service"
+    t.string   "type_of_food"
+    t.text     "location"
+    t.string   "disney_dining_plan"
+    t.string   "tables_in_wonderland"
+    t.text     "menu"
+    t.text     "important_info"
+    t.text     "famous_dishes"
+    t.text     "mentioned_in"
+    t.text     "reviews"
+    t.text     "you_might_also_like"
+    t.text     "breakfast_items"
+    t.text     "drinks"
+    t.text     "special_treats"
   end
 
   create_table "districts", force: true do |t|
@@ -123,6 +137,7 @@ ActiveRecord::Schema.define(version: 20140623025147) do
     t.boolean  "review_permalink_is_different_than_eatery_permalink", default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "published_at"
   end
 
   add_index "snapshots", ["eatery_id"], name: "index_snapshots_on_eatery_id", using: :btree

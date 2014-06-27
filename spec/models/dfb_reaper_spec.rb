@@ -19,7 +19,7 @@ describe DfbReaper do
     subject { DfbReaper.scan_review_details}
     
     it "works" do
-      subject.must_equal [{"Service"=>"Counter Service", "Type of Food"=>"Dole Whip, soft-serve ice cream, fruit", "Location"=>"Adventureland, Magic Kingdom", "Disney Dining Plan"=>"Yes, snack credits", "Tables in Wonderland"=>"No", "Menu"=>"<br>\n<a href=\"https://disneyworld.disney.go.com/dining/magic-kingdom/aloha-isle/menus/\" target=\"_blank\">Official Disney Menu</a>", "Important Info"=>"", "Famous Dishes"=>"Pineapple Dole Whip, Pineapple Dole Whip Float", "Disney Food Blog Posts Mentioning Aloha Isle"=>""}]
+      subject.must_equal [{"service"=>"Counter Service", "type_of_food"=>"Dole Whip, soft-serve ice cream, fruit", "location"=>"Adventureland, Magic Kingdom", "disney_dining_plan"=>"Yes, snack credits", "tables_in_wonderland"=>"No", "menu"=>"<br>\n<a href=\"https://disneyworld.disney.go.com/dining/magic-kingdom/aloha-isle/menus/\" target=\"_blank\">Official Disney Menu</a>", "important_info"=>"", "famous_dishes"=>"Pineapple Dole Whip, Pineapple Dole Whip Float", "mentioned_in"=>""}]
     end
   end
 end

@@ -8,6 +8,10 @@ class TouringPlansComReview < ActiveRecord::Base
   
   attr_accessor :notebook
   
+  def self.most_recent
+    all
+  end
+  
   def archive(clock=DateTime)
     return false unless valid?
     self.archived_at = clock.now
