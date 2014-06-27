@@ -1,6 +1,6 @@
 class Notebook
   attr_reader :entries
-  attr_writer :eatery_maker, :district_maker, :tpcr_maker, :photo_maker
+  attr_writer :eatery_maker, :district_maker, :tpcr_maker, :dfb_review_maker,  :snapshot_maker, :photo_maker,
   
   def initialize(entry_fetcher=Eatery.public_method(:most_recent))
     @entry_fetcher = entry_fetcher
@@ -18,9 +18,21 @@ class Notebook
     fetch_entries
   end
 
+  def new_snapshot(*args)
+    snapshot_maker.call(*args).tap do |snapshot|
+      snapshot.notebook = self
+    end
+  end
+
   def new_tpcr(*args)
     tpcr_maker.call(*args).tap do |tpcr|
       tpcr.notebook = self
+    end
+  end
+  
+  def new_dfb_review(*args)
+    dfb_review_maker.call(*args).tap do |dfb_review|
+      dfb_review.notebook = self
     end
   end
   
@@ -64,9 +76,17 @@ class Notebook
   def photo_maker
     @photo_maker ||= Photo.public_method(:new)
   end
+
+  def snapshot_maker
+    @snapshot_maker ||= Snapshot.public_method(:new)
+  end
   
   def tpcr_maker
     @tpcr_maker ||= TouringPlansComReview.public_method(:new)
+  end
+
+  def dfb_review_maker
+    @dfb_review_maker ||= DisneyfoodblogComReview.public_method(:new)
   end
   
 end
