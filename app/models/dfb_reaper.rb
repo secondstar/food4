@@ -35,7 +35,9 @@ class DfbReaper
     # set up eatery_permalink and eatery_id
     @notebook = THE_NOTEBOOK 
     eatery_permalink = DfbBridge.new(target).get_eatery_permalink
+    puts "eatery_permalink = #{eatery_permalink}"
     eatery = @notebook.entries.find_by_permalink(eatery_permalink)
+    puts "eatery = #{eatery}"
     eatery.to_s.blank? ? eatery_id = 0 : eatery_id = eatery.id
     # set up snapshot
     snapshot_attributes = dfb_review.attributes
@@ -44,7 +46,7 @@ class DfbReaper
   end
   
   def self.publish_snapshot(snapshot_attributes)
-    
+    puts "snapshot attributes #{snapshot_attributes}"
     snapshot_params = {review_type: "DisneyfoodblogComReview", 
       review_id: snapshot_attributes["id"],
       review_permalink: snapshot_attributes["permalink"],
@@ -58,6 +60,7 @@ class DfbReaper
   
   def self.update_all_reviews
     dfb_reviews = self.reap_review_names_permalinks[0]
+    # # Scraping these are painful. Maybe later.
     dfb_reviews_to_skip = ["2013 05 29 First Look Lartisan Des Glaces Sorbet And Ice Cream Shop In Epcots France Is Open See Full Menu And Photos Here", "Disney Bar And Lounge Menu", "Team Spirits Pool Bar", "Amc Dine In Theater", "2014 01 21 News And Review The Smokehouse At House Of Blues Opens In Downtown Disney", "Splitsville Luxury Lanes"]
     dfb_reviews_to_skip.each do |skipped_dfb_review|
       puts "deleting skipped_dfb_review #{skipped_dfb_review}" 

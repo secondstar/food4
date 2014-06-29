@@ -42,6 +42,12 @@ class Notebook
     end
   end
 
+  def find_or_initialize_eatery(*args)
+    eatery_maker.call(*args).tap do |eatery|
+      eatery.notebook = self
+    end
+  end
+
   def new_photo(*args)
     photo_maker.call(*args).tap do |photo|
       photo.notebook = self
@@ -70,7 +76,7 @@ class Notebook
   end
 
   def eatery_maker
-    @eatery_maker ||= Eatery.public_method(:new)
+    @eatery_maker ||= Eatery.public_method(:find_or_initialize_by)
   end
   
   def photo_maker
