@@ -1,6 +1,6 @@
 class Notebook
   attr_reader :entries
-  attr_writer :eatery_maker, :district_maker, :tpcr_maker, :dfb_review_maker,  :snapshot_maker, :photo_maker,
+  attr_writer :eatery_maker, :district_maker, :tpcr_maker, :dfb_review_maker,  :snapshot_maker, :photo_maker
   
   def initialize(entry_fetcher=Eatery.public_method(:most_recent))
     @entry_fetcher = entry_fetcher
@@ -42,6 +42,12 @@ class Notebook
     end
   end
 
+  def find_or_initialize_eatery(*args)
+    eatery_maker.call(*args).tap do |eatery|
+      eatery.notebook = self
+    end
+  end
+
   def new_photo(*args)
     photo_maker.call(*args).tap do |photo|
       photo.notebook = self
@@ -70,7 +76,7 @@ class Notebook
   end
 
   def eatery_maker
-    @eatery_maker ||= Eatery.public_method(:new)
+    @eatery_maker ||= Eatery.public_method(:find_or_initialize_by)
   end
   
   def photo_maker

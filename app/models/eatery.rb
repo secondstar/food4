@@ -5,18 +5,57 @@ class Eatery < ActiveRecord::Base
   validates :name, :presence => true
   belongs_to :district
   has_many :photos, :as => :photogenic
-
+  has_many :snapshots
+  # has_many :reviews, :through => :snapshots  # this relationship should be more like in http://stackoverflow.com/questions/17541277/rails-has-many-through-aliasing-with-source-and-source-type-for-multiple-types and in evernote
+  
   attr_accessor :notebook
   
   def self.most_recent
     all
   end
   
+  def self.find_by_permalink_through_notebook
+    @notebook = Notebook.new
+    
+  end
   def publish(clock=DateTime)
     return false unless valid?
     self.published_at = clock.now
     notebook.add_entry(self)
   end
 
-
+  def self.update_with_review(permalink = "aloha-isle",
+     review_type=DisneyfoodblogComReview)
+    @notebook = Notebook.new
+    eatery = @notebook.entries.where(permalink: permalink).first
+    latest_snapshot = eatery.snapshots.where(review_type: review_type).order("updated_at DESC").first
+    return if latest_snapshot.blank?
+    latest_review = latest_snapshot.review
+    update_params = { id: eatery.id,
+      service: latest_review.service,
+      type_of_food: latest_review.type_of_food,
+      location: latest_review.location,
+      disney_dining_plan: latest_review.disney_dining_plan,
+      tables_in_wonderland: latest_review.tables_in_wonderland,
+      menu: latest_review.menu,
+      important_info: latest_review.important_info,
+      famous_dishes: latest_review.famous_dishes,
+      # reviews: latest_review.reviews,
+      you_might_also_like: latest_review.you_might_also_like}
+    #   # breakfast_items: latest_review.breakfast_items,
+    #   # drinks: latest_review.drinks,
+    #   # special_treats: latest_review.special_treats}
+    # # eatery.assign_attributes(update_params)
+    eatery.update(update_params)
+    # return latest_review
+  end
+  
+  def self.update_all_with_disneyfoodblog_com_reviews
+    @notebook = Notebook.new
+    eateries = @notebook.entries
+    eateries.each do |eatery|
+      self.update_with_review(permalink=eatery.permalink,
+        review_type=DisneyfoodblogComReview)
+    end
+  end
 end

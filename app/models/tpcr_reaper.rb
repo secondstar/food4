@@ -14,18 +14,22 @@ class TpcrReaper
   
   def reap_park(clock=DateTime)
     district_id = District.where(name: district.name).first.id
-    reviews = WorldHarvester.find_park_eateries_list_by_permalink(district.name)[0]
-    reviews.each do |review|
-      eatery_permalink = review['permalink']
-      review = WorldHarvester.find_eatery_by_permalink(district.name, eatery_permalink)
-      params = {name: review['name'], 
-        permalink: review['permalink'], 
-        created_at: review['created_at'], 
-        updated_at: review["updated_at"],
-        archived_at: clock.now,
-        district_id: district_id
-      }
-      archive_new_review(params)
+    review_types = WorldHarvester.find_park_eateries_list_by_permalink(district.name)
+    # there are two review_types, counter service and sit-down
+    review_types.each do |review_type|
+      puts "***** review_type #{review_type} ****"
+      review_type.each do |review|
+        puts "***** review #{review} ****"
+        eatery_permalink = review['permalink']
+        review = WorldHarvester.find_eatery_by_permalink(district.name, eatery_permalink)
+        params = {name: review['name'], 
+          permalink: review['permalink'], 
+          created_at: review['created_at'], 
+          updated_at: review["updated_at"],
+          district_id: district_id
+        }
+        archive_new_review(params)        
+      end
     end
   end
   
@@ -56,19 +60,19 @@ class TpcrReaper
   end
   
   def archive_new_review(params)
-    @notebook = Notebook.new(entry_fetcher=TouringPlansComReview.public_method(:most_recent))
-    new_review = @notebook.new_tpcr(params)
+    # archive the remote data
+    # find or create the eatery
+    # create the snapshot
+    @tpcr_notebook = Notebook.new(entry_fetcher=TouringPlansComReview.public_method(:most_recent))
+    new_review = @tpcr_notebook.new_tpcr(params)
     new_review.archive
 
-    @review = TouringPlansComReview.where(permalink: new_review['permalink']).last
-    @eatery = Eatery.find_or_initialize_by(permalink: new_review[:permalink])
-    if @eatery.name.blank?
-      puts "params are #{params}"
-      @eatery.name = new_review['name']
-      @eatery.district_id = new_review['district_id']
-      @eatery.publish
-    end
-    @snapshot = @review.snapshots.create!(:review_permalink => @review.permalink, :eatery => @eatery)
+    @eatery_notebook = Notebook.new
+    @eatery = @eatery_notebook.find_or_initialize_eatery(permalink: new_review[:permalink])
+    @eatery.name = new_review['name']
+    @eatery.district_id = new_review['district_id']
+    @eatery.publish
+    @snapshot = new_review.snapshots.create!(:review_permalink => new_review.permalink, :eatery => @eatery)
     return @snapshot
   end
   
