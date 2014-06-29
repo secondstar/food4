@@ -33,8 +33,13 @@ class DfbHarvester
   end
   
   def scan_review_details
+    # # puts "old @target #{@target}"
+    # add_review_permalink_to_target
+    # @target.path = "/#{DfbBridge.new(@target).get_review_permalink}"
+    # puts "new @target #{@target}"
+    # #now that we have the proper path
     doc = Nokogiri::HTML(open(URI.encode(yql_url)))
-    puts "doc p doesn't exists? #{doc.css("p").blank?}"
+    # puts "doc p doesn't exists? #{doc.css("p").blank?}"
     eatery_values_hash = Hash.new
     return [eatery_values_hash] if doc.css("p").blank? #404 error or no such results page at DFB
     eatery_values_hash.default = ""
@@ -51,6 +56,7 @@ class DfbHarvester
     end
     # puts eatery_values_hash
     eatery_values_hash.delete("allears.net")
+    eatery_values_hash.delete("update")
     eatery_values_hash.delete("to_book_a_reservation")
     eatery_values_hash.delete("restaurant.com_gift_certificate")
     eatery_values_hash.delete("saratoga_lager")
@@ -77,6 +83,13 @@ class DfbHarvester
     return permalink.gsub(/\W/,' ').gsub(/\b\w/) { $&.upcase }
   end
   
+  # def add_review_permalink_to_target
+  #   params = @target.to_h
+  #   review_permalink = params[:path].gsub("/","")
+  #   params2 = {review_permalink: review_permalink}
+  #   params = params.merge(params2)
+  #   @target = OpenStruct.new(params)
+  # end
   def yql_url
     yql_base_url = 'http://query.yahooapis.com/v1/public/yql'
     yql_select_statment = "use 'http://yqlblog.net/samples/data.html.cssselect.xml' as data.html.cssselect; select * from data.html.cssselect where url= \'http://www.disneyfoodblog.com#{@target.path}\' and css = '#{@target.yql_css_parse}'"
