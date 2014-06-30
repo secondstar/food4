@@ -32,6 +32,39 @@ class DfbHarvester
     
   end
   
+  def scan_for_addendums
+    doc = Nokogiri::HTML(open(URI.encode(yql_url)))
+    # bloggings = scan_for_bloggings
+    tips = scan_for_tips(doc)
+    # affinities = scan_for_affinities
+    results = [] << tips
+  end
+  def scan_for_tips
+      doc = Nokogiri::HTML(open(URI.encode(yql_url)))
+      array_of_paragraphs = []
+
+      doc.css("p").each_with_index {|p| array_of_paragraphs << p.to_s}
+
+      indexed_paragraphs_hash = Hash.new
+
+      array_of_paragraphs.each_with_index {|item, index| indexed_paragraphs_hash[index] = item }
+
+      index_number_of_the_heading_of_section = indexed_paragraphs_hash.select {|k,v| v =~ /<strong>Important Inf/}.keys.first # gives us the index number of the paragraph of the section we want
+
+      section_headings_index_numbers = indexed_paragraphs_hash.select {|k,v| v =~ /<strong>/}.keys # an array
+
+
+      index_of_next_section_heading =
+         section_headings_index_numbers[section_headings_index_numbers.find_index(index_number_of_the_heading_of_section).to_i + 1]
+
+      result = []
+      array_of_paragraphs[(index_number_of_the_heading_of_section.to_i + 1)..(index_of_next_section_heading.to_i - 1)].each do |i|
+      # array_of_paragraphs.each do |i|
+      	result << i.split("p>")[1].gsub("</", "")
+      end
+      return result
+  end
+  
   def scan_review_details
     # # puts "old @target #{@target}"
     # add_review_permalink_to_target
@@ -187,4 +220,22 @@ eatery_values_hash.delete("ice_cream") # L’Artisan des Glaces Sorbet and Ice C
     
     eatery_values_hash.delete("review")    
   end
+  
+  # def scan_for_tips(doc)
+  #   results = Hash.new
+  #   results.default = {}
+  #   # Get a Nokogiri::HTML:Document for the page we’re interested in...
+  #   doc.css("p").each do |item|
+  #       if item.to_s =~ /<strong>Important Info/
+  #         h = Hash.new
+  #         h.default = ""
+  #         title = dbf_item(item).first.first.downcase.tr(" ", "_")
+  #         desc = dbf_item(item).first.last
+  #         h.store(title, desc)
+  #         results.store(title, desc)
+  #       end
+  #   end
+  #
+  #   return results
+  # end
 end
