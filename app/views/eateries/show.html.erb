@@ -184,11 +184,11 @@ window.yzq_d['myXJSGKJiTs-']='&amp;U=12c0e9sr3%2fN%3dmyXJSGKJiTs-%2fC%3d-1%2fD%3
 			<cite> </cite>
 		</div>
 		<ul class="blt">
-			<%# if !@eatery.when_to_go.blank? %>
-				<li><div class="cls">When to go: <%# @eatery.when_to_go %></div></li>
-			<%# else %>
+			<% if !@eatery.when_to_go.blank? %>
+				<li><div class="cls">When to go: <%= @eatery.when_to_go %></div></li>
+			<% else %>
 			  
-			<%# end %>
+			<% end %>
 			<li><div class="cls">Breakfast: <%= !@eatery.breakfast_hours.blank? ?  @eatery.breakfast_hours : "Times currently not available"%></div></li>
 			<li><div class="cls">Lunch: <%= !@eatery.lunch_hours.blank? ?  @eatery.lunch_hours : "Times currently not available" %></div></li>
 			<li><div class="cls">Dinner: <%= !@eatery.dinner_hours.blank? ?  @eatery.dinner_hours : "Times currently not available" %></div></li>
