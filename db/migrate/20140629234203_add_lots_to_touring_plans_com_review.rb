@@ -1,0 +1,44 @@
+class AddLotsToTouringPlansComReview < ActiveRecord::Migration
+  def change
+    add_column :touring_plans_com_reviews, :service_rating, :string
+    add_column :touring_plans_com_reviews, :requires_credit_card, :boolean
+    add_column :touring_plans_com_reviews, :kosher_available, :boolean
+    add_column :touring_plans_com_reviews, :disney_permalink, :string
+    add_column :touring_plans_com_reviews, :child_breakfast_menu_url, :text
+    add_column :touring_plans_com_reviews, :requires_pre_payment, :boolean
+    add_column :touring_plans_com_reviews, :house_specialties, :text
+    add_column :touring_plans_com_reviews, :dinner_hours, :text
+    add_column :touring_plans_com_reviews, :adult_lunch_menu_url, :text
+    add_column :touring_plans_com_reviews, :accepts_reservations, :boolean
+    add_column :touring_plans_com_reviews, :when_to_go, :text
+    add_column :touring_plans_com_reviews, :location_details, :text
+    add_column :touring_plans_com_reviews, :child_lunch_menu_url, :text
+    add_column :touring_plans_com_reviews, :accepts_tiw, :boolean
+    add_column :touring_plans_com_reviews, :wine_list, :text
+    add_column :touring_plans_com_reviews, :portion_size, :string
+    add_column :touring_plans_com_reviews, :lunch_hours, :text
+    add_column :touring_plans_com_reviews, :extinct_on, :text
+    add_column :touring_plans_com_reviews, :bar, :string
+    add_column :touring_plans_com_reviews, :short_name, :string
+    add_column :touring_plans_com_reviews, :entree_range, :text
+    add_column :touring_plans_com_reviews, :code, :string
+    add_column :touring_plans_com_reviews, :parking, :text
+    add_column :touring_plans_com_reviews, :cost_code, :string
+    add_column :touring_plans_com_reviews, :child_dinner_menu_url, :text
+    add_column :touring_plans_com_reviews, :table_quality_rating, :string
+    add_column :touring_plans_com_reviews, :counter_quality_rating, :string
+    add_column :touring_plans_com_reviews, :breakfast_hours, :string
+    add_column :touring_plans_com_reviews, :thumbs_up, :string
+    add_column :touring_plans_com_reviews, :overall_rating, :string
+    add_column :touring_plans_com_reviews, :counter_value_rating, :string
+    add_column :touring_plans_com_reviews, :adult_dinner_menu_url, :text
+    add_column :touring_plans_com_reviews, :phone_number, :string
+    add_column :touring_plans_com_reviews, :opened_on, :string
+    add_column :touring_plans_com_reviews, :adult_breakfast_menu_url, :text
+    add_column :touring_plans_com_reviews, :table_value_rating, :string
+    add_column :touring_plans_com_reviews, :awards, :text
+    add_column :touring_plans_com_reviews, :friendliness_rating, :string
+    add_column :touring_plans_com_reviews, :cuisine, :string
+    add_column :touring_plans_com_reviews, :category_code, :string
+  end
+end

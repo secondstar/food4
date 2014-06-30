@@ -22,12 +22,8 @@ class TpcrReaper
         puts "***** review #{review} ****"
         eatery_permalink = review['permalink']
         review = WorldHarvester.find_eatery_by_permalink(district.name, eatery_permalink)
-        params = {name: review['name'], 
-          permalink: review['permalink'], 
-          created_at: review['created_at'], 
-          updated_at: review["updated_at"],
-          district_id: district_id
-        }
+        params = review
+        params = params.merge({district_id: district_id})
         archive_new_review(params)        
       end
     end
@@ -42,15 +38,11 @@ class TpcrReaper
       puts "resort.id #{resort_district.id}"
       if resort_district.id > 0
         if resort['dinings'].length > 0
-          resort['dinings'].each do |eatery|
-            puts "#{eatery['name']}: #{eatery['permalink']}"
-            params = {name: eatery['name'], 
-              permalink: eatery['permalink'], 
-              created_at: eatery['created_at'], 
-              updated_at: eatery["updated_at"],
-              archived_at: clock.now,
-              district_id: resort_district.id
-            }
+          resort['dinings'].each do |review|
+            puts "#{review['name']}: #{review['permalink']}"
+            review = WorldHarvester.find_eatery_by_permalink(district.name, eatery_permalink)
+            params = review.attributes
+            params = params.merge({district_id: resort_district.id})
             archive_new_review(params)
           end
           
