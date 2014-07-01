@@ -6,7 +6,7 @@ class Eatery < ActiveRecord::Base
   belongs_to :district
   has_many :addendums, as: :portrayed
   
-  has_many :photos, :as :photogenic
+  has_many :photos, :as => :photogenic
   has_many :snapshots
   # has_many :reviews, :through => :snapshots  # this relationship should be more like in http://stackoverflow.com/questions/17541277/rails-has-many-through-aliasing-with-source-and-source-type-for-multiple-types and in evernote
   

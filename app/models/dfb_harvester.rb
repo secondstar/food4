@@ -57,9 +57,9 @@ class DfbHarvester
       index_of_next_section_heading =
          section_headings_index_numbers[section_headings_index_numbers.find_index(index_number_of_the_heading_of_section).to_i + 1]
 
-      result = []
+      result = []#array_of_paragraphs #[]
       array_of_paragraphs[(index_number_of_the_heading_of_section.to_i + 1)..(index_of_next_section_heading.to_i - 1)].each do |i|
-      # array_of_paragraphs.each do |i|
+      # array_of_paragraphs[(index_number_of_the_heading_of_section.to_i)..(index_of_next_section_heading.to_i)].each do |i|
       	result << i.split("p>")[1].gsub("</", "")
       end
       return result
