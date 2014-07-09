@@ -32,6 +32,8 @@ class DfbReaper
     params = {name: name, permalink: permalink}.merge(scanned_in_review)
     dfb_review = @dfb_notebook.new_dfb_review(params)
     dfb_review.archive
+    # create addendums
+    
     # set up eatery_permalink and eatery_id
     @notebook = THE_NOTEBOOK 
     eatery_permalink = DfbBridge.new(target).get_eatery_permalink
@@ -70,7 +72,7 @@ class DfbReaper
   end
   
   def self.scan_review_details(permalink="aloha-isle")
-    params = {path: "/#{permalink}", yql_css_parse: '#primary .entry-content p' }
+    params = {path: "#{permalink}", yql_css_parse: '#primary .entry-content p' }
     target = OpenStruct.new(params)
     results = DfbHarvester.new(target).scan_review_details
   end
