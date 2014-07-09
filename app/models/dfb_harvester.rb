@@ -10,7 +10,7 @@ class DfbHarvester
   attr_accessor :notebook
   
   def scrape_review_listing_page
-    doc = Nokogiri::HTML(open(URI.encode(yql_url)))
+    doc = Nokogiri::HTML(open(yql_url))
     # return doc
     links = Hash.new
     doc.css("a").each do |link|
@@ -32,37 +32,33 @@ class DfbHarvester
     
   end
   
-  def scan_for_addendums
-    doc = Nokogiri::HTML(open(URI.encode(yql_url)))
+  def scan_for_addendums(doc = Nokogiri::HTML(open(yql_url)))
+    results =[]
     # bloggings = scan_for_bloggings
+    # puts "yql_url #{yql_url}"
+    # puts "doc #{doc}"
+    @target.doc = doc
     tips = scan_for_tips(doc)
+    bloggings = scan_for_bloggings(doc)
+    affinities = scan_for_affinities(doc)
     # affinities = scan_for_affinities
-    results = [] << tips
+    results = tips + bloggings + affinities
   end
-  def scan_for_tips
-      doc = Nokogiri::HTML(open(URI.encode(yql_url)))
-      array_of_paragraphs = []
 
-      doc.css("p").each_with_index {|p| array_of_paragraphs << p.to_s}
+  def scan_for_tips(doc = Nokogiri::HTML(open(yql_url)))
+    @target.doc = doc
+    @target.trigger = "Important Inf"
+    results = DfbReviewScanner.new(@target).find_tips
+  end
+  
+  def scan_for_bloggings(doc = Nokogiri::HTML(open(yql_url)))
+    @target.doc = doc
+    results = DfbReviewScanner.new(@target).find_bloggings
+  end
 
-      indexed_paragraphs_hash = Hash.new
-
-      array_of_paragraphs.each_with_index {|item, index| indexed_paragraphs_hash[index] = item }
-
-      index_number_of_the_heading_of_section = indexed_paragraphs_hash.select {|k,v| v =~ /<strong>Important Inf/}.keys.first # gives us the index number of the paragraph of the section we want
-
-      section_headings_index_numbers = indexed_paragraphs_hash.select {|k,v| v =~ /<strong>/}.keys # an array
-
-
-      index_of_next_section_heading =
-         section_headings_index_numbers[section_headings_index_numbers.find_index(index_number_of_the_heading_of_section).to_i + 1]
-
-      result = []#array_of_paragraphs #[]
-      array_of_paragraphs[(index_number_of_the_heading_of_section.to_i + 1)..(index_of_next_section_heading.to_i - 1)].each do |i|
-      # array_of_paragraphs[(index_number_of_the_heading_of_section.to_i)..(index_of_next_section_heading.to_i)].each do |i|
-      	result << i.split("p>")[1].gsub("</", "")
-      end
-      return result
+  def scan_for_affinities(doc = Nokogiri::HTML(open(yql_url)))
+    @target.doc = doc
+    results = DfbReviewScanner.new(@target).find_affinities
   end
   
   def scan_review_details
@@ -71,7 +67,7 @@ class DfbHarvester
     # @target.path = "/#{DfbBridge.new(@target).get_review_permalink}"
     # puts "new @target #{@target}"
     # #now that we have the proper path
-    doc = Nokogiri::HTML(open(URI.encode(yql_url)))
+    doc = Nokogiri::HTML(open(yql_url))
     # puts "doc p doesn't exists? #{doc.css("p").blank?}"
     eatery_values_hash = Hash.new
     return [eatery_values_hash] if doc.css("p").blank? #404 error or no such results page at DFB
@@ -164,13 +160,9 @@ eatery_values_hash.delete("ice_cream") # L’Artisan des Glaces Sorbet and Ice C
   #   @target = OpenStruct.new(params)
   # end
   def yql_url
-    yql_base_url = 'http://query.yahooapis.com/v1/public/yql'
-    yql_select_statment = "use 'http://yqlblog.net/samples/data.html.cssselect.xml' as data.html.cssselect; select * from data.html.cssselect where url= \'http://www.disneyfoodblog.com#{@target.path}\' and css = '#{@target.yql_css_parse}'"
-    # puts "yql_select_statement: #{yql_select_statment}"
-
-    yql_url = "#{yql_base_url}?q=#{yql_select_statment}&format=xml"
-    # puts "@target.path: #{@target.path}"
-    # puts "yql_url: #{yql_url}"
+    yql_url = "https://query.yahooapis.com/v1/public/yql?q=use%20'https%3A%2F%2Fraw.githubusercontent.com%2Fyql%2Fyql-tables%2Fmaster%2Fdata%2Fdata.html.cssselect.xml'%20as%20cssselect%3B%20select%20*%20from%20cssselect%20where%20url%3D%20'http%3A%2F%2Fwww.disneyfoodblog.com%2F#{URI.escape(@target.path)}'%20and%20css%20%3D%20'#{URI.escape(@target.yql_css_parse)}'&diagnostics=true"
+    # puts "\nyql_url: #{yql_url}\n"
+    return yql_url
   end
   
   def swap_title(eatery_values_hash)
@@ -221,21 +213,4 @@ eatery_values_hash.delete("ice_cream") # L’Artisan des Glaces Sorbet and Ice C
     eatery_values_hash.delete("review")    
   end
   
-  # def scan_for_tips(doc)
-  #   results = Hash.new
-  #   results.default = {}
-  #   # Get a Nokogiri::HTML:Document for the page we’re interested in...
-  #   doc.css("p").each do |item|
-  #       if item.to_s =~ /<strong>Important Info/
-  #         h = Hash.new
-  #         h.default = ""
-  #         title = dbf_item(item).first.first.downcase.tr(" ", "_")
-  #         desc = dbf_item(item).first.last
-  #         h.store(title, desc)
-  #         results.store(title, desc)
-  #       end
-  #   end
-  #
-  #   return results
-  # end
 end
