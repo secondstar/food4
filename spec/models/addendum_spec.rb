@@ -1,13 +1,13 @@
 require_relative '../spec_helper_lite'
 require File.expand_path('../../../config/environment', __FILE__)
-require_relative '../../app/models/touring_plans_com_review'
+require_relative '../../app/models/addendum'
 
-describe TouringPlansComReview do
+describe Addendum do
   include SpecHelpers
   before do
-    @it = TouringPlansComReview.new(:name => "NAME")
+    @it = Addendum.new(:description => "DESCRIPTION")
     @ar = @it
-    @ar_class = TouringPlansComReview
+    @ar_class = Addendum
   end
   
 
@@ -25,29 +25,29 @@ describe TouringPlansComReview do
       stub(@ar).valid?{true}
     end
     
-    it "should add the review to the notebook" do
+    it "should add the addendum to the notebook" do
       mock(@notebook).add_entry(@it)
       @it.archive
     end
     
-    it "should return truty on success" do
+    it "should return truthy on success" do
       assert(@it.archive)
     end
     
-    describe "given an invalid review" do
-      before do
-        stub(@ar).valid?{false}
-      end
-      
-      it "should not add the review to the notebook" do
-        dont_allow(@notebook).add_entry
-        @it.archive
-      end
-      
-      it "should return false" do
-        refute(@it.archive)
-      end
-    end
+    # describe "given an invalid post" do
+    #   before do
+    #     stub(@ar).valid?{false}
+    #   end
+    #   
+    #   it "should not add the eatery to the notebook" do
+    #     dont_allow(@notebook).add_entry
+    #     @it.publish
+    #   end
+    #   
+    #   it "should return false" do
+    #     refute(@it.publish)
+    #   end
+    # end
   end
   
   describe "#archived_at" do
@@ -69,7 +69,7 @@ describe TouringPlansComReview do
       it "should be a datetime" do
         assert(@it.archived_at.is_a?(DateTime) || 
                @it.archived_at.is_a?(ActiveSupport::TimeWithZone),
-               "archived_at must be a datetime of some kind")
+               "published_at must be a datetime of some kind")
       end
  
       

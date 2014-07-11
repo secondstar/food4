@@ -32,6 +32,11 @@ class DfbReaper
     params = {name: name, permalink: permalink}.merge(scanned_in_review)
     dfb_review = @dfb_notebook.new_dfb_review(params)
     dfb_review.archive
+    ## harvest dfb_review addendums    
+    # iterate through the collection of addendums (tips, bloggings…)
+    
+    # create addendums with the dfb_review as the portrayal
+    # 
     # set up eatery_permalink and eatery_id
     @notebook = THE_NOTEBOOK 
     eatery_permalink = DfbBridge.new(target).get_eatery_permalink
@@ -42,7 +47,13 @@ class DfbReaper
     # set up snapshot
     snapshot_attributes = dfb_review.attributes
     snapshot_attributes = snapshot_attributes.merge("eatery_permalink" => eatery_permalink, "eatery_id" => eatery_id)
-    self.publish_snapshot(snapshot_attributes)
+    @snapshot = self.publish_snapshot(snapshot_attributes)
+    puts "\n\n#{@snapshot}\n\n"
+    snapshot_id = dfb_review.snapshots.first.id
+
+    # connect addendums to snapshot
+    self.archive_dfb_review_addendums(path=eatery_permalink,
+          yql_css_parse = 'div.entry-content', snapshot_id = snapshot_id)
   end
   
   def self.publish_snapshot(snapshot_attributes)
@@ -55,7 +66,7 @@ class DfbReaper
     }
     @snapshot_notebook = Notebook.new(entry_fetcher=Snapshot.public_method(:most_recent))
     snapshot = @snapshot_notebook.new_snapshot(snapshot_params)
-    snapshot.publish    
+    snapshot.publish
   end
   
   def self.update_all_reviews
@@ -70,10 +81,28 @@ class DfbReaper
   end
   
   def self.scan_review_details(permalink="aloha-isle")
-    params = {path: "/#{permalink}", yql_css_parse: '#primary .entry-content p' }
+    params = {path: "#{permalink}", yql_css_parse: '#primary .entry-content p' }
     target = OpenStruct.new(params)
     results = DfbHarvester.new(target).scan_review_details
   end
 
-  
+  def self.archive_dfb_review_addendums(path='aloha-isle', 
+      yql_css_parse = 'div.entry-content', snapshot_id = Snapshot.last.id)
+      
+    params = {path: path, yql_css_parse: yql_css_parse }
+    target = OpenStruct.new(params)
+    addendums = DfbHarvester.new(target).scan_for_addendums
+    @notebook = Notebook.new(entry_fetcher=Addendum.public_method(:most_recent))
+    addendums.each do |addendum|
+      addendum_params = addendum.merge({:portrayal_id=> snapshot_id, :portrayal_type=>"Snapshot"})
+      puts "addendum_params #{addendum_params}\n\n"
+      a = @notebook.new_addendum(addendum_params)
+      a.archive
+    end
+    
+    # a_params = {"source"=>"http://www.disneyfoodblog.com/aloha-isle/", "href"=>"http://www.disneyfoodblog.com/main-street-ice-cream-parlor/", "description"=>"Main Street Ice Cream Parlor", "category"=>"affinity", :portrayal_id=> snapshot_id, :portrayal_type=>"Snapshot"}
+    # a = @notebook.new_addendum(a_params)
+    # a.archive
+    # return a
+  end
 end

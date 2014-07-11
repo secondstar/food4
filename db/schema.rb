@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140630013711) do
+ActiveRecord::Schema.define(version: 20140711162336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addendums", force: true do |t|
+    t.string   "source"
+    t.string   "href"
+    t.text     "description"
+    t.string   "category"
+    t.integer  "portrayal_id"
+    t.string   "portrayal_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "archived_at"
+  end
 
   create_table "disneyfoodblog_com_reviews", force: true do |t|
     t.string   "name"

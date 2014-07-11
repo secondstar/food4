@@ -5,6 +5,7 @@ class Snapshot < ActiveRecord::Base
   # The eatery only culls data from the latest of each source, and caches it in its own table.
   belongs_to :eatery
   belongs_to :review, polymorphic: true
+  has_many :addendums, as: :portrayal  
 
   attr_accessor :notebook
 

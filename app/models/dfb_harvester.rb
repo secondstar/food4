@@ -10,7 +10,7 @@ class DfbHarvester
   attr_accessor :notebook
   
   def scrape_review_listing_page
-    doc = Nokogiri::HTML(open(URI.encode(yql_url)))
+    doc = Nokogiri::HTML(open(yql_url))
     # return doc
     links = Hash.new
     doc.css("a").each do |link|
@@ -32,13 +32,42 @@ class DfbHarvester
     
   end
   
+  def scan_for_addendums(doc = Nokogiri::HTML(open(yql_url)))
+    results =[]
+    # bloggings = scan_for_bloggings
+    # puts "yql_url #{yql_url}"
+    # puts "doc #{doc}"
+    @target.doc = doc
+    tips = scan_for_tips(doc)
+    bloggings = scan_for_bloggings(doc)
+    affinities = scan_for_affinities(doc)
+    # affinities = scan_for_affinities
+    results = tips + bloggings + affinities
+  end
+
+  def scan_for_tips(doc = Nokogiri::HTML(open(yql_url)))
+    @target.doc = doc
+    @target.trigger = "Important Inf"
+    results = DfbReviewScanner.new(@target).find_tips
+  end
+  
+  def scan_for_bloggings(doc = Nokogiri::HTML(open(yql_url)))
+    @target.doc = doc
+    results = DfbReviewScanner.new(@target).find_bloggings
+  end
+
+  def scan_for_affinities(doc = Nokogiri::HTML(open(yql_url)))
+    @target.doc = doc
+    results = DfbReviewScanner.new(@target).find_affinities
+  end
+  
   def scan_review_details
     # # puts "old @target #{@target}"
     # add_review_permalink_to_target
     # @target.path = "/#{DfbBridge.new(@target).get_review_permalink}"
     # puts "new @target #{@target}"
     # #now that we have the proper path
-    doc = Nokogiri::HTML(open(URI.encode(yql_url)))
+    doc = Nokogiri::HTML(open(yql_url))
     # puts "doc p doesn't exists? #{doc.css("p").blank?}"
     eatery_values_hash = Hash.new
     return [eatery_values_hash] if doc.css("p").blank? #404 error or no such results page at DFB
@@ -131,13 +160,9 @@ eatery_values_hash.delete("ice_cream") # L’Artisan des Glaces Sorbet and Ice C
   #   @target = OpenStruct.new(params)
   # end
   def yql_url
-    yql_base_url = 'http://query.yahooapis.com/v1/public/yql'
-    yql_select_statment = "use 'http://yqlblog.net/samples/data.html.cssselect.xml' as data.html.cssselect; select * from data.html.cssselect where url= \'http://www.disneyfoodblog.com#{@target.path}\' and css = '#{@target.yql_css_parse}'"
-    # puts "yql_select_statement: #{yql_select_statment}"
-
-    yql_url = "#{yql_base_url}?q=#{yql_select_statment}&format=xml"
-    # puts "@target.path: #{@target.path}"
-    # puts "yql_url: #{yql_url}"
+    yql_url = "https://query.yahooapis.com/v1/public/yql?q=use%20'https%3A%2F%2Fraw.githubusercontent.com%2Fyql%2Fyql-tables%2Fmaster%2Fdata%2Fdata.html.cssselect.xml'%20as%20cssselect%3B%20select%20*%20from%20cssselect%20where%20url%3D%20'http%3A%2F%2Fwww.disneyfoodblog.com%2F#{URI.escape(@target.path)}'%20and%20css%20%3D%20'#{URI.escape(@target.yql_css_parse)}'&diagnostics=true"
+    # puts "\nyql_url: #{yql_url}\n"
+    return yql_url
   end
   
   def swap_title(eatery_values_hash)
@@ -187,4 +212,5 @@ eatery_values_hash.delete("ice_cream") # L’Artisan des Glaces Sorbet and Ice C
     
     eatery_values_hash.delete("review")    
   end
+  
 end

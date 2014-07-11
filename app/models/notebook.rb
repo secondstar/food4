@@ -35,6 +35,12 @@ class Notebook
       dfb_review.notebook = self
     end
   end
+
+  def new_addendum(*args)
+    addendum_maker.call(*args).tap do |addendum|
+      addendum.notebook = self
+    end
+  end
   
   def new_eatery(*args)
     eatery_maker.call(*args).tap do |eatery|
@@ -93,6 +99,10 @@ class Notebook
 
   def dfb_review_maker
     @dfb_review_maker ||= DisneyfoodblogComReview.public_method(:new)
+  end
+  
+  def addendum_maker
+    @addendum_maker ||= Addendum.public_method(:new)
   end
   
 end
