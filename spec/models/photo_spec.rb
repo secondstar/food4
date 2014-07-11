@@ -1,4 +1,5 @@
-require 'minitest/autorun'
+require_relative '../spec_helper_lite'
+require File.expand_path('../../../config/environment', __FILE__)
 require_relative '../../app/models/photo'
 
 describe Photo do

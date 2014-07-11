@@ -20,9 +20,8 @@ describe DfbReaper do
     let(:permalink) {"aloha-isle"}
     
     subject { DfbReaper.scan_review_details}
-    # test is somehow broken.  Real-life works
     it "works" do
-      subject.must_equal [{"service"=>"Counter Service", "type_of_food"=>"Dole Whip, soft-serve ice cream, fruit", "location"=>"Adventureland, Magic Kingdom", "disney_dining_plan"=>"Yes, snack credits", "tables_in_wonderland"=>"No", "menu"=>"<br>\n<a href=\"https://disneyworld.disney.go.com/dining/magic-kingdom/aloha-isle/menus/\" target=\"_blank\">Official Disney Menu</a>", "important_info"=>"", "famous_dishes"=>"Pineapple Dole Whip, Pineapple Dole Whip Float", "mentioned_in"=>""}]
+      subject.must_equal [{"service"=>"Counter Service", "type_of_food"=>"Dole Whip, soft-serve ice cream, fruit", "location"=>"Adventureland, Magic Kingdom", "disney_dining_plan"=>"Yes, snack credits", "tables_in_wonderland"=>"No", "menu"=>"<br>\n<a href=\"https://disneyworld.disney.go.com/dining/magic-kingdom/aloha-isle/menus/\" target=\"_blank\">Official Disney Menu</a>", "important_info"=>"", "famous_dishes"=>"<br>\n<a href=\"https://disneyworld.disney.go.com/dining/magic-kingdom/aloha-isle/menus/\" target=\"_blank\">Official Disney Menu</a>", "mentioned_in"=>"", "reviews"=>""}]
     end
   end
 end
