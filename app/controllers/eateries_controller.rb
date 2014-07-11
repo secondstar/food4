@@ -24,7 +24,9 @@ class EateriesController < ApplicationController
     # # @video = Eatery.find_video("#{ename} disney", 3)
     # @tweet_search_term = Eatery.find_tweets(ename)
     # @eatery_dfb_links = @eatery.addendums.where('href IS NOT NULL')
-    # @eatery_dfb_tips = @eatery.addendums.where('href IS NULL')    
+    @eatery_dfb_tips = @eatery.snapshots.last.addendums.where(category: 'tips')
+    @eatery_dfb_affinities = @eatery.snapshots.last.addendums.where(category: 'affinity')
+    @eatery_dfb_bloggings = @eatery.snapshots.last.addendums.where(category: 'blogging')
   end
   
   private

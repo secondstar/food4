@@ -108,7 +108,9 @@ window.yzq_d['myXJSGKJiTs-']='&amp;U=12c0e9sr3%2fN%3dmyXJSGKJiTs-%2fC%3d-1%2fD%3
 					<% numcount = 0 %>
 		 	  <% @eatery_dfb_tips.each do |dfb_tip| %>
 					<% numcount += 1 %>
-					<li class="num<%= numcount %>"><span><!-- --></span><div><%= dfb_tip.description %></li>
+					<li class="num<%= numcount %>"><span><!-- --></span>
+						<div><%= dfb_tip.description.html_safe %>
+					</li>
 				<% end %>
 			<% else %>
 			  <li>No tips yet!</li>
@@ -122,7 +124,15 @@ window.yzq_d['myXJSGKJiTs-']='&amp;U=12c0e9sr3%2fN%3dmyXJSGKJiTs-%2fC%3d-1%2fD%3
 	<div class="bd">
 		<div class="title">
 		</div>
-		<p><%= !@eatery.you_might_also_like.blank? ? h(@eatery.you_might_also_like.html_safe) : "Sorry I don't have that for you right now." %></p>
+		<p>
+			<% if !@eatery_dfb_affinities.blank? %>
+		 	  <% @eatery_dfb_affinities.each do |dfb_affinity| %>
+			  	<%= link_to dfb_affinity.description, dfb_affinity.href %><br />
+				<% end %>
+			<% else %>
+			  "Sorry I don't have that for you right now."
+		 	<% end %>
+		</p>
 	</div>
 	<div class="ft"><a class="more" href=""></a></div>
 </div>
@@ -134,15 +144,12 @@ window.yzq_d['myXJSGKJiTs-']='&amp;U=12c0e9sr3%2fN%3dmyXJSGKJiTs-%2fC%3d-1%2fD%3
 		</div>
 		
 		<ul class="thumbs">
-			<% if !@eatery_dfb_links.blank? %>
-		 	  <% @eatery_dfb_links.each do |dfb_link| %>
-			 	    <% if !dfb_link.href.blank? %>
-						<li><%= link_to image_tag("exclamation.png", :size => "32x32", :class => "lz"), dfb_link.href, :class => 'img' %>
+			<% if !@eatery_dfb_bloggings.blank? %>
+		 	  <% @eatery_dfb_bloggings.each do |dfb_blogging| %>
+			 	    <% if !@eatery_dfb_bloggings.blank? %>
+						<li><%= link_to image_tag("exclamation.png", :size => "32x32", :class => "lz"), dfb_blogging.href, :class => 'img' %>
 							<div class="txt">
-								<%= link_to dfb_link.description, dfb_link.href, :class => 'title' %>
-								<cite><%= link_to dfb_link.source.gsub(/.com\/.*/, '.com').gsub(/http:\/\//, '').gsub(/www./, ''), dfb_link.href, :class => 'title' %>
-								</cite>
-
+								<%= link_to dfb_blogging.description, dfb_blogging.href, :class => 'title' %>
 							</div>
 						</li>
 					<% end %>
