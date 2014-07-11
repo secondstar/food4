@@ -11,10 +11,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140622002149) do
+ActiveRecord::Schema.define(version: 20140711162336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addendums", force: true do |t|
+    t.string   "source"
+    t.string   "href"
+    t.text     "description"
+    t.string   "category"
+    t.integer  "portrayal_id"
+    t.string   "portrayal_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "archived_at"
+  end
+
+  create_table "disneyfoodblog_com_reviews", force: true do |t|
+    t.string   "name"
+    t.string   "permalink"
+    t.datetime "archived_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "service"
+    t.string   "type_of_food"
+    t.text     "location"
+    t.string   "disney_dining_plan"
+    t.string   "tables_in_wonderland"
+    t.text     "menu"
+    t.text     "important_info"
+    t.text     "famous_dishes"
+    t.text     "mentioned_in"
+    t.text     "reviews"
+    t.text     "you_might_also_like"
+    t.text     "breakfast_items"
+    t.text     "drinks"
+    t.text     "special_treats"
+  end
 
   create_table "districts", force: true do |t|
     t.string   "name"
@@ -90,6 +124,8 @@ ActiveRecord::Schema.define(version: 20140622002149) do
     t.text     "house_specialties"
     t.text     "location_details"
     t.datetime "published_on"
+    t.string   "when_to_go"
+    t.string   "child_lunch_menu_url"
   end
 
   create_table "photos", force: true do |t|
@@ -115,6 +151,7 @@ ActiveRecord::Schema.define(version: 20140622002149) do
     t.boolean  "review_permalink_is_different_than_eatery_permalink", default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "published_at"
   end
 
   add_index "snapshots", ["eatery_id"], name: "index_snapshots_on_eatery_id", using: :btree
@@ -127,6 +164,47 @@ ActiveRecord::Schema.define(version: 20140622002149) do
     t.datetime "updated_at"
     t.datetime "archived_at"
     t.integer  "district_id"
+    t.string   "service_rating"
+    t.boolean  "requires_credit_card"
+    t.boolean  "kosher_available"
+    t.string   "disney_permalink"
+    t.text     "child_breakfast_menu_url"
+    t.boolean  "requires_pre_payment"
+    t.text     "house_specialties"
+    t.text     "dinner_hours"
+    t.text     "adult_lunch_menu_url"
+    t.boolean  "accepts_reservations"
+    t.text     "when_to_go"
+    t.text     "location_details"
+    t.text     "child_lunch_menu_url"
+    t.boolean  "accepts_tiw"
+    t.text     "wine_list"
+    t.string   "portion_size"
+    t.text     "lunch_hours"
+    t.text     "extinct_on"
+    t.string   "bar"
+    t.string   "short_name"
+    t.text     "entree_range"
+    t.string   "code"
+    t.text     "parking"
+    t.string   "cost_code"
+    t.text     "child_dinner_menu_url"
+    t.string   "table_quality_rating"
+    t.string   "counter_quality_rating"
+    t.string   "breakfast_hours"
+    t.string   "thumbs_up"
+    t.string   "overall_rating"
+    t.string   "counter_value_rating"
+    t.text     "adult_dinner_menu_url"
+    t.string   "phone_number"
+    t.string   "opened_on"
+    t.text     "adult_breakfast_menu_url"
+    t.string   "table_value_rating"
+    t.text     "awards"
+    t.string   "friendliness_rating"
+    t.string   "cuisine"
+    t.string   "category_code"
+    t.string   "dress"
   end
 
 end

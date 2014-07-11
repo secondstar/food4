@@ -1,4 +1,5 @@
 require_relative '../spec_helper_lite'
+require File.expand_path('../../../config/environment', __FILE__)
 require_relative '../../app/models/district'
 
 describe District do
@@ -68,10 +69,14 @@ describe District do
         @it.publish(@clock)
       end
       
+      it "works" do
+        @it.published_at.must_equal "something"
+      end
+      
       it "should be a datetime" do
         assert(@it.published_at.is_a?(DateTime) || 
                @it.published_at.is_a?(ActiveSupport::TimeWithZone),
-               "pubdate must be a datetime of some kind")
+               "published_at must be a datetime of some kind")
       end
  
       

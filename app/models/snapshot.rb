@@ -5,5 +5,18 @@ class Snapshot < ActiveRecord::Base
   # The eatery only culls data from the latest of each source, and caches it in its own table.
   belongs_to :eatery
   belongs_to :review, polymorphic: true
+  has_many :addendums, as: :portrayal  
+
+  attr_accessor :notebook
+
+  def self.most_recent
+    last
+  end
+  
+  def publish(clock=DateTime)
+    return false unless valid?
+    self.published_at = clock.now
+    notebook.add_entry(self)
+  end
   
 end

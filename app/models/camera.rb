@@ -18,7 +18,7 @@ class Camera
     
     @results = Camera.get("https://query.yahooapis.com/v1/public/yql", :query =>  {:q => q, :format =>  'json'})
     arrayed_query_results = Array(@results['query']['results'])
-    puts "number of query_results: #{arrayed_query_results.length}"
+    # puts "number of query_results: #{arrayed_query_results.length}"
     if arrayed_query_results.length == 1
       if @results['query']['results']['photo'].first.length == 2
         @photos = [@results['query']['results']['photo']]

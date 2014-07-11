@@ -1,10 +1,8 @@
 require 'date'
 require 'active_record'
 
-class TouringPlansComReview < ActiveRecord::Base
-  # has_many :eateries, through: :snapshots
-  has_many :snapshots, as: :review
-  belongs_to :district
+class Addendum < ActiveRecord::Base
+  belongs_to :portrayal, polymorphic: true
   
   attr_accessor :notebook
   
@@ -17,6 +15,5 @@ class TouringPlansComReview < ActiveRecord::Base
     self.archived_at = clock.now
     notebook.add_entry(self)
   end
-
   
 end

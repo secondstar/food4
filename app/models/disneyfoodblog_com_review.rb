@@ -1,9 +1,11 @@
 require 'date'
 require 'active_record'
 
-class TouringPlansComReview < ActiveRecord::Base
+class DisneyfoodblogComReview < ActiveRecord::Base
   # has_many :eateries, through: :snapshots
   has_many :snapshots, as: :review
+  has_many :addendums, as: :portrayed
+  
   belongs_to :district
   
   attr_accessor :notebook
