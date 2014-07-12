@@ -22,9 +22,12 @@ class DfbReviewScanner
 
     # puts "***** array_of_paragraphs #{array_of_paragraphs}"
     result = []#array_of_paragraphs #[]
+    puts "***************************************"
+    puts "array_of_paragraphs[(index_number_of_the_heading_of_section.to_i + 1)..(index_of_next_section_heading.to_i - 1)]"
+    puts "#{array_of_paragraphs[(index_number_of_the_heading_of_section.to_i + 1)..(index_of_next_section_heading.to_i - 1)]}"
+    puts "***************************************"
     array_of_paragraphs[(index_number_of_the_heading_of_section.to_i + 1)..(index_of_next_section_heading.to_i - 1)].each do |i|
-    # array_of_paragraphs[(index_number_of_the_heading_of_section.to_i)..(index_of_next_section_heading.to_i)].each do |i|
-    	result << i.split("p>")[1].gsub("</", "")
+      result << i.split("p>")[1].gsub("</", "")
     end
     return result
     
@@ -64,14 +67,16 @@ class DfbReviewScanner
   
   def find_affinities
     results =[]
-    links = @target.doc.css("ul.noindent li strong").first.parent.css("a")
-    links.each do |l|
-      affinity_params = {}
-      affinity_params['source'] = "http://www.disneyfoodblog.com/#{@target.path}/"
-      affinity_params['href'] = l['href']
-      affinity_params['description'] = l.text
-      affinity_params['category'] = "affinity"
-      results << affinity_params
+    if @target.doc.css("ul.noindent li strong").first
+      links = @target.doc.css("ul.noindent li strong").first.parent.css("a")
+      links.each do |l|
+        affinity_params = {}
+        affinity_params['source'] = "http://www.disneyfoodblog.com/#{@target.path}/"
+        affinity_params['href'] = l['href']
+        affinity_params['description'] = l.text
+        affinity_params['category'] = "affinity"
+        results << affinity_params
+      end      
     end
     return results
   end

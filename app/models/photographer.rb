@@ -2,6 +2,7 @@ require 'httparty'
 require 'ostruct'
 
 class Photographer
+  # photographer is in charge of where the camera is pointed (search), and when the photo is published.
   attr_accessor :notebook
   
   include HTTParty
