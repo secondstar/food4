@@ -21,6 +21,7 @@ class DfbBridge
   def dfb_to_eatery_conversion_hash
     conversion_hash =
         {"akershus-royal-banquet-hall-princess-storybook-restaurant" => "akershus-royal-banquet-hall",
+          "the-lunching-pad" => "lunching-pad",
           "beaches-and-cream" => "beaches-cream",
 		      "biergarten-restaurant" => "biergarten",
 			    "big-river-grille-and-brewing-works" => "big-river-grille-brewing-works",
@@ -30,13 +31,13 @@ class DfbBridge
 				"columbia-harbor-house" => "columbia-harbour-house",
 				"el-pirata-y-el-perico" => "tortuga-tavern",
 				"electric-umbrella" => "electric-umbrella-restaurant",
+        "studio-catering-co" => "studio-catering-company",
 				"hollywood-and-vine-restaurant" => "hollywood-and-vine",
 				"il-mulino-new-york-trattoria" => "ii-mulino-new-york-trattoria",
 				"jiko" => "jiko-the-cooking-place",
 				"kimonos-sushi-bar" => "kimonos",
 				"kouzzina" => "kouzzina-by-cat-cora",
 				"kringla-bakeri-og-cafe" => "kringla-bakeri-og-kafe",
-				"ohana" => "ohanas",
 				"pecos-bills-tall-tale-inn-and-cafe" => "pecos-bill-tall-tale-inn-and-cafe",
 				"pinocchios-village-haus" => "pinocchio-village-haus",
 				"rainforest-cafe" => "rainforest-cafe-animal-kingdom",
@@ -52,7 +53,31 @@ class DfbBridge
 				"turf-club" => "turf-club-bar-grill",
         "victoria-and-alberts-restaurant" => "victoria-alberts",
 				"yak-and-yeti-counter-service" => "yak-and-yeti-local-food-cafe",
-				"yak-and-yeti-restaurant" => "yak-yeti-restaurant"}
+				"yak-and-yeti-restaurant" => "yak-yeti-restaurant",
+        "victoria-falls" => "victoria-falls-lounge",
+        "the-drop-off" => "the-drop-off-pool-bar",
+        "beaches-and-cream" => "beaches-cream-soda-shop",
+        "hurricane-hannas" => "hurricane-hannas-grill",
+        "banana-cabana-pool-bar" => "banana-cabana",
+        "the-wave" => "the-wave-restaurant",
+        "outer-rim" => "outer-rim-lounge",
+        "top-of-the-world-lounge" => "top-world-lounge",
+        "pepper-market-food-court" => "pepper-market",
+        "siestas-pool-par" => "siestas-cantina",
+        "beach-pool-bar" => "beaches-pool-bar-grill",
+        "gasparilla-grill-and-games" => "gasparilla-grill-games",
+        "st-johns-pool-bar" => "courtyard-pool-bar",
+        "captain-cooks-snack-company" => "captain-cooks",
+        "kona-island-sushi-bar" => "kona-island",
+        "sassagoula-floatworks-and-food-factory" => "sassagoula-floatworks-food-factory",
+        "mardi-grogs-pool-bar" => "mardi-grogs",
+        "on-the-rocks-pool-bar" => "on-rocks",
+        "the-crews-cup-lounge" => "crews-cup-lounge",
+        "the-fountain" => "fountain-eats-sweets",
+        "picabu-buffeteria" => "picabu",
+        "cabana-bar-and-beach-club" => "cabana-bar-beach-club",
+        "garden-grove-cafe" => "garden-grove"
+      }
   end
   def dfb_name_conversion_hash
     conversion_hash = {
@@ -66,13 +91,13 @@ class DfbBridge
         "boatwrights-dining-hall" => "boatwrights",
         "boma-flavors-of-africa" => "boma",
         "electric-umbrella-restaurant" => "electric-umbrella",
+        "studio-catering-company" => "studio-catering-co",
         "hollywood-and-vine" => "hollywood-and-vine-restaurant",
         "ii-mulino-new-york-trattoria" => "il-mulino-new-york-trattoria",
         "jiko-the-cooking-place" => "jiko",
         "kimonos-sushi-bar" => "kimonos",
         "kouzzina-by-cat-cora" => "kouzzina",
         "kringla-bakeri-og-kafe" => "kringla-bakeri-og-cafe",
-        "ohanas" => "ohana",
         "pecos-bill-tall-tale-inn-and-cafe" => "pecos-bills-tall-tale-inn-and-cafe",
         "pinocchio-village-haus"=> "pinocchios-village-haus",
         "rainforest-cafe-animal-kingdom" => "rainforest-cafe",
@@ -88,9 +113,34 @@ class DfbBridge
         "victoria-alberts" => "victoria-and-alberts-restaurant",
         "yak-and-yeti-local-food-cafe" => "yak-and-yeti-counter-service",
         "yak-yeti-restaurant" => "yak-and-yeti-restaurant",
-        "columbia-harbour-house" => "columbia-harbor-house"
-         
-    }
+        "columbia-harbour-house" => "columbia-harbor-house",
+        "victoria-falls-lounge" => "victoria-falls",
+        "the-drop-off-pool-bar" => "the-drop-off",
+        "beaches-and-cream-soda-shop" => "beaches-cream",
+        "hurricane-hannas-grill" => "hurricane-hannas",
+        "banana-cabana" => "banana-cabana-pool-bar",
+        "the-wave-restaurant" => "the-wave",
+        "outer-rim" => "outer-rim-lounge",
+        "top-world-lounge" => "top-of-the-world-lounge",
+        "pepper-market" => "pepper-market-food-court",
+        "siestas-cantina" => "siestas-pool-par",
+        "beach-pool-bar-bar-grill" => "beaches-pool",
+        "gasparilla-grill-and-games" => "gasparilla-grill-and-games",
+        "courtyard-pool-bar" => "st-johns-pool-bar",
+        "captain-cooks" => "captain-cooks-snack-company",
+        "kona-island" => "kona-island-sushi-bar",
+        "sassagoula-floatworks-food-factory" => "sassagoula-floatworks-and-food-factory",
+        "mardi-grogs" => "mardi-grogs-pool-bar",
+        "on-rocks" => "on-the-rocks-pool-bar",
+        "the-crews-cup-lounge" => "crews-cup-lounge",
+        "fountain-eats-sweets" => "the-fountain",
+        "picabu" =>  "picabu-buffeteria",
+        "cabana-bar-beach-club" => "cabana-bar-and-beach-club",
+        "garden-grove" => "garden-grove-cafe"
+        
+        
+        
+      }
     
 
   end
