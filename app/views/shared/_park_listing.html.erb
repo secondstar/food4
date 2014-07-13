@@ -2,7 +2,14 @@
 <% park_name_class = 'mod ' %>
 <% column_number == 1 ? park_name_class : park_name_class += "mod channel ch-C3 "  %>
 <% last_listing == 'true' ? park_name_class  += "cls ": park_name_class += "line "  %>
-<%# @park_photo = park_listing.photos.first -%>
+<% @park_photos = park_listing.photos.to_a.shuffle!.first(5) -%>
+<% if @park_photos.length < 5
+	@photos =[]
+	@e = park_listing.eateries
+	@e.each{|e| @photos << e.photos}
+	@park_photos = @photos.flatten.to_a.shuffle!.first(5)
+end
+ %>
 
 <% if park_name == 'Epcot'%>
 <%# render :partial => 'epcot_listing' %>
@@ -13,11 +20,14 @@
 		<!-- mod channel ch-C3 line -->
 		<div class="hd cls">
 			<h2> <%= link_to park_listing.name, district_path(park_listing) %> </h2>
-			<% if !@park_photo.blank? %>
+			<% if !@park_photos.blank? %>
 				<li class="last">
-					<%= image_tag "http://farm#{@park_photo.farm}.static.flickr.com/#{@park_photo.server}/#{@park_photo.flickr_id}_#{@park_photo.secret}_m.jpg", :title => "#{@park_photo.title}", :class => "class" %>
-					<br />
-					<%= @park_photo.title %><br /><%= link_to "photo credit", "http://www.flickr.com/photos/#{@park_photo.owner}/#{@park_photo.flickr_id}" %>
+					<% @park_photos.each do |photo| %>
+						<%= link_to image_tag("http://farm#{photo.farm}.static.flickr.com/#{photo.server}/#{photo.flickr_id}_#{photo.secret}_s.jpg",
+						:title => "#{photo.title}", 
+						:class => "class"), "http://www.flickr.com/photos/#{photo.owner}/#{photo.flickr_id}" %>
+					<% end %>
+					
 				</li>
 			<% else %>
 			  <li>no photos found</li>
