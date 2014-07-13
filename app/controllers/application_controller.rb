@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   
   def find_resort_and_downtown_dining
     @parks = District.where(:is_park => true)
-    @lodgings = District.where(:is_park => false)
+    @lodgings = District.resorts
     
   end
   

@@ -5,7 +5,6 @@
 		<!-- <a href="http://shine.yahoo.com/channel/health/how-to-break-a-habit-in-12-steps-2532888/" class="img"><img src="http://l.yimg.com/jn/util/anysize/310*275c-86400,http%3A%2F%2Fl.yimg.com%2Fa%2Fi%2Fus%2Fshine%2Fhealth%2F200382537-001.jpg" alt="Quit your bad habits—for good!" height="275" width="310"></a> -->
 		<div class="attr">
 			<% if @photo.title %>
-				<%= @photo.title %>
 			<li class="last">
 				<%= image_tag "http://farm#{@photo.farm}.static.flickr.com/#{@photo.server}/#{@photo.flickr_id}_#{@photo.secret}_m.jpg", :title => "#{@photo.title}", :class => "class" %>
 				<br />
@@ -15,18 +14,13 @@
 			
 			<h1><a style="text-decoration:none;" href="/" class="lnk"><%= content_for?(:title) ? yield(:title) : "Food at Walt Disney World" %></a></h1>
 			<p>&nbsp;</p>
-			<cite>Restaurant listings powered by <strong><a href="http://touringplans.com">TouringPlans.com</a> and <a href="http://disneyfoodblog.com">The Disney Food Blog</a>.</strong><%= @photo.title %> </cite>
+			<cite>Restaurant listings powered by <strong><a href="http://touringplans.com">TouringPlans.com</a> and <a href="http://disneyfoodblog.com">The Disney Food Blog</a>.</strong></cite>
 		    
 		    </p>
 		</div>
 
 	</ul>
-	<% if (params[:search_location]) == "resort-dining" %>
-		<%= render :partial => '/shared/park_listing2', 
-		:locals => {:park_name => "Resorts", 
-			:photo_search => params[:search_location] } %>
-	  
-	<% end %>
+	
 <% end -%>
 
 <% content_for :side do -%>
