@@ -44,6 +44,7 @@ class Camera
     query << "and"
     query << wdw_turf_woe_ids
     query << "and"
+    query << license
     query << flickr_key
     query << "and"
     query << sort_type
@@ -69,11 +70,16 @@ class Camera
   def search_term
     # my_photo_search = @photo_target.search_term.gsub(/'/, "\\\\'") # original -- clean up wording
     my_photo_search = @photo_target.search_term.gsub("Disney's", "Disney") #clean up wording
+    my_photo_search = @photo_target.search_term.gsub("Resort", "") #because not everyone uses the word 'resort'
     "text =\"#{my_photo_search}\""
   end
   
   def wdw_turf_woe_ids
     "woe_id in (SELECT woeid FROM geo.places WHERE text='lake buena vista, FL' or text='bay lake, FL' or text='Windermere, FL' or text='Couples Glen, FL' or text='Lake Reams' or text='Celebration, FL' or text='Bay Hill, FL')"
+  end
+  
+  def licence
+    "licence='2'"
   end
   
   def flickr_key
