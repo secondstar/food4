@@ -26,6 +26,7 @@ class TouringPlansComFeed
       "Animal Kingdom"=>"/animal-kingdom/dining.json",
       "Typhoon Lagoon"=>"/typhoon-lagoon/dining.json",
       "Blizzard Beach"=>"/blizzard-beach/dining.json",
+      'Downtown Disney' => "/walt-disney-world/downtown-disney-dining",
       "resorts" => "/walt-disney-world/resort-dining.json"
     } 
     

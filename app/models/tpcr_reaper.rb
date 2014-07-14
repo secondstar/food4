@@ -29,6 +29,25 @@ class TpcrReaper
     end
   end
   
+  def reap_downtown_disney(clock=DateTime)
+    district_id = District.where(name: district.name).first.id
+    dd_district = WorldHarvester.find_downtown_disney_list
+    dd_district[1][1].each {|review| puts "#{review['name']}"}
+    dd_district[1][1].each do |review|
+      review_params = {name: review['name'], permalink: review["permalink"], cuisine:  review["cuisine"],
+        table_quality_rating: review["table_quality_rating"], counter_quality_rating: review["counter_quality_rating"]}
+        puts review_params
+        params = review_params.merge({district_id: district_id})
+        archive_new_review(params)        
+    end
+      # puts "#{review[1]}"
+      # review = WorldHarvester.find_eatery_by_permalink(district.name, eatery_permalink)
+      # params = review.attributes
+      # params = params.merge({district_id: resort_district.id})
+      # archive_new_review(params)
+    # end
+          
+  end
   def reap_resorts(clock=DateTime)
     lodging_districts = WorldHarvester.find_list_of_lodging_districts
     lodging_districts.each do |resort|
