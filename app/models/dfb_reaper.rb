@@ -24,7 +24,7 @@ class DfbReaper
     #     b) set eatery id to 0 if doesn't match
     params = {name: name, permalink: permalink}
     target = OpenStruct.new(params)
-    puts "**************************** target #{target} ************************"
+    # puts "**************************** target #{target} ************************"
     
     @dfb_notebook = Notebook.new(entry_fetcher=DisneyfoodblogComReview.public_method(:most_recent))
     scanned_in_review = self.scan_review_details(permalink)[0]

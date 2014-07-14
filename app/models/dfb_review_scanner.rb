@@ -22,10 +22,10 @@ class DfbReviewScanner
 
     # puts "***** array_of_paragraphs #{array_of_paragraphs}"
     result = []#array_of_paragraphs #[]
-    puts "***************************************"
+    # puts "***************************************"
     puts "array_of_paragraphs[(index_number_of_the_heading_of_section.to_i + 1)..(index_of_next_section_heading.to_i - 1)]"
     puts "#{array_of_paragraphs[(index_number_of_the_heading_of_section.to_i + 1)..(index_of_next_section_heading.to_i - 1)]}"
-    puts "***************************************"
+    # puts "***************************************"
     array_of_paragraphs[(index_number_of_the_heading_of_section.to_i + 1)..(index_of_next_section_heading.to_i - 1)].each do |i|
       result << i.split("p>")[1].gsub("</", "")
     end

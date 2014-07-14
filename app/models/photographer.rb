@@ -11,10 +11,16 @@ class Photographer
   format :json
   
   def self.find_photos(photo_search='Walt Disney World', quantity='10')
-    params = {search_term: photo_search, quantity: quantity.to_s }
+    params = {search_term: photo_search, quantity: quantity.to_s, angle: 'basic' }
     
     photo_target = OpenStruct.new(params)
-    Camera.new(photo_target).shoot_collection
+    photos = Camera.new(photo_target).shoot_collection
+    # tagged_photos = []
+    # if photos.length < quantity.length
+    #   @target.angle = 'tags'
+    #   tagged_photos = Camera.new(photo_target).shoot_collection
+    # end
+    # photos = photos + tagged_photos
   end  
   
   def self.publish_photos(photo_search='Epcot', quantity='10', photogenic_type='District')
