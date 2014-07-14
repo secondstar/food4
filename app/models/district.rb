@@ -19,7 +19,7 @@ class District < ActiveRecord::Base
   def self.resorts
     where(is_park: false).where.not(name: "Resorts").where.not(name: 'Downtown Disney')
   end
-  
+
   def self.parks
     where(is_park: true)
   end

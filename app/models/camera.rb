@@ -43,12 +43,13 @@ class Camera
     query << search_term
     query << "and"
     query << wdw_turf_woe_ids
+    # query << "and"
+    # query << license
     query << "and"
-    query << license
     query << flickr_key
     query << "and"
     query << sort_type
-    "#{query.join(" ")}limit #{@photo_target.quantity}"
+    "#{query.join(" ")} limit #{@photo_target.quantity}"
   end
   
   def all_of_wdw
@@ -68,17 +69,20 @@ class Camera
   end
   
   def search_term
-    # my_photo_search = @photo_target.search_term.gsub(/'/, "\\\\'") # original -- clean up wording
-    my_photo_search = @photo_target.search_term.gsub("Disney's", "Disney") #clean up wording
-    my_photo_search = @photo_target.search_term.gsub("Resort", "") #because not everyone uses the word 'resort'
+    # my_photo_search = @photo_target.search_term.gsub("Disney's", "Disney") #clean up wording
+    my_photo_search = @photo_target.search_term.downcase.gsub(/[^[[:word:]]\s]/, '') #flickr search trips up on non-alphanumeric characters.  this leaves spaces and only downcased words.
+    my_photo_search = @photo_target.search_term.gsub("resort", "") #because not everyone uses the word 'resort'
+    
+    ghirardelli soda fountain  chocolate shop
     "text =\"#{my_photo_search}\""
   end
   
   def wdw_turf_woe_ids
-    "woe_id in (SELECT woeid FROM geo.places WHERE text='lake buena vista, FL' or text='bay lake, FL' or text='Windermere, FL' or text='Couples Glen, FL' or text='Lake Reams' or text='Celebration, FL' or text='Bay Hill, FL')"
+    # "woe_id in (SELECT woeid FROM geo.places WHERE text='lake buena vista, FL' or text='bay lake, FL' or text='Windermere, FL' or text='Couples Glen, FL' or text='Lake Reams' or text='Celebration, FL' or text='Bay Hill, FL' or text='Downtown Disney Resort')"
+    "woe_id in (SELECT woeid FROM geo.places WHERE text='Walt Disney World')"
   end
   
-  def licence
+  def license
     "licence='2'"
   end
   

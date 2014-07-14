@@ -72,7 +72,6 @@ class Photographer
       # puts "resort: #{resort.name}"
       Photographer.publish_photos(photo_search= "#{resort.name}", quantity='10', photogenic_type='District')
     end
-  end
-  
+  end  
   
 end
