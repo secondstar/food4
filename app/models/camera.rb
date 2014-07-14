@@ -22,6 +22,7 @@ class Camera
     @results = Camera.get("https://query.yahooapis.com/v1/public/yql", :query =>  {:q => q, :format =>  'json'})
     results_count = @results['query']['count']
     puts "*************"
+    puts "q = #{q}"
     puts "results count = #{results_count}"
     puts "@photo_target.quantity = #{@photo_target.quantity}"
     puts "*************"
