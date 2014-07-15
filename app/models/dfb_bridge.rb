@@ -76,7 +76,18 @@ class DfbBridge
         "the-fountain" => "fountain-eats-sweets",
         "picabu-buffeteria" => "picabu",
         "cabana-bar-and-beach-club" => "cabana-bar-beach-club",
-        "garden-grove-cafe" => "garden-grove"
+        "garden-grove-cafe" => "garden-grove",
+        "ghirardelli-soda-fountain" => "ghirardelli-soda-fountain-chocolate-shop",
+        "rainforest-cafe" => "rainforest-cafe-downtown-disney",
+        "wolfgang-puck-express" => "wolfgang-puck-express-marketplace",
+        "rainforest-cafe" => "rainforest-cafe-downtown-disney",
+        "portobello-restaurant" => "portobello",
+        "raglan-road" => "raglan-road-irish-pub-restaurant",
+        "amc-dine-in-theater" => "amc-dine-in-theatres-fork-screen",
+        "bongos" => "bongos-cuban-cafe",
+        "splitsville-luxury-lanes" => "splitsville",
+        "wolfgang-puck-cafe" => "wolfgang-puck-dining-room",
+        "wolfgang-puck-express" => "wolfgang-puck-express-west-side"
       }
   end
   def dfb_name_conversion_hash
@@ -136,10 +147,18 @@ class DfbBridge
         "fountain-eats-sweets" => "the-fountain",
         "picabu" =>  "picabu-buffeteria",
         "cabana-bar-beach-club" => "cabana-bar-and-beach-club",
-        "garden-grove" => "garden-grove-cafe"
-        
-        
-        
+        "garden-grove" => "garden-grove-cafe",
+        "ghirardelli-soda-fountain-chocolate-shop" => "ghirardelli-soda-fountain",
+        "rainforest-cafe-downtown-disney" => "rainforest-cafe",
+        "wolfgang-puck-express-marketplace" => "wolfgang-puck-express",
+        "rainforest-cafe-downtown-disney" => "rainforest-cafe",
+        "portobello" => "portobello-restaurant",
+        "raglan-road-irish-pub-restaurant" => "raglan-road",
+        "amc-dine-in-theatres-fork-screen" =>"amc-dine-in-theater",
+        "bongos-cuban-cafe" => "bongos",
+        "splitsville" => "splitsville-luxury-lanes",
+        "wolfgang-puck-dining-room" => "wolfgang-puck-cafe",
+         "wolfgang-puck-express-west-side" => "wolfgang-puck-express"
       }
     
 

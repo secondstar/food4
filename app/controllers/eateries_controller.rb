@@ -21,9 +21,15 @@ class EateriesController < ApplicationController
     @photos     = @eatery.photos
     if @photos.length < 10
       @photos = @photos + @eatery.district.photos
+      if @photos.length < 10
+      	@e = @eatery.district.eateries
+      	@e.each {|e| @photos << e.photos}
+      	@photos = @photos.flatten.to_a.shuffle!.first(10)
+      end      
     end
+    @photos = @photos.to_a.shuffle!
     @head_photo = @photos.last
-    @photos     = @photos.to_a.shuffle!.first(3)
+    @photos     = @photos.first(3)
     # # @video = Eatery.find_video("#{ename} disney", 3)
     # @tweet_search_term = Eatery.find_tweets(ename)
     # @eatery_dfb_links = @eatery.addendums.where('href IS NOT NULL')
