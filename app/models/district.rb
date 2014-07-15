@@ -11,6 +11,18 @@ class District < ActiveRecord::Base
   
   scope :not_a_park,               -> { where(is_park: false) }
   scope :resorts, -> { not_a_park.where("name != ?", "Downtown Disney") }  
+
+  def self.most_recent
+    all
+  end
+
+  def self.resorts
+    where(is_park: false).where.not(name: "Resorts").where.not(name: 'Downtown Disney')
+  end
+
+  def self.parks
+    where(is_park: true)
+  end
   
   def publish(clock=DateTime)
     return false unless valid?
@@ -20,10 +32,11 @@ class District < ActiveRecord::Base
   
   def self.search_location(search_location)
     if search_location == "resorts"
-      self.resorts
+      results = self.resorts
     else
-      self.all
+      results = self.all
     end
+    return results
   end
   # Touringplans.com does not have a list of parks, so we generate and store one in districts
   def self.update_each

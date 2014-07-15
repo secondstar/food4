@@ -24,7 +24,7 @@ class DfbReaper
     #     b) set eatery id to 0 if doesn't match
     params = {name: name, permalink: permalink}
     target = OpenStruct.new(params)
-    puts "**************************** target #{target} ************************"
+    # puts "**************************** target #{target} ************************"
     
     @dfb_notebook = Notebook.new(entry_fetcher=DisneyfoodblogComReview.public_method(:most_recent))
     scanned_in_review = self.scan_review_details(permalink)[0]
@@ -48,11 +48,12 @@ class DfbReaper
     snapshot_attributes = dfb_review.attributes
     snapshot_attributes = snapshot_attributes.merge("eatery_permalink" => eatery_permalink, "eatery_id" => eatery_id)
     @snapshot = self.publish_snapshot(snapshot_attributes)
-    puts "\n\n#{@snapshot}\n\n"
+    puts "\n\n*** #{snapshot_attributes} ***\n\n"
     snapshot_id = dfb_review.snapshots.first.id
+    snapshot_review_permalink = dfb_review.snapshots.first.review_permalink
 
     # connect addendums to snapshot
-    self.archive_dfb_review_addendums(path=eatery_permalink,
+    self.archive_dfb_review_addendums(path= snapshot_review_permalink,
           yql_css_parse = 'div.entry-content', snapshot_id = snapshot_id)
   end
   
@@ -72,12 +73,25 @@ class DfbReaper
   def self.update_all_reviews
     dfb_reviews = self.reap_review_names_permalinks[0]
     # # Scraping these are painful. Maybe later.
-    dfb_reviews_to_skip = ["2013 05 29 First Look Lartisan Des Glaces Sorbet And Ice Cream Shop In Epcots France Is Open See Full Menu And Photos Here", "Disney Bar And Lounge Menu", "Team Spirits Pool Bar", "Amc Dine In Theater", "2014 01 21 News And Review The Smokehouse At House Of Blues Opens In Downtown Disney", "Splitsville Luxury Lanes"]
+    dfb_reviews_to_skip = ["2010 09 30 First Look Epcots New Karamell Kuche", "2013 01 15 Review Epcots Les Halles Bakery", "2013 09 04 First Look Starbucks Opens At Epcots Fountain View Cafe", "2013 05 29 First Look Lartisan Des Glaces Sorbet And Ice Cream Shop In Epcots France Is Open See Full Menu And Photos Here", "Disney Bar And Lounge Menu", "Team Spirits Pool Bar", "Amc Dine In Theater", "2014 01 21 News And Review The Smokehouse At House Of Blues Opens In Downtown Disney", "Splitsville Luxury Lanes", "Columbia Harbour House", "Columbia Harbor House", "Pecos Bills Tall Tale Inn And Cafe"]
     dfb_reviews_to_skip.each do |skipped_dfb_review|
       puts "deleting skipped_dfb_review #{skipped_dfb_review}" 
       dfb_reviews.delete(skipped_dfb_review)
     end
+    dfb_reviews = self.add_unlisted_reviews(dfb_reviews)
+    
     dfb_reviews.each {|key, value| self.archive_new_review(name= key, permalink= value )}
+  end
+  
+  def self.add_unlisted_reviews(dfb_reviews)
+    results = dfb_reviews.merge({"Hollywood Scoops" => "hollywood-scoops", "Dinosaur Gertie’s Ice Cream of Extinction" => "dinosaur-gerties-ice-cream-of-extinction", "Oasis Canteen" => "oasis-canteen", "Anaheim Produce" => "anaheim-produce", "KRNR Rock Station" => "krnr-rock-station", "Peevy’s Polar Pipeline" => "peevys-polar-pipeline", "Sweet Spells" => "sweet-spells", "Avalunch" => "avalunch", "Cooling Hut" => "cooling-hut", "Frostbite Freddy's" => "frostbite-freddys", "Warming Hut" => "warming-hut",
+      "Coffee Hut" => "coffee-hut", "Contemporary Grounds" => "contemporary-grounds", 
+      "Meadow Snack Bar" => "meadow-snack-bar",
+      "Chuck Wagon" => "chuck-wagon", "Garden View Lounge Afternoon Tea" => "garden-view-tea-room",
+      "Scat Cats Club" => "scat-cats-club", "Turf Club Lounge" => "turf-club-lounge", 
+      "Java Bar" => "java-bar", "Splash Terrace" => "splash-terrace"
+      })
+    
   end
   
   def self.scan_review_details(permalink="aloha-isle")

@@ -29,6 +29,24 @@ class TpcrReaper
     end
   end
   
+  def reap_downtown_disney(clock=DateTime)
+    district_id = District.where(name: district.name).first.id
+    review_types = WorldHarvester.find_downtown_disney_list
+    review_types.each do |review_type|
+      puts "***** review_type #{review_type[0].to_s} ****"
+      puts review_type[1]
+      unless review_type[1].to_s.length == 0
+        review_type[1].each do |review|
+        review_params = {name: review['name'], permalink: review["permalink"], cuisine:  review["cuisine"],
+          table_quality_rating: review["table_quality_rating"], counter_quality_rating: review["counter_quality_rating"]}
+          puts review_params
+          params = review_params.merge({district_id: district_id})
+          archive_new_review(params)        
+        end
+      end
+    end
+  end
+
   def reap_resorts(clock=DateTime)
     lodging_districts = WorldHarvester.find_list_of_lodging_districts
     lodging_districts.each do |resort|
@@ -39,10 +57,12 @@ class TpcrReaper
       if resort_district.id > 0
         if resort['dinings'].length > 0
           resort['dinings'].each do |review|
-            puts "#{review['name']}: #{review['permalink']}"
-            review = WorldHarvester.find_eatery_by_permalink(district.name, eatery_permalink)
-            params = review.attributes
-            params = params.merge({district_id: resort_district.id})
+            puts "review name: #{review['name']}, review permalink: #{review['permalink']}, district.name: #{district.name}"
+            review = WorldHarvester.find_eatery_by_permalink(district.name, review['permalink'])
+            puts"********** review:"
+            puts review
+            # params = review.attributes
+            params = review.merge({district_id: resort_district.id})
             archive_new_review(params)
           end
           

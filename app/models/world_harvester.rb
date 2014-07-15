@@ -34,6 +34,14 @@ class WorldHarvester
     TouringPlansComFeed.new(district, eatery).fetch_listing
   end
 
+  # --- Downtown Disney --- #
+  # http://touringplans.com/walt-disney-world/downtown-disney-dining
+  def self.find_downtown_disney_list
+    district = OpenStruct.new(:name => "Downtown Disney")
+    eatery = OpenStruct.new
+    TouringPlansComFeed.new(district, eatery).fetch_listing
+  end
+
   # http://touringplans.com/walt-disney-world/resort-dining.json
   def self.find_resort_eateries_list_by_permalink(resort_permalink)
     lodging_districts = self.find_list_of_lodging_districts

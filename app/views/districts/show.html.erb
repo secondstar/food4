@@ -8,14 +8,12 @@
 		<!-- <a href="http://shine.yahoo.com/channel/health/how-to-break-a-habit-in-12-steps-2532888/" class="img"><img src="http://l.yimg.com/jn/util/anysize/310*275c-86400,http%3A%2F%2Fl.yimg.com%2Fa%2Fi%2Fus%2Fshine%2Fhealth%2F200382537-001.jpg" alt="Quit your bad habits—for good!" height="275" width="310"></a> -->
 		<div class="attr">
 			<% if !@photo.blank? %>
-				<% @photo.each do |photo| %>
 				<li class="last">
-					<%= image_tag "http://farm#{photo.farm}.static.flickr.com/#{photo.server}/#{photo.flickr_id}_#{photo.secret}_m.jpg", :title => "#{photo.title}", :class => "class" %>
+					<%= image_tag "http://farm#{@photo.farm}.static.flickr.com/#{@photo.server}/#{@photo.flickr_id}_#{@photo.secret}_m.jpg", :title => "#{@photo.title}", :class => "class" %>
 					<br />
-					<%= photo.title %><br /><%= link_to "photo credit", "http://www.flickr.com/photos/#{photo.owner}/#{photo.flickr_id}" %>
+					<%= @photo.title %><br /><%= link_to "photo credit", "http://www.flickr.com/photos/#{@photo.owner}/#{@photo.flickr_id}" %>
 				</li>
 					
-				<%  end %>
 			<% else %>
 			  <li>no photos found</li>
 			<% end %>
