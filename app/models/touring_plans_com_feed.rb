@@ -58,6 +58,7 @@ class TouringPlansComFeed
   def get_eatery_details_by_permalink
     # http://touringplans.com/walt-disney-world/dining/chuck-wagon.json
     link = construct_eatery_permalink
+    puts "link: #{link}"
     @eatery = TouringPlansComFeed.get(link).parsed_response
   end
   
@@ -106,7 +107,7 @@ class TouringPlansComFeed
       "Animal Kingdom"=>"/animal-kingdom/dining",
       "Typhoon Lagoon"=>"/typhoon-lagoon/dining",
       "Blizzard Beach"=>"/blizzard-beach/dining",
-      "resorts" => "/walt-disney-world/dining"
+      "Resorts" => "/walt-disney-world/dining"
     } 
     
   end
