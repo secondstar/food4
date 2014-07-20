@@ -7,6 +7,7 @@ gem 'crack', '~> 0.4.2'  #parsing xml and json, might be needed for a Rails app
 gem 'retries', '~> 0.0.5' # Assists in pulling or pushing to flakey connections and api's
 gem 'resque', '~> 1.25.2' # http://rubygems.org/gems/resque
 gem 'nokogiri', '~> 1.6.2.1' # for scraping sites
+gem 'whenever', '~> 0.9.2', :require => false # cron jobs for updating eatery data, including links to photos
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
