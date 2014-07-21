@@ -13,6 +13,15 @@ class Snapshot < ActiveRecord::Base
     last
   end
   
+  def self.touringplans
+    # last
+    where(review_type: "TouringPlansComReview").order("published_at DESC")
+  end
+  def self.dfb
+    # last
+    where(review_type: "DisneyfoodblogComReview").order("published_at DESC")
+  end
+  
   def publish(clock=DateTime)
     return false unless valid?
     self.published_at = clock.now

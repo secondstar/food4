@@ -33,7 +33,7 @@ class EateriesController < ApplicationController
     # # @video = Eatery.find_video("#{ename} disney", 3)
     # @tweet_search_term = Eatery.find_tweets(ename)
     # @eatery_dfb_links = @eatery.addendums.where('href IS NOT NULL')
-    @dfb_snapshots = @eatery.snapshots.where(review_type: "DisneyfoodblogComReview").order("published_at DESC")
+    @dfb_snapshots = @eatery.snapshots.dfb
     if @dfb_snapshots.length > 0
       @eatery_dfb_tips = @dfb_snapshots.first.addendums.where(category: 'tips')
       @eatery_dfb_affinities = @dfb_snapshots.first.addendums.where(category: 'affinity')
