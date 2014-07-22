@@ -1,3 +1,6 @@
+<% if params[:search_location] == "resort-dining" %> 
+	<%= content_for(:title, "Resort Dining") %><br />
+<% end %>
 <%= content_for?(:title) ? yield(:title) : "Food at Walt Disney World" %>
 
 <% content_for :title_section do -%>
