@@ -47,6 +47,9 @@ group :development, :test do
   gem 'database_cleaner', '~> 1.3.0'
 end
 
+group :production do
+  gem 'unicorn', '~> 4.8.3'
+end
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
