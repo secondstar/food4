@@ -109,7 +109,7 @@ window.yzq_d['myXJSGKJiTs-']='&amp;U=12c0e9sr3%2fN%3dmyXJSGKJiTs-%2fC%3d-1%2fD%3
 		 	  <% @eatery_dfb_tips.each do |dfb_tip| %>
 					<% numcount += 1 %>
 					<li class="num<%= numcount %>"><span><!-- --></span>
-						<div><%= dfb_tip.description.html_safe %>
+						<%= dfb_tip.description.html_safe %>
 					</li>
 				<% end %>
 			<% else %>
@@ -213,9 +213,9 @@ window.yzq_d['myXJSGKJiTs-']='&amp;U=12c0e9sr3%2fN%3dmyXJSGKJiTs-%2fC%3d-1%2fD%3
 		
 		<ul class="thumbs">
 			<li><a class="img" href=""><img width="73" height="73" class="lz" alt="paid reservations" src="http://farm3.static.flickr.com/2524/5845268015_2a5da93ca5_s.jpg"></a><div class="txt"><h3><%= label = @eatery.requires_pre_payment == 't' ? "Paid reservations required." : "Pay when the check comes" %></h3> <cite> </cite></div></li>
-			<li><a class="img" href=""><img width="73" height="73" class="lz" alt="Tables in Wonderland" src="http://farm6.static.flickr.com/5293/5532871520_68f78551a8_s.jpg"></a><div class="txt"><h3><%= "A Tables in Wonderland Restaurant? #{@eatery.tables_in_wonderland}" %></h3> <cite> </cite></div></li>
-			<li><a class="img" href=""><img width="73" height="73" class="lz" alt="" src="http://l.yimg.com/jn/util/anysize/73*73c-86400,http%3A%2F%2Fl.yimg.com%2Fa%2Fi%2Fus%2Fshine%2Ffood%2F73.eating_peas.jpg"></a><div class="txt"><h3>Entree price range is <%= !@eatery.entree_range.blank? ? "#{@eatery.entree_range}" : "not stated." %></h3> <cite> </cite></div></li>
-			<li><a class="img" href=""><img width="73" height="73" class="lz" alt="" src="http://l.yimg.com/jn/util/anysize/73*73c-86400,http%3A%2F%2Fl.yimg.com%2Fa%2Fi%2Fus%2Fshine%2Ffood%2F73.pbj.jpg"></a><div class="txt"><h3>On the Disney Dining Plan?  <%= !@eatery.disney_dining_plan.blank? ? h(@eatery.disney_dining_plan.html_safe) : "Nope, not this year." %></h3> <cite> </cite></div></li>
+			<li><a class="img" href=""><img width="73" height="73" class="lz" alt="Tables in Wonderland" src="http://farm6.static.flickr.com/5293/5532871520_68f78551a8_s.jpg"></a><div class="txt"><h3>A Tables in Wonderland Restaurant?</h3> <%= "#{@eatery.tables_in_wonderland}" %></div></li>
+			<li><a class="img" href=""><img width="73" height="73" class="lz" alt="" src="http://l.yimg.com/jn/util/anysize/73*73c-86400,http%3A%2F%2Fl.yimg.com%2Fa%2Fi%2Fus%2Fshine%2Ffood%2F73.eating_peas.jpg"></a><div class="bd"><h3>Entree price range is</h3> <%= !@eatery.entree_range.blank? ? "#{@eatery.entree_range}" : "not stated." %></h3> <cite> </cite></div></li>
+			<li><a class="img" href=""><img width="73" height="73" class="lz" alt="" src="http://l.yimg.com/jn/util/anysize/73*73c-86400,http%3A%2F%2Fl.yimg.com%2Fa%2Fi%2Fus%2Fshine%2Ffood%2F73.pbj.jpg"></a><div class="txt"><h3>On the Disney Dining Plan?</h3>  <%= !@eatery.disney_dining_plan.blank? ? h(@eatery.disney_dining_plan.html_safe) : "Nope, not this year." %></h3> <cite> </cite></div></li>
 		</ul>
 	</div>
 	<div class="ft"><a class="more" href=""></a></div>
