@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'welcome/index'
+
   get 'notebook/index'
 
   resources :districts, :eateries
@@ -9,7 +11,8 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'districts#index'
+  root 'welcome#index'
+  # root 'districts#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
