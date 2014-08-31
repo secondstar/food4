@@ -41,13 +41,24 @@ describe DfbHarvester do
     before do
       sleep(2.seconds)
     end
-    it "works" do
-      @it.scan_for_bloggings.must_equal [{"source"=>"http://www.disneyfoodblog.com/whispering-canyon-cafe/", "href"=>"http://www.disneyfoodblog.com/2014/05/11/review-dinner-at-whispering-canyon-cafe-in-disneys-wilderness-lodge/", "description"=>"Review: Dinner at Whispering Canyon Cafe in Disney’s Wilderness Lodge", "category"=>"blogging"}, {"source"=>"http://www.disneyfoodblog.com/whispering-canyon-cafe/", "href"=>"http://www.disneyfoodblog.com/2014/01/22/three-must-try-disney-pies/", "description"=>"Three Must-Try Disney Pies!", "category"=>"blogging"}, {"source"=>"http://www.disneyfoodblog.com/whispering-canyon-cafe/", "href"=>"http://www.disneyfoodblog.com/2013/09/24/the-weirdest-burgers-in-disney-world/", "description"=>"The Weirdest Burgers in Disney World", "category"=>"blogging"}, {"source"=>"http://www.disneyfoodblog.com/whispering-canyon-cafe/", "href"=>"http://www.disneyfoodblog.com/2013/07/22/disney-popcorn-gallery/", "description"=>"Disney Popcorn Gallery", "category"=>"blogging"}, {"source"=>"http://www.disneyfoodblog.com/whispering-canyon-cafe/", "href"=>"http://www.disneyfoodblog.com/2013/07/15/disney-food-blog-challenge-the-disney-world-milkshake-crawl/", "description"=>"Disney Food Blog Challenge: The Disney World Milkshake Crawl", "category"=>"blogging"}, {"source"=>"http://www.disneyfoodblog.com/whispering-canyon-cafe/", "href"=>"http://www.disneyfoodblog.com/2013/06/25/our-ten-favorite-frozen-drinks-in-disney-world/", "description"=>"Ten Best Frozen Drinks in Disney World", "category"=>"blogging"}, {"source"=>"http://www.disneyfoodblog.com/whispering-canyon-cafe/", "href"=>"http://www.disneyfoodblog.com/2013/05/16/the-most-popular-disney-restaurants-and-alternatives-when-theyre-full/", "description"=>"The Most Popular Disney World Restaurants (and Alternatives When They’re Full)", "category"=>"blogging"}, {"source"=>"http://www.disneyfoodblog.com/whispering-canyon-cafe/", "href"=>"http://www.disneyfoodblog.com/2012/10/28/review-new-lunch-menu-at-whispering-canyon-cafe-in-disneys-wilderness-lodge/", "description"=>"Review: New Lunch Menu at Whispering Canyon Cafe in Disney’s Wilderness Lodge", "category"=>"blogging"}, {"source"=>"http://www.disneyfoodblog.com/whispering-canyon-cafe/", "href"=>"http://www.disneyfoodblog.com/2012/09/22/disney-food-post-round-up-september-23-2012/", "description"=>"Disney Food Post Round-Up: September 23, 2012", "category"=>"blogging"}, {"source"=>"http://www.disneyfoodblog.com/whispering-canyon-cafe/", "href"=>"http://www.disneyfoodblog.com/2012/09/22/news-whispering-canyon-cafe-changes-it-up-with-new-menus/", "description"=>"News! Whispering Canyon Cafe Changes It Up With New Menus", "category"=>"blogging"}]
-    end
     
-    it "has exactly 10 items" do
+    it 'is a Enumerable' do
+      @it.scan_for_bloggings.must_be_kind_of Enumerable
+    end
+
+    it "returns 10 results" do
       @it.scan_for_bloggings.length.must_equal 10
     end
+    
+    it 'has the first result as a hash' do
+      @it.scan_for_bloggings.first.must_be_kind_of Hash
+      
+    end
+    
+    it 'lists 4 items in the hash' do
+      @it.scan_for_bloggings.first.length.must_equal 4
+    end
+    
     
   end
 
