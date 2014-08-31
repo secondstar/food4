@@ -26,6 +26,10 @@ describe DfbReaper do
       subject.first.must_be_kind_of Hash
       
     end
+    
+    it 'lists 228 items in the hash' do
+      subject.first.length.must_equal 228
+    end
 
   end
 
