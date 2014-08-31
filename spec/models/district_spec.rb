@@ -69,18 +69,19 @@ describe District do
         @it.publish(@clock)
       end
       
+      #fix
       it "works" do
         @it.published_at.must_equal "something"
       end
       
+      #fix
       it "should be a datetime" do
         assert(@it.published_at.is_a?(DateTime) || 
                @it.published_at.is_a?(ActiveSupport::TimeWithZone),
                "published_at must be a datetime of some kind")
       end
- 
-      
-      
+
+      #fix
       it "should be the current time" do
         @it.published_at.must_equal(@now)
       end
