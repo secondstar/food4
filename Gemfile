@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
-ruby '2.1.1'
-
+# ruby '2.1.1'
+# #ruby-gemset=wdwfood
 
 gem 'httparty', '~> 0.13.1' # pull json api data from other sites, better than just curl or Nokogiri
 gem 'kaminari', '~> 0.15.1' #  # pagination
@@ -58,3 +58,5 @@ gem 'bcrypt', '~> 3.1.7'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# logs, tracking
+gem 'newrelic_rpm'
