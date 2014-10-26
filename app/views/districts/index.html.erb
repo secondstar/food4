@@ -27,17 +27,17 @@
 <% end -%>
 
 <% content_for :side do -%>
-	<%= render :partial => "/shared/sidebar" %>
+	<%# render :partial => "/shared/sidebar" %>
 <% end -%>
 <!--  -->
 
 <!--  -->
 <% if params[:search_location] == "resort-dining" %> 
 <%# nb: lodgings will be shown no matter what the search_location is %>
-	<%= render :partial => 'resort_and_eatery_listing' %>
+	<%# render :partial => 'resort_and_eatery_listing' %>
 
 	<!--  -->
 <%- else -%>
-	<%= render :partial => 'park_and_resort_eateries_listing' %>
+	<%# render :partial => 'park_and_resort_eateries_listing' %>
 	
 <% end %>
