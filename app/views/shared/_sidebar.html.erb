@@ -24,7 +24,7 @@
 				<div class="ft"></div>
 			</div>
 <!--  -->
-<%= render :partial => '/shared/facebook_recommendation_section' %>
+<%# render :partial => '/shared/facebook_recommendation_section' %>
 
 <!-- Twitter widget -->
 			<!-- <div id="ylf-vitality" class="mod line">
@@ -35,9 +35,9 @@
 					new TWTR.Widget({
 					  version: 2,
 					  type: 'search',
-					  search: '<%= @tweet_search_term %>',
+					  search: '<%# @tweet_search_term %>',
 					  interval: 6000,
-					  title: '<%= @tweet_search_term %>',
+					  title: '<%# @tweet_search_term %>',
 					  subject: 'let\'s eat',
 					  width: 250,
 					  height: 300,
