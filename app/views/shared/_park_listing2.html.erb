@@ -8,6 +8,8 @@
 		<ul class="thumbs">
 			<% if !@eateries.blank? %>
 			  <% @eateries.each do |eatery| %>
+				<% cache eatery do %>
+			  
 			<li>
 				<%= link_to image_tag("exclamation.png", :size => "32x32", :class => "lz"), eatery_permalink_path(eatery.permalink), :class => 'img' %>
 				<div class="txt">					
@@ -16,6 +18,7 @@
 
 				</div>
 			</li>
+				<% end %>
 			  <% end %>
 			<% else %>
 			  <p>no listings yet for!</p>

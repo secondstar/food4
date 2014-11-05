@@ -23,9 +23,11 @@ end
 			<% if !@park_photos.blank? %>
 				<li class="last">
 					<% @park_photos.each do |photo| %>
+						<% cache photo do %>
 						<%= link_to image_tag("http://farm#{photo.farm}.static.flickr.com/#{photo.server}/#{photo.flickr_id}_#{photo.secret}_s.jpg",
 						:title => "#{photo.title}", 
 						:class => "class"), "http://www.flickr.com/photos/#{photo.owner}/#{photo.flickr_id}" %>
+						<% end %>
 					<% end %>
 					
 				</li>
