@@ -28,7 +28,7 @@ class DistrictsController < ApplicationController
     end
     
     @photo    = @photos.last
-    @photos   = @photos.to_a.shuffle!.first(2)
+    @photos   = @photos.to_a.first(2)
     
     respond_to do |format|
       format.html # show.html.erb
