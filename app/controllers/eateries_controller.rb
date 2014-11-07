@@ -24,10 +24,10 @@ class EateriesController < ApplicationController
       if @photos.length < 10
       	@e = @eatery.district.eateries
       	@e.each {|e| @photos << e.photos}
-      	@photos = @photos.flatten.to_a.shuffle!.first(10)
+      	@photos = @photos.flatten.to_a.first(10)
       end      
     end
-    @photos = @photos.to_a.shuffle!
+    @photos = @photos.to_a
     @head_photo = @photos.last
     @photos     = @photos.first(3)
     # # @video = Eatery.find_video("#{ename} disney", 3)
