@@ -37,20 +37,6 @@ end
 		
 		</div>
 		<div class="bd">
-			<ul class="blt">
-				
-				
-				<% if !park_listing.eateries.blank? %>
-				  <% for eatery in park_listing.eateries %>
-					<li><div class="cls">
-						<%= link_to eatery.name, eatery_permalink_path(eatery.permalink), :class => 'title' %>
-					</div></li>				    
-				  <% end %>
-				<% else %>
-				  <p>no listings yet!</p>
-				<% end %>
-
-			</ul>
 		</div>
 	</div>
 <% end %>
