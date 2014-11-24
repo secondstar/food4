@@ -10,14 +10,14 @@ class District < ActiveRecord::Base
   attr_accessor :notebook
   
   scope :not_a_park,               -> { where(is_park: false) }
-  scope :resorts, -> { not_a_park.where("name != ?", "Downtown Disney") }  
+  scope :visible,   -> {  select { |district| district.eateries.size > 0 }  }
 
   def self.most_recent
-    all
+    visible
   end
 
   def self.resorts
-    where(is_park: false).where.not(name: "Resorts").where.not(name: 'Downtown Disney')
+    not_a_park.where("name != ?", "Downtown Disney").visible
   end
 
   def self.parks
@@ -34,7 +34,7 @@ class District < ActiveRecord::Base
     if search_location == "resorts"
       results = self.resorts
     else
-      results = self.all
+      results = self.most_recent
     end
     return results
   end
