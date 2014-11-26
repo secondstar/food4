@@ -1,12 +1,7 @@
 <div class="cls col-bg">
 	<div class="col-b">
-	  <% for district in @lodgings %>
-		<% if district.eateries.exists? %>
-		  <%= render :partial => "/shared/park_listing", 
-		  :object => district, 
+	  <%= render :partial => "/shared/park_listing",
 		  :locals => {:last_listing => 'false', 
-			  :column_number => '1'} %>
-		<% end %>
-	  <% end %>
+			  :column_number => '1'}, collection: @lodgings %>
 	</div>
 </div>
