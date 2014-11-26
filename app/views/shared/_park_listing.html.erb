@@ -2,33 +2,10 @@
 <% park_name_class = 'mod ' %>
 <% column_number == 1 ? park_name_class : park_name_class += "mod channel ch-C3 "  %>
 <% last_listing == 'true' ? park_name_class  += "cls ": park_name_class += "line "  %>
-<% @park_photos = park_listing.photos.to_a.first(3) -%>
-<% if @park_photos.length < 3
-	@photos =[]
-	@e = park_listing.eateries
-	@e.each{|e| @photos << e.photos}
-	@park_photos = @photos.flatten.to_a.first(3)
-end
- %>
 
 	<div id="<%= park_name %>" class="<%= park_name_class %>">
-		<!-- mod channel ch-C3 line -->
 		<div class="hd cls">
 			<h2> <%= link_to park_listing.name, district_path(park_listing) %> </h2>
-			<% if !@park_photos.blank? %>
-				<li class="last">
-					<% @park_photos.each do |photo| %>
-						<% cache photo do %>
-						<%= link_to image_tag("http://farm#{photo.farm}.static.flickr.com/#{photo.server}/#{photo.flickr_id}_#{photo.secret}_s.jpg",
-						:title => "#{photo.title}", 
-						:class => "class"), "http://www.flickr.com/photos/#{photo.owner}/#{photo.flickr_id}" %>
-						<% end %>
-					<% end %>
-					
-				</li>
-			<% else %>
-			  <li>no photos found</li>
-			<% end %>
 		
 		</div>
 		<div class="bd">
