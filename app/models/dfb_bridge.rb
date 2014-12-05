@@ -55,7 +55,7 @@ class DfbBridge
 				"yak-and-yeti-counter-service" => "yak-and-yeti-local-food-cafe",
 				"yak-and-yeti-restaurant" => "yak-yeti-restaurant",
         "victoria-falls" => "victoria-falls-lounge",
-        "the-drop-off" => "the-drop-off-pool-bar",
+        "the-drop-off-pool-bar" => "the-drop-off",
         "beaches-and-cream" => "beaches-cream-soda-shop",
         "hurricane-hannas" => "hurricane-hannas-grill",
         "banana-cabana-pool-bar" => "banana-cabana",
