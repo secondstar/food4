@@ -60,3 +60,6 @@ gem 'bcrypt', '~> 3.1.7'
 
 # logs, tracking
 gem 'newrelic_rpm'
+
+# app improvement
+gem 'skylight', '~> 0.5.0'
