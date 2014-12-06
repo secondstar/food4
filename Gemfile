@@ -45,6 +45,7 @@ group :development, :test do
   gem 'rr', '~> 1.1.2'
   gem 'activerecord-nulldb-adapter'
   gem 'database_cleaner', '~> 1.3.0'
+  gem 'travis', '~> 1.7.4'
 end
 
 group :production do

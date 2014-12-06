@@ -1,3 +1,10 @@
 language: ruby
 rvm:
-  - "2.1.1"
+- 2.1.1
+deploy:
+  provider: heroku
+  api_key:
+    secure: jFtYTNdVzxpYklHQRXUSh7GsxVkPlSceiGyYgc5OzCGbD3rDUVPIw9GPGL34T0xUFdVu2NhqxlM1KJ6g/TbpYAQ+Fvcy5BS9Mm2cL8CMhYbe9zdnPdsAkPDoDbASqpjg8QZC0ipWzaXUhjdtgCYt9ODbUFc9JGHzQpR2RFcH/DU=
+  app: food4
+  on:
+    repo: secondstar/food4
