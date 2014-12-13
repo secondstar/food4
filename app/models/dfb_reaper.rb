@@ -14,8 +14,8 @@ class DfbReaper
     return results
   end
   
-  def self.archive_new_review(name="Aloha Isle", permalink="aloha-isle")
-    dnra = DfbNewReviewArchiver.new(review_name: name, permalink: permalink)
+  def self.archive_new_review(eatery_name="Cheshire Cafe", permalink="cheshire-cafe")
+    dnra = DfbNewReviewArchiver.new(eatery_name, permalink)
     dnra.store
   end
   

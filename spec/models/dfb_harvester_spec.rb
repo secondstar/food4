@@ -15,6 +15,7 @@ describe DfbHarvester do
     # puts "@target is #{@target}"
   end
 
+
   describe "#yql_url" do
     before do
       # puts "\nyql_url: #{@it.yql_url}\n"
@@ -22,7 +23,7 @@ describe DfbHarvester do
     it "works" do
       # puts "\n yql_url: #{@it.yql_url} \n"
       
-      @it.yql_url.must_equal "https://query.yahooapis.com/v1/public/yql?q=use%20'https%3A%2F%2Fraw.githubusercontent.com%2Fyql%2Fyql-tables%2Fmaster%2Fdata%2Fdata.html.cssselect.xml'%20as%20cssselect%3B%20select%20*%20from%20cssselect%20where%20url%3D%20'http%3A%2F%2Fwww.disneyfoodblog.com%2Fwhispering-canyon-cafe'%20and%20css%20%3D%20'%23primary%20.entry-content'&diagnostics=true"
+      @it.yql_url.must_equal "https://query.yahooapis.com/v1/public/yql?q=SELECT+*+FROM+data.html.cssselect+WHERE+url%3D%27http%3A%2F%2Fwww.disneyfoodblog.com%2Fwhispering-canyon-cafe%27+AND+css%3D%27%23primary+.entry-content%27&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys"
     end
   end
   
