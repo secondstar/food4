@@ -31,11 +31,20 @@ describe DfbReaper do
 
 
   describe "scan_review_details" do
-    let(:permalink) {"aloha-isle"}
+    let(:permalink) {"cheshire-cafe"}
+    let(:eatery_name) {"Cheshire Cafe"}
+
+    subject { DfbReaper.scan_review_details(permalink)}
+    it "is one element in an array" do
+      subject.size.must_equal 1
+    end
     
-    subject { DfbReaper.scan_review_details}
-    it "works" do
-      subject.must_equal [{"service"=>"Counter Service", "type_of_food"=>"Dole Whip, soft-serve ice cream, fruit", "location"=>"Adventureland, Magic Kingdom", "disney_dining_plan"=>"Yes, snack credits", "tables_in_wonderland"=>"No", "menu"=>"<br>\n<a href=\"https://disneyworld.disney.go.com/dining/magic-kingdom/aloha-isle/menus/\" target=\"_blank\">Official Disney Menu</a>", "important_info"=>"", "famous_dishes"=>"<br>\n<a href=\"https://disneyworld.disney.go.com/dining/magic-kingdom/aloha-isle/menus/\" target=\"_blank\">Official Disney Menu</a>", "mentioned_in"=>"", "reviews"=>""}]
+    it 'has a hash as the first element' do
+      subject[0].must_be_kind_of Hash
+    end
+    
+    it 'has a hash with 11 elements' do
+      subject[0].length.must_equal 12
     end
   end
 
