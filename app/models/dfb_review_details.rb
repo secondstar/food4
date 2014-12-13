@@ -26,8 +26,12 @@ class DfbReviewDetails
     end
     # deal with inidividual review quirks
     # ==========================================
-    return normalize_scan(eatery_values_hash)
+    eatery_values_hash = _normalize_scan(eatery_values_hash)
+    return eatery_values_hash
+    
     # ==========================================
+    ### the rest of this method will eventually be deleted after they have become factories ###
+    ## -------------------------------------------------
     # puts eatery_values_hash
     # These hash values are bold text on the webpage that we key off of.  The are not values we care about.
     # eatery_values_hash.delete(" important_information") # Turf Club Lounge
@@ -79,7 +83,7 @@ eatery_values_hash.delete("ice_cream") # L’Artisan des Glaces Sorbet and Ice C
     eatery_values_hash.delete("saratoga_lager")
     eatery_values_hash.delete("for_information_on_other_walt_disney_world_table_service_restaurants,_head_to_our_")
     # puts eatery_values_hash
-    _swap_title(eatery_values_hash)
+    # swap_title(eatery_values_hash)
     return [eatery_values_hash]
     
   end
@@ -96,19 +100,18 @@ eatery_values_hash.delete("ice_cream") # L’Artisan des Glaces Sorbet and Ice C
     return detail
   end
   
-  def _swap_title(eatery_values_hash)
+  def self.swap_title(eatery_values_hash)
     #When scanning review details, the title in the DB doesn't always match the column name
     #posts_mentioning -- the key created varies, so we search for it and replace it
-    if eatery_values_hash.select { |key, value| key.start_with? 'disney_food_blog_posts_mentioning' }.length > 0
-      posts_mentioning = eatery_values_hash.select { |key, value| key.start_with? 'disney_food_blog_posts_mentioning' }.first.first
+    hash_of_dfb_posts_mentioning_this_eatery = eatery_values_hash.select { |key| key.match('\Adisney_food_blog_posts_mentioning*') }
+    
+    if hash_of_dfb_posts_mentioning_this_eatery.length > 0
+      posts_mentioning = eatery_values_hash.select { |key, value|
+         key.match('\Adisney_food_blog_posts_mentioning*') }.first.first
       eatery_values_hash["mentioned_in"] = eatery_values_hash[posts_mentioning]
-      eatery_values_hash.delete(posts_mentioning)      
+      eatery_values_hash.delete(posts_mentioning)
     end
-    #other_table_service -- the key has a comma in it, so we search for it and replace it
-    if eatery_values_hash.select { |key, value| key.start_with? 'for_information_on_other_walt_disney_world' }.length > 0
-      other_table_service = eatery_values_hash.select { |key, value| key.start_with? 'for_information_on_other_walt_disney_world' }.first.first
-      eatery_values_hash.delete(other_table_service)      
-    end
+    
     #important_info - we know the key, so we swap it out directly
     eatery_values_hash["important_info"] =  eatery_values_hash.fetch("important_information",
                                             eatery_values_hash["important_info"])
@@ -142,16 +145,18 @@ eatery_values_hash.delete("ice_cream") # L’Artisan des Glaces Sorbet and Ice C
                                             eatery_values_hash["reviews"])
     
     eatery_values_hash.delete("review")    
+    return eatery_values_hash
   end
-  
-  def normalize_scan(eatery_values_hash)
+    
+  def _normalize_scan(eatery_values_hash)
     if permalinks_of_reviews_with_non_standard_format.include?(target.path)
       class_name = "Dfb" + target.path.to_s.titleize.gsub(" ","") + "ReviewScan"
       normalized_details = class_name.constantize.new(eatery_values_hash).normalize      
     else
       normalized_details = eatery_values_hash
     end
-    return [normalized_details]
+    
+    return normalized_details
   end
   
   def permalinks_of_reviews_with_non_standard_format

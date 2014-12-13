@@ -1,13 +1,18 @@
 class DfbNewReviewArchiver
   
   attr_accessor :notebook
-  attr_reader :review_name, :permalink
   
+  attr_reader :eatery_name, :permalink, :yql_css_parse, :target
   @notebook = THE_NOTEBOOK 
   
-  def initialize(args)
-    review_name = args[review_name]
-    permalink = args[permalink]
+  def initialize(eatery_name, permalink, yql_css_parse="#primary .entry-content p")
+    @eatery_name    =  eatery_name
+    @permalink      = permalink
+    @yql_css_parse  = yql_css_parse
+    @target         = {eatery_name: eatery_name, 
+                        permalink: permalink, 
+                        yql_css_parse: yql_css_parse,
+                        path: yql_css_parse}
   end
   
   def store
@@ -18,16 +23,14 @@ class DfbNewReviewArchiver
     # 3) create snapshot
     #     a) link snapshot if matches
     #     b) set eatery id to 0 if doesn't match
-    params = {name: name, permalink: permalink}
-    target = OpenStruct.new(params)
-    # puts "**************************** target #{target} ************************"
     
     @dfb_notebook = Notebook.new(entry_fetcher=DisneyfoodblogComReview.public_method(:most_recent))
-    scanned_in_review = self.scan_review_details(permalink)[0]
-    return if scanned_in_review.blank? # review exists in index, but not really on remote site
-    params = {name: name, permalink: permalink}.merge(scanned_in_review)
+    # scanned_in_review = self.scan_review_details(permalink)[0]
+    return if _scanned_in_review.blank? # review exists in index, but not really on remote site
+    params = _merge_model_params_with__scanned_in_review
     dfb_review = @dfb_notebook.new_dfb_review(params)
     dfb_review.archive
+    return
     ## harvest dfb_review addendums    
     # iterate through the collection of addendums (tips, bloggings…)
     
@@ -52,6 +55,17 @@ class DfbNewReviewArchiver
     self.archive_dfb_review_addendums(path= snapshot_review_permalink,
           yql_css_parse = 'div.entry-content', snapshot_id = snapshot_id)
     
+  end
+  
+  def _merge_model_params_with__scanned_in_review
+    initial_params = {name: eatery_name, permalink: permalink}
+    params = initial_params.merge(_scanned_in_review)
+  end
+
+  def _scanned_in_review
+    params = {:path=> permalink, :yql_css_parse=>"#primary .entry-content p"}
+    scan_target = OpenStruct.new(params)
+    DfbHarvester.new(scan_target).scan_review_details[0]
   end
   
 end

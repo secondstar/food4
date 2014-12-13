@@ -67,8 +67,9 @@ class DfbHarvester
     # @target.path = "/#{DfbBridge.new(@target).get_review_permalink}"
     # puts "new @target #{@target}"
     # #now that we have the proper path
-    results = DfbReviewDetails.new(target: @target).scan
-    return results
+    eatery_values_hash = DfbReviewDetails.new(target: @target).scan
+    results = DfbReviewDetails.swap_title(eatery_values_hash)
+    results = [results]
     ## ==========================================
     
   end
