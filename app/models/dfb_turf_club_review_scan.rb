@@ -8,7 +8,6 @@ class DfbTurfClubReviewScan
   def normalize
     # returns only the pairs that have desired keys
     initial_scan.delete("update")
-    initial_scan.delete("disney_food_blog_posts_mentioning_turf_club_bar_&amp;_grill")
     
     return initial_scan
   end

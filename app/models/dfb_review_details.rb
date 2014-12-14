@@ -26,7 +26,7 @@ class DfbReviewDetails
     end
     # deal with inidividual review quirks
     # ==========================================
-    eatery_values_hash = _normalize_scan(eatery_values_hash)
+    # eatery_values_hash = _normalize_scan(eatery_values_hash)
     return eatery_values_hash
     
     # ==========================================
@@ -150,7 +150,7 @@ eatery_values_hash.delete("ice_cream") # L’Artisan des Glaces Sorbet and Ice C
     
   def _normalize_scan(eatery_values_hash)
     if permalinks_of_reviews_with_non_standard_format.include?(target.path)
-      class_name = "Dfb" + target.path.to_s.titleize.gsub(" ","") + "ReviewScan"
+      class_name = "Dfb" + target.path.to_s.titleize.gsub(" ","").gsub("/","") + "ReviewScan"
       normalized_details = class_name.constantize.new(eatery_values_hash).normalize      
     else
       normalized_details = eatery_values_hash
@@ -161,7 +161,6 @@ eatery_values_hash.delete("ice_cream") # L’Artisan des Glaces Sorbet and Ice C
   
   def permalinks_of_reviews_with_non_standard_format
     permalinks = %w(turf-club
-      013/06/07/review-krnr-rock-station-food-truck-at-disneys-hollywood-studios
       trout-pass
       garden-grove-cafe
     victoria-and-alberts-restaurant
