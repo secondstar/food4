@@ -35,12 +35,7 @@ class DfbReviewDetails
     # puts eatery_values_hash
     # These hash values are bold text on the webpage that we key off of.  The are not values we care about.
     # eatery_values_hash.delete(" important_information") # Turf Club Lounge
-    eatery_values_hash.delete(" important_info") # KRNR Rock Station
-    eatery_values_hash.delete(" reviews") # KRNR Rock Station
     eatery_values_hash.delete("allears.net")
-    eatery_values_hash.delete("moosehead_and_red_hook") # Trout Pass
-    eatery_values_hash.delete("as_of_july_17th,_2013,_dinner_buffets_are_only_held_on_friday_evenings.") # Garden Grove Cafe
-    eatery_values_hash.delete("to_make_reservations") # Queen Victoria’s Room at Victoria and Albert’s Restaurant
     eatery_values_hash.delete("breakfast") # Gasparilla Island Grill
     eatery_values_hash.delete("lunch_&amp;_dinner") # Gasparilla Island Grill
     eatery_values_hash.delete("dessert") # Gasparilla Island Grill
