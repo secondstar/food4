@@ -26,8 +26,8 @@ describe DfbCoolWashPizzaReviewScan do
       subject.normalize.must_be_kind_of Hash
     end
 
-    it 'has 11 elements' do
-      subject.normalize.size.must_equal 11
+    it 'has 9 elements' do
+      subject.normalize.size.must_equal 9
     end
 
     # key in original hash did not have a 'menu' key

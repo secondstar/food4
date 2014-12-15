@@ -62,15 +62,7 @@ eatery_values_hash.delete("ice_cream") # L’Artisan des Glaces Sorbet and Ice C
     eatery_values_hash.delete("soups,_salads,_hot_and_cold_sandwiches,_quiche,_bread,_and_cheeses") # Epcot’s Les Halles Bakery
     eatery_values_hash.delete("what_are_your_thoughts_on_the_new_starbucks_format_at_fountain_view?_chime_in!") # Fountain View Cafe
     eatery_values_hash.delete("first_look_of_the_new_fountain_view_cafe_doing_business_as_a_starbucks!") # Fountain View Cafe
-    eatery_values_hash.delete("note") # Cool Wash Pizza"
-    eatery_values_hash.delete("real_tableware") # Be Our Guest
-    eatery_values_hash.delete("cracked_door_arch") # Be Our Guest
-    eatery_values_hash.delete("entryway_mosaics") # Be Our Guest
-    eatery_values_hash.delete("be_our_guest_restaurant_menu") # Be Our Guest
-    eatery_values_hash.delete('<a_href="http') # Be Our Guest
-    eatery_values_hash.delete('see_our_<a_href="http') # Be Our Guest    
     eatery_values_hash.delete("to_book_a_reservation")
-    eatery_values_hash.delete("restaurant.com_gift_certificate") # Shulas's
     eatery_values_hash.delete("saratoga_lager")
     eatery_values_hash.delete("for_information_on_other_walt_disney_world_table_service_restaurants,_head_to_our_")
     # puts eatery_values_hash

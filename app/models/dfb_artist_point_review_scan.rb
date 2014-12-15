@@ -1,4 +1,4 @@
-class DfbCoolWashPizzaReviewScan
+class DfbArtistPointReviewScan
   def initialize(initial_scan)
     @initial_scan =  initial_scan
   end
@@ -14,10 +14,10 @@ class DfbCoolWashPizzaReviewScan
   
   def _delete_bad_keys
     bad_key_1 = initial_scan.keys.select { |key| key.match('\A<a_href*') }
-    # bad_key_2 = initial_scan.keys.select { |key| key.match('\Arestaurant.com*') }
+    bad_key_2 = initial_scan.keys.select { |key| key.match('\Afor_information_on_other_walt_disney_world_table_service_restaurants*') }
     # bad_key_2 = bad_key_2[0]
-    bad_keys = ["note", "save_money_with_bundles", "18_different_facets_of_disney_dining", "the_disney_food_blog" ] +
-                bad_key_1
+    bad_keys = ["save_money_with_bundles", "18_different_facets_of_disney_dining", "the_disney_food_blog" ] +
+                bad_key_1 + bad_key_2
     
     bad_keys.each do |k|
       initial_scan.delete(k)
