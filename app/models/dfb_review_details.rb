@@ -1,4 +1,5 @@
 class DfbReviewDetails
+  # returns a hash that fits into DisneyfoodblogComReview
   def initialize(args)
     @target =  args[:target]
     yql_url = DfbYqlCollector.new(target).yql_url
@@ -36,11 +37,6 @@ class DfbReviewDetails
     # These hash values are bold text on the webpage that we key off of.  The are not values we care about.
     # eatery_values_hash.delete(" important_information") # Turf Club Lounge
     eatery_values_hash.delete("allears.net")
-    eatery_values_hash.delete("breakfast") # Gasparilla Island Grill
-    eatery_values_hash.delete("lunch_&amp;_dinner") # Gasparilla Island Grill
-    eatery_values_hash.delete("dessert") # Gasparilla Island Grill
-    eatery_values_hash.delete("monsieur_paul") # Monsieur Paul Restaurant
-    eatery_values_hash.delete("reviews_of_bistro_de_paris") # Monsieur Paul Restaurant
     eatery_values_hash.delete("update")
 eatery_values_hash.delete("choice_of_ordering_their_ice_cream_or_sorbet_in_one-_or_two-scoop_sizes,_in_either_a_cone_or_a_cup.") # L’Artisan des Glaces Sorbet and Ice Cream Shop in Epcot
 eatery_values_hash.delete("pastel_colors_and_old-world_structural_touches") # L’Artisan des Glaces Sorbet and Ice Cream Shop in Epcot
