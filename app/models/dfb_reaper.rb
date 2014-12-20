@@ -35,7 +35,7 @@ class DfbReaper
   def self.update_all_reviews
     dfb_reviews = self.reap_review_names_permalinks[0]
     # # Scraping these are painful. Maybe later.
-    dfb_reviews_to_skip = ["2010 09 30 First Look Epcots New Karamell Kuche", "2013 01 15 Review Epcots Les Halles Bakery", "2013 09 04 First Look Starbucks Opens At Epcots Fountain View Cafe", "2013 05 29 First Look Lartisan Des Glaces Sorbet And Ice Cream Shop In Epcots France Is Open See Full Menu And Photos Here", "Disney Bar And Lounge Menu", "Team Spirits Pool Bar", "Amc Dine In Theater", "2014 01 21 News And Review The Smokehouse At House Of Blues Opens In Downtown Disney", "Splitsville Luxury Lanes", "Columbia Harbour House", "Columbia Harbor House", "Pecos Bills Tall Tale Inn And Cafe"]
+    dfb_reviews_to_skip = ["2010 09 30 First Look Epcots New Karamell Kuche", "2013 01 15 Review Epcots Les Halles Bakery", "2013 09 04 First Look Starbucks Opens At Epcots Fountain View Cafe", "2013 05 29 First Look Lartisan Des Glaces Sorbet And Ice Cream Shop In Epcots France Is Open See Full Menu And Photos Here", "Disney Bar And Lounge Menu", "Team Spirits Pool Bar", "Amc Dine In Theater", "2014 01 21 News And Review The Smokehouse At House Of Blues Opens In Downtown Disney", "Splitsville Luxury Lanes", "Columbia Harbour House", "Columbia Harbor House", "Pecos Bills Tall Tale Inn And Cafe", "El Pirata Y El Perico", "Yakitori House", "Http   Disneyfoodblog Com Monsieur Paul Restaurant", "Kouzzina", "Siestas Pool Par", "On The Rocks Pool Bar" ]
     dfb_reviews_to_skip.each do |skipped_dfb_review|
       puts "deleting skipped_dfb_review #{skipped_dfb_review}" 
       dfb_reviews.delete(skipped_dfb_review)
