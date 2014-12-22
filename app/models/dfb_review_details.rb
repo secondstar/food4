@@ -29,14 +29,6 @@ class DfbReviewDetails
     # ==========================================
     eatery_values_hash = _normalize_scan(eatery_values_hash)
     return eatery_values_hash
-    
-    # ==========================================
-    ### the rest of this method will eventually be deleted after they have become factories ###
-    ## -------------------------------------------------
-    # puts eatery_values_hash
-    # swap_title(eatery_values_hash)
-    return [eatery_values_hash]
-    
   end
   
   def _dfb_item(service_desc)
