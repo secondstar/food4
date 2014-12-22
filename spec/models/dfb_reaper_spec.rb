@@ -57,4 +57,16 @@ describe DfbReaper do
       subject.must_equal "someting"
     end
   end
+  
+  describe '#list_reviews_to_skip' do
+    subject { DfbReaper.new }
+    
+    it 'is an Array' do
+      subject.list_reviews_to_skip.must_be_kind_of Array
+    end
+
+    it 'has at least one element' do
+      subject.list_reviews_to_skip.size.must_be :>=, 1
+    end
+  end
 end

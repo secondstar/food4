@@ -75,10 +75,15 @@ class DfbReaper
       a = @notebook.new_addendum(addendum_params)
       a.archive
     end
-    
+
     # a_params = {"source"=>"http://www.disneyfoodblog.com/aloha-isle/", "href"=>"http://www.disneyfoodblog.com/main-street-ice-cream-parlor/", "description"=>"Main Street Ice Cream Parlor", "category"=>"affinity", :portrayal_id=> snapshot_id, :portrayal_type=>"Snapshot"}
     # a = @notebook.new_addendum(a_params)
     # a.archive
     # return a
   end
+  
+  def list_reviews_to_skip
+    problems = DfbDomainKnowledge.new.i_know_normal_scrape_does_not_work
+  end
+  
 end

@@ -1,6 +1,6 @@
 require_relative '../spec_helper_lite'
 require File.expand_path('../../../config/environment', __FILE__)
-require_relative '../../app/models/dfb_gasparilla_grill_and_games_review_scan'
+require_relative '../../app/disneyfoodblog/dfb_gasparilla_grill_and_games_review_scan'
 require "ostruct"
 
 describe DfbGasparillaGrillAndGamesReviewScan do
