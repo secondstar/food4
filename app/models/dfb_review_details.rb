@@ -27,6 +27,7 @@ class DfbReviewDetails
     end
     # deal with inidividual review quirks
     # ==========================================
+    eatery_values_hash = _swap_title(eatery_values_hash)
     eatery_values_hash = _normalize_scan(eatery_values_hash)
     return eatery_values_hash
   end
@@ -43,7 +44,7 @@ class DfbReviewDetails
     return detail
   end
   
-  def self.swap_title(eatery_values_hash)
+  def _swap_title(eatery_values_hash)
     #When scanning review details, the title in the DB doesn't always match the column name
     #posts_mentioning -- the key created varies, so we search for it and replace it
     hash_of_dfb_posts_mentioning_this_eatery = eatery_values_hash.select { |key| key.match('\Adisney_food_blog_posts_mentioning*') }
@@ -56,37 +57,46 @@ class DfbReviewDetails
     end
     
     #important_info - we know the key, so we swap it out directly
-    eatery_values_hash["important_info"] =  eatery_values_hash.fetch("important_information",
-                                            eatery_values_hash["important_info"])
+    eatery_values_hash["important_info"] =  
+        eatery_values_hash.fetch("important_information",
+          eatery_values_hash["important_info"])
     eatery_values_hash.delete("important_information")
+    
     #famous_drinks/dishes - we know the key, so we swap it out directly
-    eatery_values_hash["famous_dishes"] =   eatery_values_hash.fetch("famous_drinks/dishes",
-                                            eatery_values_hash["famous_dishes"])
+    eatery_values_hash["famous_dishes"] =
+        eatery_values_hash.fetch("famous_drinks/dishes",
+          eatery_values_hash["famous_dishes"])
     eatery_values_hash.delete("famous_drinks/dishes")
+
     #famous_drinks - we know the key, so we swap it out directly
-    eatery_values_hash["famous_dishes"] =   eatery_values_hash.fetch("famous_drinks",
-                                            eatery_values_hash["famous_dishes"])
-    
+    eatery_values_hash["famous_dishes"] =
+        eatery_values_hash.fetch("famous_drinks",
+        eatery_values_hash["famous_dishes"])
     eatery_values_hash.delete("famous_drinks")
+
     #best_eats - we know the key, so we swap it out directly
-    eatery_values_hash["famous_dishes"] =   eatery_values_hash.fetch("best_eats",
-                                            eatery_values_hash["famous_dishes"])
-    
+    eatery_values_hash["famous_dishes"] =
+        eatery_values_hash.fetch("best_eats",
+        eatery_values_hash["famous_dishes"])
     eatery_values_hash.delete("famous_eats")
+
     #famous_eats - we know the key, so we swap it out directly
-    eatery_values_hash["famous_dishes"] =   eatery_values_hash.fetch("famous_eats",
-                                            eatery_values_hash["famous_dishes"])
-    
+    eatery_values_hash["famous_dishes"] = 
+        eatery_values_hash.fetch("famous_eats",
+        eatery_values_hash["famous_dishes"])
+
     eatery_values_hash.delete("best_eats")
+
     #menus - we know the key, so we swap it out directly
-    eatery_values_hash["famous_dishes"] =   eatery_values_hash.fetch("menus",
-                                            eatery_values_hash["menu"])
-    
-    eatery_values_hash.delete("menus")    
+    eatery_values_hash["famous_dishes"] =   
+        eatery_values_hash.fetch("menus",
+        eatery_values_hash["menu"])
+    eatery_values_hash.delete("menus")
+
     #reviews - we know the key, so we swap it out directly
-    eatery_values_hash["reviews"] =   eatery_values_hash.fetch("review",
-                                            eatery_values_hash["reviews"])
-    
+    eatery_values_hash["reviews"] =
+        eatery_values_hash.fetch("review",
+        eatery_values_hash["reviews"])
     eatery_values_hash.delete("review")    
     return eatery_values_hash
   end
@@ -110,10 +120,10 @@ class DfbReviewDetails
   
   def _delete_bad_keys(eatery_values_hash)
     
-    good_keys = ["name", "permalink", "archived_at", "created_at", "updated_at", "service", "type_of_food",
-                "location", "disney_dining_plan", "tables_in_wonderland", "menu", "important_info",
-                "famous_dishes", "mentioned_in", "reviews", "you_might_also_like", "breakfast_items", "drinks",
-                "special_treats"]
+    good_keys = ["name", "permalink", "archived_at", "created_at", "updated_at", 
+                  "service", "type_of_food", "location", "disney_dining_plan", "tables_in_wonderland",
+                  "menu", "important_info", "famous_dishes", "mentioned_in", "reviews",
+                  "you_might_also_like", "breakfast_items", "drinks", "special_treats"]
 
     eatery_values_hash.each do |key, value|
       regexp_phrase = '\A'+ key + '\z' # contains only the key

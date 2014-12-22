@@ -64,8 +64,8 @@ class DfbHarvester
     # puts "new @target #{@target}"
     # #now that we have the proper path
     eatery_values_hash = DfbReviewDetails.new(target: @target).scan
-    results = DfbReviewDetails.swap_title(eatery_values_hash)
-    results = [results]
+    # results = DfbReviewDetails.swap_title(eatery_values_hash)
+    results = [eatery_values_hash]
     ## ==========================================
     
   end
