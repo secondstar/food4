@@ -26,8 +26,30 @@ class DfbDomainKnowledge
       "Java Bar" => "java-bar", "Splash Terrace" => "splash-terrace"
       }
   end
-  
-  def raindeer
-    "moo"
+
+  def i_know_these_links_have_bad_hash_keys
+    permalinks = %w(turf-club
+      trout-pass
+      garden-grove-cafe
+    victoria-and-alberts-restaurant
+    gasparilla-grill-and-games
+    2013/05/29/first-look-lartisan-des-glaces-sorbet-and-ice-cream-shop-in-epcots-france-is-open-see-full-menu-and-photos-here
+    2013/01/15/review-epcots-les-halles-bakery
+    2013/09/04/first-look-starbucks-opens-at-epcots-fountain-view-cafe
+    cool-wash-pizza
+    be-our-guest-restaurant
+    shulas-steak-house
+    artist-point
+    gastons-tavern
+    bistro-de-paris
+    monsieur-paul-restaurant
+    fresh-mediterranean-market
+    bluezoo
+    queen-victorias-room-at-victoria-and-alberts-restaurant
+    backstretch-pool-bar
+    il-mulino-new-york-trattoria
+    kimonos-sushi-bar
+    wolfgang-puck-express
+    )
   end
 end

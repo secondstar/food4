@@ -92,7 +92,7 @@ class DfbReviewDetails
   end
     
   def _normalize_scan(eatery_values_hash)
-    if permalinks_of_reviews_with_non_standard_format.include?(target.path)
+    if _permalinks_of_reviews_with_non_standard_format.include?(target.path)
        normalized_details = _delete_bad_keys(eatery_values_hash)
       # this might not be needed
       # class_name = "Dfb" + target.path.to_s.titleize.gsub(" ","").gsub("/","") + "ReviewScan"
@@ -104,30 +104,8 @@ class DfbReviewDetails
     return normalized_details
   end
   
-  def permalinks_of_reviews_with_non_standard_format
-    permalinks = %w(turf-club
-      trout-pass
-      garden-grove-cafe
-    victoria-and-alberts-restaurant
-    gasparilla-grill-and-games
-    2013/05/29/first-look-lartisan-des-glaces-sorbet-and-ice-cream-shop-in-epcots-france-is-open-see-full-menu-and-photos-here
-    2013/01/15/review-epcots-les-halles-bakery
-    2013/09/04/first-look-starbucks-opens-at-epcots-fountain-view-cafe
-    cool-wash-pizza
-    be-our-guest-restaurant
-    shulas-steak-house
-    artist-point
-    gastons-tavern
-    bistro-de-paris
-    monsieur-paul-restaurant
-    fresh-mediterranean-market
-    bluezoo
-    queen-victorias-room-at-victoria-and-alberts-restaurant
-    backstretch-pool-bar
-    il-mulino-new-york-trattoria
-    kimonos-sushi-bar
-    wolfgang-puck-express
-    )
+  def _permalinks_of_reviews_with_non_standard_format
+    permalinks = DfbDomainKnowledge.new.i_know_these_links_have_bad_hash_keys
   end
   
   def _delete_bad_keys(eatery_values_hash)
