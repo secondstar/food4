@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.1'
+ruby '2.2.2'
 # #ruby-gemset=wdwfood
 
 gem 'httparty', '~> 0.13.1' # pull json api data from other sites, better than just curl or Nokogiri
