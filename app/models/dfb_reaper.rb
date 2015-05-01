@@ -35,7 +35,7 @@ class DfbReaper
   def self.update_all_reviews
     dfb_reviews = self.reap_review_names_permalinks[0]
     # # Scraping these are painful. Maybe later.
-    dfb_reviews_to_skip = ["2010 09 30 First Look Epcots New Karamell Kuche", "2013 01 15 Review Epcots Les Halles Bakery", "2013 09 04 First Look Starbucks Opens At Epcots Fountain View Cafe", "2013 05 29 First Look Lartisan Des Glaces Sorbet And Ice Cream Shop In Epcots France Is Open See Full Menu And Photos Here", "Disney Bar And Lounge Menu", "Team Spirits Pool Bar", "Amc Dine In Theater", "2014 01 21 News And Review The Smokehouse At House Of Blues Opens In Downtown Disney", "Splitsville Luxury Lanes", "Columbia Harbour House", "Columbia Harbor House", "Pecos Bills Tall Tale Inn And Cafe", "El Pirata Y El Perico", "Yakitori House", "Http   Disneyfoodblog Com Monsieur Paul Restaurant", "Kouzzina", "Siestas Pool Par", "On The Rocks Pool Bar" ]
+    dfb_reviews_to_skip = self.list_reviews_to_skip
     dfb_reviews_to_skip.each do |skipped_dfb_review|
       puts "deleting skipped_dfb_review #{skipped_dfb_review}" 
       dfb_reviews.delete(skipped_dfb_review)
@@ -46,13 +46,9 @@ class DfbReaper
   end
   
   def self.add_unlisted_reviews(dfb_reviews)
-    results = dfb_reviews.merge({"Hollywood Scoops" => "hollywood-scoops", "Dinosaur Gertie’s Ice Cream of Extinction" => "dinosaur-gerties-ice-cream-of-extinction", "Oasis Canteen" => "oasis-canteen", "Anaheim Produce" => "anaheim-produce", "KRNR Rock Station" => "krnr-rock-station", "Peevy’s Polar Pipeline" => "peevys-polar-pipeline", "Sweet Spells" => "sweet-spells", "Avalunch" => "avalunch", "Cooling Hut" => "cooling-hut", "Frostbite Freddy's" => "frostbite-freddys", "Warming Hut" => "warming-hut",
-      "Coffee Hut" => "coffee-hut", "Contemporary Grounds" => "contemporary-grounds", 
-      "Meadow Snack Bar" => "meadow-snack-bar",
-      "Chuck Wagon" => "chuck-wagon", "Garden View Lounge Afternoon Tea" => "garden-view-tea-room",
-      "Scat Cats Club" => "scat-cats-club", "Turf Club Lounge" => "turf-club-lounge", 
-      "Java Bar" => "java-bar", "Splash Terrace" => "splash-terrace"
-      })
+    unlisted = DfbDomainKnowledge.new.i_know_these_links_are_not_listed_on_site
+
+    results = dfb_reviews.merge(unlisted)
     
   end
   
@@ -75,10 +71,15 @@ class DfbReaper
       a = @notebook.new_addendum(addendum_params)
       a.archive
     end
-    
+
     # a_params = {"source"=>"http://www.disneyfoodblog.com/aloha-isle/", "href"=>"http://www.disneyfoodblog.com/main-street-ice-cream-parlor/", "description"=>"Main Street Ice Cream Parlor", "category"=>"affinity", :portrayal_id=> snapshot_id, :portrayal_type=>"Snapshot"}
     # a = @notebook.new_addendum(a_params)
     # a.archive
     # return a
   end
+  
+  def self.list_reviews_to_skip
+    problems = DfbDomainKnowledge.new.i_know_normal_scrape_does_not_work
+  end
+  
 end

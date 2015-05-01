@@ -1,6 +1,6 @@
 require_relative '../spec_helper_lite'
 require File.expand_path('../../../config/environment', __FILE__)
-require_relative '../../app/models/dfb_turf_club_review_scan'
+require_relative '../../app/disneyfoodblog/dfb_turf_club_review_scan'
 require "ostruct"
 
 describe DfbTurfClubReviewScan do
@@ -15,10 +15,6 @@ describe DfbTurfClubReviewScan do
     subject { DfbTurfClubReviewScan.new(initial_scan) }
     
   describe 'normalize' do
-    it 'works' do
-      subject.normalize.must_equal "something"
-    end
-    
     it 'is a hash' do
       subject.normalize.must_be_kind_of Hash
     end
