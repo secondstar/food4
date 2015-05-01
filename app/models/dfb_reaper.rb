@@ -46,13 +46,9 @@ class DfbReaper
   end
   
   def self.add_unlisted_reviews(dfb_reviews)
-    results = dfb_reviews.merge({"Hollywood Scoops" => "hollywood-scoops", "Dinosaur Gertie’s Ice Cream of Extinction" => "dinosaur-gerties-ice-cream-of-extinction", "Oasis Canteen" => "oasis-canteen", "Anaheim Produce" => "anaheim-produce", "KRNR Rock Station" => "krnr-rock-station", "Peevy’s Polar Pipeline" => "peevys-polar-pipeline", "Sweet Spells" => "sweet-spells", "Avalunch" => "avalunch", "Cooling Hut" => "cooling-hut", "Frostbite Freddy's" => "frostbite-freddys", "Warming Hut" => "warming-hut",
-      "Coffee Hut" => "coffee-hut", "Contemporary Grounds" => "contemporary-grounds", 
-      "Meadow Snack Bar" => "meadow-snack-bar",
-      "Chuck Wagon" => "chuck-wagon", "Garden View Lounge Afternoon Tea" => "garden-view-tea-room",
-      "Scat Cats Club" => "scat-cats-club", "Turf Club Lounge" => "turf-club-lounge", 
-      "Java Bar" => "java-bar", "Splash Terrace" => "splash-terrace"
-      })
+    unlisted = DfbDomainKnowledge.new.i_know_these_links_are_not_listed_on_site
+
+    results = dfb_reviews.merge(unlisted)
     
   end
   
