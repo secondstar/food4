@@ -34,7 +34,8 @@ class Photographer
     end
     
     remote_photo_collection = Photographer.find_photos(photo_search, quantity.to_s)
-    photogenic_id = @photogenic_notebook.entries.find_by_name(photo_search).id.to_i
+    photogenic_id = self._find_id_of_photogenic(photo_search)
+    # photogenic_id = @photogenic_notebook.entries.find_by_name(photo_search).id.to_i
     remote_photo_collection.each do |photo|
       url = "https://farm#{photo['farm']}.staticflickr.com/#{photo['server']}/#{photo['id']}_#{photo['secret']}.jpg"
       puts "*** photo *** "
@@ -80,4 +81,8 @@ class Photographer
     end
   end  
   
+  def self._find_id_of_photogenic(photogenic_name)
+    photogenics_names_with_ids = Hash[@photogenic_notebook.entries.map { |h| [h.name ,h.id.to_i]}]
+    photogenic_id = photogenics_names_with_ids[photogenic_name]
+  end
 end
