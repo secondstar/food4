@@ -63,4 +63,4 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'newrelic_rpm'
 
 # app improvement
-gem 'skylight', '~> 0.5.0'
+# gem 'skylight', '~> 0.5.0'
