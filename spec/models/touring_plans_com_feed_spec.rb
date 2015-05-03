@@ -62,4 +62,26 @@ describe TouringPlansComFeed do
     end
 
   end
+  
+  describe '#construct_eatery_permalink with a space in the permalink' do
+    let(:district) { OpenStruct.new(:name => "Animal Kingdom") }
+    let(:eatery)   { OpenStruct.new(:permalink => "lobby Lounge", :menu_type_permalink => "") }
+    subject { TouringPlansComFeed.new(district, eatery).construct_eatery_permalink }
+    
+    it 'replaces spaces with %20' do
+        subject.must_equal "/animal-kingdom/dining/lobby%20Lounge.json"
+      end
+    
+  end
+
+  describe '#construct_eatery_permalink with no space in the permalink' do
+    let(:district) { OpenStruct.new(:name => "Animal Kingdom") }
+    let(:eatery)   { OpenStruct.new(:permalink => "lobbyLounge", :menu_type_permalink => "") }
+    subject { TouringPlansComFeed.new(district, eatery).construct_eatery_permalink }
+    
+      it 'leaves eatery.permalink as-is' do
+          subject.must_equal "/animal-kingdom/dining/lobbyLounge.json"
+      end
+  end
+
 end

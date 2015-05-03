@@ -92,8 +92,9 @@ class TouringPlansComFeed
 
   def construct_eatery_permalink
     eatery_permalink = []
+    improved_permalink = eatery.permalink.to_s.gsub(' ', '%20')
     eatery_permalink << eatery_permalink_root
-    eatery_permalink << eatery.permalink
+    eatery_permalink << improved_permalink
     "#{eatery_permalink.join('/')}.json"
     
   end
