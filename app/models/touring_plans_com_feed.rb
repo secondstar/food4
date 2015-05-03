@@ -57,9 +57,26 @@ class TouringPlansComFeed
   # --- Eatery Details --- #
   def get_eatery_details_by_permalink
     # http://touringplans.com/walt-disney-world/dining/chuck-wagon.json
-    link = construct_eatery_permalink
+    eatery_permalink  = eatery.permalink || ""
+    eatery_name       = eatery.name      || eatery_permalink.split("-").join(" ")
+    link              = construct_eatery_permalink
     # puts "link: #{link}"
-    @eatery = TouringPlansComFeed.get(link).parsed_response
+    response = TouringPlansComFeed.get(link)
+    case response.code
+      when 200
+        @eatery = TouringPlansComFeed.get(link).parsed_response
+      when 404
+        @eatery               = _echo_back_empty_hash
+        @eatery["permalink"]  = eatery_permalink
+        @eatery["name"]       = eatery_name
+      when 500...600
+        # puts "ZOMG ERROR #{response.code}"
+        @eatery               = _echo_back_empty_hash
+        @eatery["permalink"]  = eatery_permalink
+        @eatery["name"]       = eatery_name
+    end
+
+    @eatery
   end
   
   # --- Menus at TouringPlans.com --- #
@@ -112,4 +129,51 @@ class TouringPlansComFeed
     
   end
   
+  def _echo_back_empty_hash
+    {"house_specialties"=>"", 
+      "entree_range"=>"", 
+      "created_at"=>"", 
+      "adult_breakfast_menu_url"=>"", 
+      "short_name"=>"", 
+      "parking"=>"", 
+      "requires_pre_payment"=>false, 
+      "opened_on"=>nil, 
+      "name"=>"", 
+      "dinner_hours"=>"", 
+      "counter_value_rating"=>"", 
+      "when_to_go"=>"", 
+      "counter_quality_rating"=>"", 
+      "thumbs_up"=>nil, 
+      "permalink"=>"", 
+      "cuisine"=>"", 
+      "child_lunch_menu_url"=>"", 
+      "bar"=>"", 
+      "awards"=>"", 
+      "overall_rating"=>nil, 
+      "kosher_available"=>false, 
+      "dress"=>"", 
+      "disney_permalink"=>nil, 
+      "accepts_tiw"=>false, 
+      "updated_at"=>"", 
+      "phone_number"=>"", 
+      "location_details"=>"", 
+      "friendliness_rating"=>nil, 
+      "cost_code"=>"", 
+      "category_code"=>"", 
+      "table_quality_rating"=>nil, 
+      "extinct_on"=>nil, 
+      "adult_lunch_menu_url"=>"", 
+      "adult_dinner_menu_url"=>"", 
+      "wine_list"=>"", 
+      "table_value_rating"=>nil, 
+      "requires_credit_card"=>true, 
+      "portion_size"=>"", 
+      "child_dinner_menu_url"=>"", 
+      "service_rating"=>nil, 
+      "lunch_hours"=>"", 
+      "code"=>"", 
+      "child_breakfast_menu_url"=>"", 
+      "breakfast_hours"=>"", 
+      "accepts_reservations"=>false}
+  end
 end
