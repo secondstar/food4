@@ -2,7 +2,7 @@ class UpdateFromDisneyFoodBlog < Thor
   
   desc "all_reviews", "create new snapshots of all the reviews at WDW"
   def all_reviews
-    require "../../config/environment"
+    require "./config/environment"
     
     say "Creating new snapshots of DFB's reivews…", :red
     DfbReaper.update_all_reviews
