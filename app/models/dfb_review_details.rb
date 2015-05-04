@@ -16,13 +16,13 @@ class DfbReviewDetails
     doc.css("p").each do |item|
         if item.to_s =~ /<strong>/
           h = Hash.new
-          h.default = ""
-          title = _dfb_item(item).first.first.downcase.tr(" ", "_")
+          # h.default = ""
+          title = _dfb_item(item).first.first.to_s.downcase.tr(" ", "_")
           # strips non-breaking space & whitespace that's leading and trailing 
           title = title.gsub(/\A\p{Space}*|\p{Space}*\z/, '')
           desc = _dfb_item(item).first.last
-          h.store(title, desc)
-          eatery_values_hash.store(title, desc)
+          h.store(title, desc) 
+          eatery_values_hash.store(title, desc) unless title == ""
         end
     end
     # deal with inidividual review quirks
