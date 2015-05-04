@@ -5,7 +5,7 @@ require "ostruct"
 
 describe DfbReviewDetails do
   describe '#scan with golden path' do
-    params = {path: "whispering-canyon-cafe", yql_css_parse: '#primary .entry-content p' }
+    params = {path: "whispering-canyon-cafe", yql_css_parse: 'article .entry-content p' }
     let(:target) { OpenStruct.new(params) }
     subject { DfbReviewDetails.new(target: target).scan }
     
