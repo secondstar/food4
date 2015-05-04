@@ -5,7 +5,7 @@ class DfbNewReviewArchiver
   attr_reader :eatery_name, :permalink, :yql_css_parse, :target
   @notebook = THE_NOTEBOOK 
   
-  def initialize(eatery_name, permalink, yql_css_parse="#primary .entry-content p")
+  def initialize(eatery_name, permalink, yql_css_parse="article .entry-content p")
     @eatery_name    =  eatery_name
     @permalink      = permalink
     @yql_css_parse  = yql_css_parse
@@ -63,7 +63,7 @@ class DfbNewReviewArchiver
   end
 
   def _scanned_in_review
-    params = {:path=> permalink, :yql_css_parse=>"#primary .entry-content p"}
+    params = {:path=> permalink, :yql_css_parse=>"article .entry-content p"}
     scan_target = OpenStruct.new(params)
     DfbHarvester.new(scan_target).scan_review_details[0]
   end

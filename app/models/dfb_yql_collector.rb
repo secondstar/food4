@@ -31,7 +31,8 @@ class DfbYqlCollector
     target.yql_css_parse
   end
   def _yql_select_statement
-    ["q", "SELECT * FROM data.html.cssselect WHERE url='#{_dfb_link}' AND css='#{_css_selectors}'"]
+    # select * from data.html.cssselect where url="http://www.disneyfoodblog.com/whispering-canyon-cafe" and css="article .entry-content p"
+    ["q", "select * from data.html.cssselect where url='#{_dfb_link}' AND css='#{_css_selectors}'"]
   end
   
   def _yql_base_url

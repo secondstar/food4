@@ -5,7 +5,7 @@ require "ostruct"
 
 describe DfbReviewDetails do
   describe '#scan with golden path' do
-    params = {path: "whispering-canyon-cafe", yql_css_parse: '#primary .entry-content p' }
+    params = {path: "whispering-canyon-cafe", yql_css_parse: 'article .entry-content p' }
     let(:target) { OpenStruct.new(params) }
     subject { DfbReviewDetails.new(target: target).scan }
     
@@ -19,6 +19,101 @@ describe DfbReviewDetails do
     
     it 'constains a hash with 10 elements' do
       subject.size.must_equal 10
+    end
+  end
+
+  describe '#scan edge case 01' do
+    # High Octane has a slightly different format that originally broke collecting DFB
+    params = {path: "high-octane-refreshments", yql_css_parse: 'article .entry-content p' }
+    let(:target) { OpenStruct.new(params) }
+    subject { DfbReviewDetails.new(target: target).scan }
+    
+    # it 'works' do
+    #   subject.must_equal "someting"
+    # end
+    
+    it 'is a hash' do
+      subject.must_be_kind_of Hash
+    end
+    
+    it 'constains a hash with 11 elements' do
+      subject.size.must_equal 11
+    end
+  end
+
+  describe '#scan edge case 02' do
+    # Trattoria al Forno has the title "AllEars.net Menus," that originally broke collecting DFB
+    params = {path: "trattoria-al-forno-2", yql_css_parse: 'article .entry-content p' }
+    let(:target) { OpenStruct.new(params) }
+    subject { DfbReviewDetails.new(target: target).scan }
+    
+    # it 'works' do
+    #   subject.must_equal "something"
+    # end
+    
+    it 'is a hash' do
+      subject.must_be_kind_of Hash
+    end
+    
+    it 'constains a hash with 11 elements' do
+      subject.size.must_equal 11
+    end
+  end
+  
+  describe '#scan edge case 03' do
+    # Trader Sam’s Grog Grotto has the title "Famous Dishes and Drinks," that originally broke collecting DFB
+    params = {path: "trader-sams-grog-grotto", yql_css_parse: 'article .entry-content p' }
+    let(:target) { OpenStruct.new(params) }
+    subject { DfbReviewDetails.new(target: target).scan }
+    
+    # it 'works' do
+    #   subject.must_equal "something"
+    # end
+    
+    it 'is a hash' do
+      subject.must_be_kind_of Hash
+    end
+    
+    it 'constains a hash with 8 elements' do
+      subject.size.must_equal 8
+    end
+  end
+
+  describe '#scan edge case 04' do
+    # Mardi Grogs Pool Bar has <strong /> in the middle of its description that originally broke collecting DFB
+    params = {path: "mardi-grogs-pool-bar", yql_css_parse: 'article .entry-content p' }
+    let(:target) { OpenStruct.new(params) }
+    subject { DfbReviewDetails.new(target: target).scan }
+    
+    # it 'works' do
+    #   subject.must_equal "someting"
+    # end
+    
+    it 'is a hash' do
+      subject.must_be_kind_of Hash
+    end
+    
+    it 'constains a hash with 11 elements' do
+      subject.size.must_equal 11
+    end
+  end
+
+  describe '#scan edge case 05' do
+    # Haagen-Dazs has "Allears.net" as a title that originally broke collecting DFB
+    params = {path: "haagen-dazs", yql_css_parse: 'article .entry-content p' }
+    let(:target) { OpenStruct.new(params) }
+    subject { DfbReviewDetails.new(target: target).scan }
+    
+    # it 'works' do
+    #   subject.must_equal "something"
+    # end
+    
+    it 'is a hash' do
+      subject.must_be_kind_of Hash
+    end
+    
+    it 'constains a hash with 11 elements' do
+      subject.size.must_equal 11
     end
   end
   

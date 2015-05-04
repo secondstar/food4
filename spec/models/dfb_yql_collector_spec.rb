@@ -5,13 +5,14 @@ require "ostruct"
 
 describe DfbYqlCollector do
   describe "#yql_url" do
-    params = {path: "whispering-canyon-cafe", yql_css_parse: '#primary .entry-content p' }
+    params = {path: "whispering-canyon-cafe", yql_css_parse: 'article .entry-content p' }
     let(:target) { OpenStruct.new(params) }
     subject { DfbYqlCollector.new(target).yql_url }
     it "works" do
       
-      subject.must_equal "https://query.yahooapis.com/v1/public/yql?q=SELECT+*+FROM+data.html.cssselect+WHERE+url%3D%27http%3A%2F%2Fwww.disneyfoodblog.com%2Fwhispering-canyon-cafe%27+AND+css%3D%27%23primary+.entry-content+p%27&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys"
+      subject.must_equal "https://query.yahooapis.com/v1/public/yql?q=select+*+from+data.html.cssselect+where+url%3D%27http%3A%2F%2Fwww.disneyfoodblog.com%2Fwhispering-canyon-cafe%27+AND+css%3D%27article+.entry-content+p%27&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys"
     end
+    
     
     it 'is a link to yql' do
       subject.must_match /https:\/\/query.yahooapis.com\/v1\/public\/yql/
