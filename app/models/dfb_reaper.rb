@@ -53,7 +53,7 @@ class DfbReaper
   end
   
   def self.scan_review_details(permalink="aloha-isle")
-    params = {path: "#{permalink}", yql_css_parse: '#primary .entry-content p' }
+    params = {path: "#{permalink}", yql_css_parse: 'article .entry-content p' }
     target = OpenStruct.new(params)
     results = DfbHarvester.new(target).scan_review_details
   end

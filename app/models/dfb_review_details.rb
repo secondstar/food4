@@ -16,13 +16,14 @@ class DfbReviewDetails
     doc.css("p").each do |item|
         if item.to_s =~ /<strong>/
           h = Hash.new
-          h.default = ""
-          title = _dfb_item(item).first.first.downcase.tr(" ", "_")
+          title = _dfb_item(item).first.first.to_s.downcase.tr(" ", "_")
           # strips non-breaking space & whitespace that's leading and trailing 
           title = title.gsub(/\A\p{Space}*|\p{Space}*\z/, '')
+          # swap out 'DFB Posts Mentioning' for 'Disney Food Blog Posts Mentioning'
+          title = title.sub(/\Adfb_posts_mentioning/, 'disney_food_blog_posts_mentioning')
           desc = _dfb_item(item).first.last
-          h.store(title, desc)
-          eatery_values_hash.store(title, desc)
+          h.store(title, desc) 
+          eatery_values_hash.store(title, desc) unless _unused_title_attributes.include?(title.to_s)
         end
     end
     # deal with inidividual review quirks
@@ -130,6 +131,10 @@ class DfbReviewDetails
       matches_to_good_keys_size = good_keys.select {|key| key.match(regexp_phrase) }.length
       eatery_values_hash.delete(key) if matches_to_good_keys_size < 1
     end
+  end
+  
+  def _unused_title_attributes
+    ["", "_", "allears.net_menus", "allears.net", "famous_dishes_and_drinks"]
   end
   
 end
