@@ -30,7 +30,7 @@ class DfbNewReviewArchiver
     params = _merge_model_params_with__scanned_in_review
     dfb_review = @dfb_notebook.new_dfb_review(params)
     dfb_review.archive
-    return
+    # return
     ## harvest dfb_review addendums    
     # iterate through the collection of addendums (tips, bloggings…)
     
@@ -42,15 +42,16 @@ class DfbNewReviewArchiver
     puts "eatery_permalink = #{eatery_permalink}"
     eatery = @notebook.entries.find_by_permalink(eatery_permalink)
     puts "eatery = #{eatery}"
-    eatery.to_s.blank? ? eatery_id = 0 : eatery_id = eatery.id
+    eatery.to_s.length == 0 ? eatery_id = 0 : eatery_id = eatery.id
     # set up snapshot
-    snapshot_attributes = dfb_review.attributes
+    snapshot_attributes = dfb_review.attributes # these should be 
     snapshot_attributes = snapshot_attributes.merge("eatery_permalink" => eatery_permalink, "eatery_id" => eatery_id)
-    @snapshot = self.publish_snapshot(snapshot_attributes)
+    return
+    @snapshot = publish_snapshot(snapshot_attributes)
     puts "\n\n*** #{snapshot_attributes} ***\n\n"
     snapshot_id = dfb_review.snapshots.first.id
     snapshot_review_permalink = dfb_review.snapshots.first.review_permalink
-
+    
     # connect addendums to snapshot
     self.archive_dfb_review_addendums(path= snapshot_review_permalink,
           yql_css_parse = 'div.entry-content', snapshot_id = snapshot_id)
@@ -68,4 +69,19 @@ class DfbNewReviewArchiver
     DfbHarvester.new(scan_target).scan_review_details[0]
   end
   
+  def publish_snapshot(snapshot_attributes)
+    snapshot = snapshot_notebook.new_snapshot(snapshot_attributes)
+    snapshot.publish
+  end
+  
+  def snapshot_notebook
+    @snapshot_notebook = Notebook.new(entry_fetcher=Snapshot.public_method(:most_recent))
+  end
+  
+  def set_snapshot_attributes(dfb_review_attrs)
+    attrs = ["eatery_id", "review_type", "review_id", "review_permalink", "review_permalink_is_different_than_eatery_permalink"]
+    dfb_review_attrs
+    
+    
+  end
 end
