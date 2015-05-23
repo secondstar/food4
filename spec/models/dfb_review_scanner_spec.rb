@@ -1,12 +1,12 @@
-require_relative '../spec_helper_lite'
-
-require_relative '../../app/models/dfb_review_scanner'
-require_relative '../../app/models/dfb_harvester'
-require_relative '../../app/models/dfb_yql_collector'
-
 require 'nokogiri'
 require 'open-uri'
 require "ostruct"
+
+require_relative '../spec_helper_lite'
+
+require_relative '../../app/models/dfb_harvester'
+require_relative '../../app/models/dfb_yql_collector'
+require_relative '../../app/models/dfb_review_scanner'
 
 describe DfbReviewScanner do
   
@@ -17,17 +17,26 @@ describe DfbReviewScanner do
     dh = DfbHarvester.new(@target)
     scraped_review_listing_page = dh.scrape_review_listing_page
   end
-  
-  # describe '#find_meat' do
-  #   subject { DfbReviewScanner.new(@target).find_meat }
-  #
-  #   it 'must be a Hash' do
-  #     subject.must_be_kind_of Hash
-  #   end
-  #   it 'works' do
-  #     subject.must_equal "someting"
-  #   end
-  # end
+
+  describe 'find_tips' do
+    subject { DfbReviewScanner.new(@target).find_tips }
+    
+    # it 'works' do
+    #   subject.must_equal "someting"
+    # end
+    
+    it 'is an Array' do
+      subject.must_be_kind_of Array
+    end
+    
+    it 'has a Hash as the first element of that Array' do
+      subject.first.must_be_kind_of Hash
+    end
+    
+    it 'has 4 elements in the first Hash' do
+      subject.first.length.must_equal 4
+    end
+  end
   describe '#find_affinities with golden path' do
 
     subject { DfbReviewScanner.new(@target).find_affinities }
@@ -43,10 +52,11 @@ describe DfbReviewScanner do
     
     # test the method's code
 
-    it 'works' do
-      # show the currently resulting code in the error since this method is not currently fully tested
-      subject.must_equal "something"
-    end
+
+    # it 'works' do
+    #   # show the currently resulting code in the error since this method is not currently fully tested
+    #   subject.must_equal "something"
+    # end
 
     it 'is an Array' do
         subject.must_be_kind_of Array
