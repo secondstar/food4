@@ -6,7 +6,7 @@ require "ostruct"
 describe DfbHarvester do
   before do
     params = {path: "whispering-canyon-cafe", 
-      yql_css_parse: "#primary .entry-content"     
+      yql_css_parse: "article .entry-content p"     
     }
     target = OpenStruct.new(params)
     @it = DfbHarvester.new(target)
@@ -23,7 +23,7 @@ describe DfbHarvester do
     it "works" do
       # puts "\n yql_url: #{@it.yql_url} \n"
       
-      @it.yql_url.must_equal "https://query.yahooapis.com/v1/public/yql?q=SELECT+*+FROM+data.html.cssselect+WHERE+url%3D%27http%3A%2F%2Fwww.disneyfoodblog.com%2Fwhispering-canyon-cafe%27+AND+css%3D%27%23primary+.entry-content%27&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys"
+      @it.yql_url.must_equal "https://query.yahooapis.com/v1/public/yql?q=select+*+from+data.html.cssselect+where+url%3D%27http%3A%2F%2Fwww.disneyfoodblog.com%2Fwhispering-canyon-cafe%27+AND+css%3D%27article+.entry-content+p%27&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys"
     end
   end
   
@@ -78,6 +78,7 @@ describe DfbHarvester do
           "description"=>"Trail’s End Restaurant", 
           "category"=>"affinity"}
       ] 
+      
     end
   end
 

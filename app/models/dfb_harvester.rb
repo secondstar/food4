@@ -7,17 +7,17 @@ class DfbHarvester
     @target = target
   end
   
-  attr_accessor :notebook
+  attr_accessor :notebook, :target
   
   def scrape_review_listing_page
-    doc = Nokogiri::HTML(open(yql_url))
+    target.doc = Nokogiri::HTML(open(yql_url))
     # return doc
     links = Hash.new
-    doc.css("a").each do |link|
-      permalink = link['href']
-      permalink = permalink.blank? ? "" : permalink.gsub(/.*\.disneyfoodblog.com\//,'')
+    target.doc.css("a").each do |link|
+      permalink = link['href'].to_s
+      permalink = permalink.length == 0 ? "" : permalink.gsub(/.*\.disneyfoodblog.com\//,'')
       permalink = permalink.gsub(/\/$/,'')
-      name = link['content'].blank? ? self.get_name_from_dfb_permalink(permalink) : link['content'].gsub(/\W/,' ')
+      name = link['content'].to_s.length == 0 ? self.get_name_from_dfb_permalink(permalink) : link['content'].gsub(/\W/,' ')
       links.store(name, permalink)
     end
     #Take out the first three because they're kruft.
@@ -35,10 +35,10 @@ class DfbHarvester
     # puts "doc #{doc}"
     @target.doc = doc
     tips = scan_for_tips(doc)
-    bloggings = scan_for_bloggings(doc)
-    affinities = scan_for_affinities(doc)
-    # affinities = scan_for_affinities
-    results = tips + bloggings + affinities
+    # bloggings = scan_for_bloggings(doc)
+    # affinities = scan_for_affinities(doc)
+    # # affinities = scan_for_affinities
+    # results = tips + bloggings + affinities
   end
 
   def scan_for_tips(doc = Nokogiri::HTML(open(yql_url)))
@@ -53,8 +53,8 @@ class DfbHarvester
   end
 
   def scan_for_affinities(doc = Nokogiri::HTML(open(yql_url)))
-    @target.doc = doc
-    results = DfbReviewScanner.new(@target).find_affinities
+    target.doc = doc
+    results = DfbReviewScanner.new(target).find_affinities
   end
   
   def scan_review_details
@@ -82,9 +82,8 @@ class DfbHarvester
   #   @target = OpenStruct.new(params)
   # end
   def yql_url
-    yc = DfbYqlCollector.new(@target)
+    yc = DfbYqlCollector.new(target)
     yc.yql_url
   end
-  
   
 end

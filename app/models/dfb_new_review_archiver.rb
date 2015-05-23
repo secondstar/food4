@@ -41,19 +41,20 @@ class DfbNewReviewArchiver
     eatery_permalink = DfbBridge.new(target).get_eatery_permalink
     puts "eatery_permalink = #{eatery_permalink}"
     eatery = @notebook.entries.find_by_permalink(eatery_permalink)
-    puts "eatery = #{eatery}"
+    puts "eatery = #{eatery.name}"
     eatery.to_s.length == 0 ? eatery_id = 0 : eatery_id = eatery.id
     # set up snapshot
-    snapshot_attributes = dfb_review.attributes # these should be 
-    snapshot_attributes = snapshot_attributes.merge("eatery_permalink" => eatery_permalink, "eatery_id" => eatery_id)
-    return
+    #  => Snapshot(eatery_id: integer, review_type: string, review_id: integer, review_permalink: text, review_permalink_is_different_than_eatery_permalink: boolean, published_at: datetime) 
+    # eatery_id: 676, review_type: "DisneyfoodblogComReview", review_id: 14627, review_permalink: "whispering-canyon-cafe", review_permalink_is_different_than_eatery_permalink: false
+    snapshot_attributes = {eatery_id: eatery_id, review_type: "DisneyfoodblogComReview", review_id: dfb_review[:id], review_permalink: dfb_review[:permalink], review_permalink_is_different_than_eatery_permalink: false}
+    # return
     @snapshot = publish_snapshot(snapshot_attributes)
     puts "\n\n*** #{snapshot_attributes} ***\n\n"
     snapshot_id = dfb_review.snapshots.first.id
     snapshot_review_permalink = dfb_review.snapshots.first.review_permalink
     
     # connect addendums to snapshot
-    self.archive_dfb_review_addendums(path= snapshot_review_permalink,
+    DfbReaper.archive_dfb_review_addendums(path= snapshot_review_permalink,
           yql_css_parse = 'div.entry-content', snapshot_id = snapshot_id)
     
   end
