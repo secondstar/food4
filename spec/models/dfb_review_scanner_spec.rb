@@ -18,7 +18,7 @@ describe DfbReviewScanner do
     scraped_review_listing_page = dh.scrape_review_listing_page
   end
 
-  describe 'find_tips' do
+  describe '#find_tips golden path' do
     subject { DfbReviewScanner.new(@target).find_tips }
     
     # it 'works' do
@@ -37,6 +37,36 @@ describe DfbReviewScanner do
       subject.first.length.must_equal 4
     end
   end
+  describe '#find_tips edge case liberty-inn' do
+    "liberty-inn"
+    # "You Might also Like:" is not nested in a <p />
+    before do
+      params = { path: "liberty-inn", yql_css_parse: '.entry-content'}
+      @target = OpenStruct.new(params)
+      # add nokogiri scrape of review to @target
+      dh = DfbHarvester.new(@target)
+      scraped_review_listing_page = dh.scrape_review_listing_page
+    end
+    
+    subject { DfbReviewScanner.new(@target).find_tips }
+    
+    # it 'works' do
+    #   subject.must_equal "someting"
+    # end
+    
+    it 'is an Array' do
+      subject.must_be_kind_of Array
+    end
+    
+    it 'has a Hash as the first element of that Array' do
+      subject.first.must_be_kind_of Hash
+    end
+    
+    it 'has 4 elements in the first Hash' do
+      subject.first.length.must_equal 4
+    end
+  end
+
   describe '#find_affinities with golden path' do
 
     subject { DfbReviewScanner.new(@target).find_affinities }
