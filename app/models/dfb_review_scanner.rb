@@ -19,8 +19,9 @@ class DfbReviewScanner
   def find_tips
     results =[]
     if _list_categories_and_paths.keys.include?("important info")
-      strong_containing_important_info = target.doc.css(_list_categories_and_paths["important info"]).first.parent.parent
-      list_of_tips = strong_containing_important_info.parent.css("/ul").css("li").children
+      # strong_containing_important_info = target.doc.css(_list_categories_and_paths["important info"]).first.parent.parent
+      # list_of_tips = strong_containing_important_info.parent.css("/ul").css("li").children
+      list_of_tips = target.doc.css("ul/li")
       list_of_tips.each do |l|
             tips_params = {}
             tips_params['source'] = "http://www.disneyfoodblog.com/#{target.path}/"

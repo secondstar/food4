@@ -38,7 +38,7 @@ describe DfbReviewScanner do
     end
   end
   describe '#find_tips edge case liberty-inn' do
-    "liberty-inn"
+    # "liberty-inn"
     # "You Might also Like:" is not nested in a <p />
     before do
       params = { path: "liberty-inn", yql_css_parse: '.entry-content'}
@@ -50,9 +50,9 @@ describe DfbReviewScanner do
     
     subject { DfbReviewScanner.new(@target).find_tips }
     
-    # it 'works' do
-    #   subject.must_equal "someting"
-    # end
+    it 'works' do
+      subject.must_equal "someting"
+    end
     
     it 'is an Array' do
       subject.must_be_kind_of Array
@@ -85,7 +85,7 @@ describe DfbReviewScanner do
 
     # it 'works' do
     #   # show the currently resulting code in the error since this method is not currently fully tested
-    #   subject.must_equal "something"
+    #   subject.must_equal "someting"
     # end
 
     it 'is an Array' do
