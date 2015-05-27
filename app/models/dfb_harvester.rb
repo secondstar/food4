@@ -58,7 +58,7 @@ class DfbHarvester
   end
   
   def scan_review_details
-    puts "** old @target #{@target}"
+    puts "** scan_review_details target #{@target}"
     # add_review_permalink_to_target
     # @target.path = "/#{DfbBridge.new(@target).get_review_permalink}"
     # puts "new @target #{@target}"

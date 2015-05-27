@@ -17,9 +17,6 @@ describe DfbHarvester do
 
 
   describe "#yql_url" do
-    before do
-      # puts "\nyql_url: #{@it.yql_url}\n"
-    end
     it "works" do
       # puts "\n yql_url: #{@it.yql_url} \n"
       
