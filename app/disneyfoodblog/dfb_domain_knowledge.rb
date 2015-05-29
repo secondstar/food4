@@ -51,7 +51,6 @@ class DfbDomainKnowledge
     2013/05/29/first-look-lartisan-des-glaces-sorbet-and-ice-cream-shop-in-epcots-france-is-open-see-full-menu-and-photos-here
     2013/01/15/review-epcots-les-halles-bakery
     2013/09/04/first-look-starbucks-opens-at-epcots-fountain-view-cafe
-    cool-wash-pizza
     be-our-guest-restaurant
     shulas-steak-house
     artist-point

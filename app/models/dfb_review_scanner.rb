@@ -18,7 +18,7 @@ class DfbReviewScanner
 
   def find_tips
     results =[]
-    if _list_categories_and_paths.keys.include?("important info")
+    if _list_categories_and_paths.keys.grep(/important info/).any?
       # strong_containing_important_info = target.doc.css(_list_categories_and_paths["important info"]).first.parent.parent
       # list_of_tips = strong_containing_important_info.parent.css("/ul").css("li").children
       list_of_tips = target.doc.css("ul/li")
@@ -46,17 +46,18 @@ class DfbReviewScanner
   end
   def find_bloggings
     results =[]
-    list_items = @target.doc.css("ul.noindent li")
-    list_items.each do |l|
-      if l.css('strong').text.blank?
-        blogging_params = {}
-        blogging_params['source'] = "http://www.disneyfoodblog.com/#{@target.path}/"
-        blogging_params['href'] = l.css("a").first['href']
-        blogging_params['description'] = l.css("a").first.text
-        blogging_params['category'] = "blogging"
-        results << blogging_params
+    if _list_categories_and_paths.keys.any? {|k| k.include?("posts mentioning")}
+      list_items = target.doc.css(".entry-content li/a")
+      list_items.each do |l|
+          blogging_params = {}
+          blogging_params['source'] = "http://www.disneyfoodblog.com/#{target.path}/"
+          blogging_params['href'] = l['href']
+          blogging_params['description'] = l.text
+          blogging_params['category'] = "blogging"
+          results << blogging_params
       end
     end
+
     return results
     
   end
