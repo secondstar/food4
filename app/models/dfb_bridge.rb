@@ -1,6 +1,8 @@
 class DfbBridge
   #names of the eateries and lodgings on DFB do not exactly match touringplans
   # target should be an OpenStruct containing {permalink: "akershus-royal-banquet-hall"}
+  attr_reader :target
+  
   def initialize(target)
     @target = target
   end
@@ -8,13 +10,13 @@ class DfbBridge
   def get_review_permalink
     # will return known dfb permalink, or original permalink
     ch = dfb_name_conversion_hash
-    result = ch.fetch(@target.permalink, @target.permalink)
+    result = ch.fetch(target[:permalink], target[:permalink])
   end
   
   def get_eatery_permalink
     # will return known dfb permalink, or original permalink
     d2ch = dfb_to_eatery_conversion_hash
-    result = d2ch.fetch(@target.permalink, @target.permalink)
+    result = d2ch.fetch(target[:permalink], target[:permalink])
     
   end
   

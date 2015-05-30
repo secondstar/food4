@@ -54,10 +54,13 @@ describe DfbReaper do
     subject { DfbReaper.archive_new_review(new_review_name, permalink) }
     
     it 'works' do
-      subject.must_equal "something"
+      subject.must_equal "someting"
     end
   end
   
+  describe '#archive_dfb_review_addendums' do
+    
+  end
   describe '#list_reviews_to_skip' do
     subject { DfbReaper.list_reviews_to_skip }
     

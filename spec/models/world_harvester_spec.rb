@@ -180,8 +180,8 @@ describe WorldHarvester do
 # {"name"=>"Treehouse Villas at Disney's Saratoga Springs Resort", "dinings"=>[], "permalink"=>"treehouse-villas-at-disneys-saratoga-springs-resort"}]
 #     end
     
-    it "has exactly 30 items" do
-      subject.length.must_equal 30
+    it "has exactly 31 items" do
+      subject.length.must_equal 31
     end
     
   end
@@ -220,8 +220,23 @@ describe WorldHarvester do
     
     subject { WorldHarvester.find_menu_by_permalink(district_name, eatery_permalink, menu_type_permalink) }
 
-    it "works" do
-      subject.must_equal [{"menu"=>{"child_price"=>nil, "buffet"=>false, "description"=>"", "drinks"=>false, "fixed_price_only"=>false, "verified_date"=>"November 16, 2014", "kids"=>false, "character_meal"=>false, "gratuity_included"=>false, "name"=>"All Day Menu", "adult_price"=>nil, "sales_tax_included"=>false}}, {"dining"=>{"category_code"=>"counter_service", "short_name"=>"Aloha Isle"}}, {"menu_links"=>[{"links"=>[{"market_price"=>false, "snack_credit"=>true, "description"=>"", "name"=>"Fresh-cut Pineapple Spear", "price"=>"$3.29"}], "group"=>"Snack"}, {"links"=>[{"market_price"=>false, "snack_credit"=>true, "description"=>"your choice of Pineapple, Vanilla, or Orange ", "name"=>"Dole Whip Cup", "price"=>"$3.99"}, {"market_price"=>false, "snack_credit"=>true, "description"=>"Your chioce of 2 flavors Pineapple, Vanilla, or Orange", "name"=>"Dole Whip Twist Cup", "price"=>"$3.99"}, {"market_price"=>false, "snack_credit"=>true, "description"=>"Vanilla, Pineapple, or Orange Dole Whip with Pineapple Juice", "name"=>"Pineapple Float", "price"=>"$4.99"}, {"market_price"=>false, "snack_credit"=>true, "description"=>"your chioce of Pineapple, Vanilla, or Orange Dole Whip", "name"=>"Fountain Beverage Float", "price"=>"$4.49"}], "group"=>"Dessert"}, {"links"=>[{"market_price"=>false, "snack_credit"=>true, "description"=>nil, "name"=>"Smartwater", "price"=>"$4.00"}, {"market_price"=>false, "snack_credit"=>true, "description"=>"", "name"=>"Dasani Bottled Water", "price"=>"$2.50"}, {"market_price"=>false, "snack_credit"=>true, "description"=>"", "name"=>"Pineapple Juice", "price"=>"$2.69"}, {"market_price"=>false, "snack_credit"=>true, "description"=>"", "name"=>"Simply Orange Orange Juice", "price"=>"$3.79"}, {"market_price"=>false, "snack_credit"=>true, "description"=>"", "name"=>"Minute Maid Apple Juice", "price"=>"$2.59"}, {"market_price"=>false, "snack_credit"=>true, "description"=>"", "name"=>"Hot Tea", "price"=>"$2.29"}, {"market_price"=>false, "snack_credit"=>true, "description"=>"", "name"=>"Nestle Hot Cocoa", "price"=>"$2.29"}, {"market_price"=>false, "snack_credit"=>true, "description"=>"regular or decaf", "name"=>"Coffee", "price"=>"$2.29"}, {"market_price"=>false, "snack_credit"=>true, "description"=>"Coca-Cola, Diet Coke, Sprite, Minute Maid Light, Barq's Root Beer", "name"=>"Assorted Fountain Beverage - Regular", "price"=>"$2.99"}, {"market_price"=>false, "snack_credit"=>true, "description"=>"Coca-Cola, Diet Coke, Sprite, Minute Maid Light, Barq's Root Beer", "name"=>"Assorted Fountain Beverage - Large", "price"=>"$3.29"}], "group"=>"Beverage"}]}]
+    # it "works" do
+    #   subject.must_equal "something"
+    # end
+    
+    it 'is a Array' do
+      subject.must_be_kind_of Array
+    end
+    
+    it 'has a main array that has a length of 3' do
+      subject.length.must_equal 3
+    end
+    it 'has a hash as the first element' do
+      subject.first.must_be_kind_of Hash
+    end
+    
+    it 'has a first element 2 long' do
+      subject.first["menu"].length.must_equal 12
     end
   end
   
