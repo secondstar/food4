@@ -9,9 +9,9 @@ describe DfbReviewDetails do
     let(:target) { OpenStruct.new(params) }
     subject { DfbReviewDetails.new(target: target).scan }
     
-    it 'works' do
-      subject.must_equal "someting"
-    end
+    # it 'works' do
+    #   subject.must_equal "someting"
+    # end
     
     it 'is a hash' do
       subject.must_be_kind_of Hash
