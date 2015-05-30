@@ -34,11 +34,7 @@ class DfbHarvester
     # puts "yql_url #{yql_url}"
     # puts "doc #{doc}"
     @target.doc = doc
-    tips = scan_for_tips(doc)
-    # bloggings = scan_for_bloggings(doc)
-    # affinities = scan_for_affinities(doc)
-    # # affinities = scan_for_affinities
-    # results = tips + bloggings + affinities
+    results << scan_for_tips(doc) << scan_for_bloggings(doc) << scan_for_affinities(doc)
   end
 
   def scan_for_tips(doc = Nokogiri::HTML(open(yql_url)))

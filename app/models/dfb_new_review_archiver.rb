@@ -5,23 +5,24 @@ class DfbNewReviewArchiver
   attr_reader :eatery_name, :permalink, :yql_css_parse, :target
   @notebook = THE_NOTEBOOK 
   
-  def initialize(eatery_name, permalink, yql_css_parse=".entry-content p")
+  def initialize(eatery_name, permalink, yql_css_parse=".entry-content")
     @eatery_name    =  eatery_name
     @permalink      = permalink
     @yql_css_parse  = yql_css_parse
     @target         = {eatery_name: eatery_name, 
                         permalink: permalink, 
                         yql_css_parse: yql_css_parse,
-                        path: yql_css_parse}
+                        path: permalink}
   end
   
   def store
+    
     review = _scanned_in_review
     return if review.blank? # does the review exists in index, but not really on remote site
     
     _connect_snapshot_to_eatery(
         eatery_id = _get_eatery_id_for_snapshot, 
-        dfb_review = _archive_scanned_in_review(review))
+        dfb_review = archive_scanned_in_review(review))
     _connect_addendums_to_snapshot
     
   end
@@ -54,7 +55,7 @@ class DfbNewReviewArchiver
     
   end
   
-  def _archive_scanned_in_review(review)
+  def archive_scanned_in_review(review)
     dfb_notebook = Notebook.new(entry_fetcher=DisneyfoodblogComReview.public_method(:most_recent))
     params = _merge_model_params_with__scanned_in_review(review)
     dfb_review = dfb_notebook.new_dfb_review(params)
