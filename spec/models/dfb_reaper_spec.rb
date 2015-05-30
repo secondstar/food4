@@ -24,7 +24,7 @@ describe DfbReaper do
     end
     
     it 'lists 240 items in the hash' do
-      subject.first.length.must_equal 240
+      subject.first.length.must_equal 241
     end
 
   end
@@ -54,13 +54,10 @@ describe DfbReaper do
     subject { DfbReaper.archive_new_review(new_review_name, permalink) }
     
     it 'works' do
-      subject.must_equal "someting"
+      subject.must_equal "something"
     end
   end
   
-  describe '#archive_dfb_review_addendums' do
-    
-  end
   describe '#list_reviews_to_skip' do
     subject { DfbReaper.list_reviews_to_skip }
     
