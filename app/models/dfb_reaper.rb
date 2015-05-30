@@ -59,16 +59,16 @@ class DfbReaper
   end
 
   def self.archive_dfb_review_addendums(path='aloha-isle', 
-      yql_css_parse = 'div.entry-content', snapshot_id = Snapshot.last.id)
-      
-    params = {path: path, yql_css_parse: yql_css_parse }
-    target = OpenStruct.new(params)
-    addendums = DfbHarvester.new(target).scan_for_addendums
-    @notebook = Notebook.new(entry_fetcher=Addendum.public_method(:most_recent))
+      yql_css_parse = 'div.entry-content', 
+      snapshot_id = Snapshot.dfb.where(review_permalink: "aloha-isle").first.id, 
+      addendum_notebook = Notebook.new(entry_fetcher = Addendum.public_method(:most_recent))
+      )
+    
+    addendums = self._collect_dfb_review_addendums(path, yql_css_parse, snapshot_id)
     addendums.each do |addendum|
-      addendum_params = addendum.merge({:portrayal_id=> snapshot_id, :portrayal_type=>"Snapshot"})
+      addendum_params = self._attach_snapshot_to_addendum(addendum, snapshot_id)
       puts "addendum_params #{addendum_params}\n\n"
-      a = @notebook.new_addendum(addendum_params)
+      a = addendum_notebook.new_addendum(addendum_params)
       a.archive
     end
 
@@ -76,6 +76,17 @@ class DfbReaper
     # a = @notebook.new_addendum(a_params)
     # a.archive
     # return a
+  end
+
+  def self._collect_dfb_review_addendums(path='aloha-isle', 
+    yql_css_parse = 'div.entry-content', snapshot_id = Snapshot.dfb.where(review_permalink: "aloha-isle").first.id)
+    params = {path: path, yql_css_parse: yql_css_parse }
+    target = OpenStruct.new(params)
+    addendums = DfbHarvester.new(target).scan_for_addendums.flatten
+  end
+  
+  def self._attach_snapshot_to_addendum(addendum, snapshot_id)
+    addendum.merge({:portrayal_id=> snapshot_id, :portrayal_type=>"Snapshot"})
   end
   
   def self.list_reviews_to_skip
