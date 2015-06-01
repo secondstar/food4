@@ -89,7 +89,9 @@ class DfbBridge
         "bongos" => "bongos-cuban-cafe",
         "splitsville-luxury-lanes" => "splitsville",
         "wolfgang-puck-cafe" => "wolfgang-puck-dining-room",
-        "wolfgang-puck-express" => "wolfgang-puck-express-west-side"
+        "wolfgang-puck-express" => "wolfgang-puck-express-west-side",
+        "tamu-tamu-refreshments" => "tamu-tamu",
+        "main-street-ice-cream-parlor" => "plaza-ice-cream-parlor"
       }
   end
   def dfb_name_conversion_hash
@@ -160,7 +162,10 @@ class DfbBridge
         "bongos-cuban-cafe" => "bongos",
         "splitsville" => "splitsville-luxury-lanes",
         "wolfgang-puck-dining-room" => "wolfgang-puck-cafe",
-         "wolfgang-puck-express-west-side" => "wolfgang-puck-express"
+         "wolfgang-puck-express-west-side" => "wolfgang-puck-express",
+         "tamu-tamu" => "tamu-tamu-refreshments",
+         "plaza-ice-cream-parlor" => "main-street-ice-cream-parlor"
+         
       }
     
 
