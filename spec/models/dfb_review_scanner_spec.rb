@@ -154,6 +154,35 @@ describe DfbReviewScanner do
       @drs = DfbReviewScanner.new(@target)
     end
 
+    describe '#find_tips' do
+      subject { @drs.find_tips }
+    
+      # it 'works' do
+      #   subject.must_equal "someting"
+      # end
+    
+      it 'is an Array' do
+        subject.must_be_kind_of Array
+      end
+    
+      it 'has a Hash as the first element of that Array' do
+        subject.first.must_be_kind_of Hash
+      end
+    
+      it 'has 4 elements in the first Hash' do
+        subject.first.length.must_equal 4
+      end
+      
+      it 'has the first element of the Array is a Hash with a length of 4' do
+        subject.first.length.must_equal 4
+      end
+      
+      it 'has a hash with a tip for a quick lunch while waiting for Test Track' do
+        subject.first['description'].must_equal "<li>You never know what’s going to happen at WCC — servers are on the lookout for ways to have fun with guests.</li>"
+      end
+      
+    end
+
     describe '#find_affinities' do
       subject { @drs.find_affinities }
     
