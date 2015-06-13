@@ -53,8 +53,20 @@ describe DfbReaper do
     let(:permalink) {"the-drop-off-pool-bar"}
     subject { DfbReaper.archive_new_review(new_review_name, permalink) }
     
-    it 'works' do
-      subject.must_equal "something"
+    # it 'works' do
+    #   subject.must_equal "something"
+    # end
+    
+    it 'is an Array' do
+      subject.must_be_kind_of Array
+    end
+    
+    it 'is an Array that contains a Hash' do
+      subject.first.must_be_kind_of Hash
+    end
+    
+    it 'has 4 elements in in the first Hash' do
+      subject.first.length.must_equal 4
     end
   end
   
