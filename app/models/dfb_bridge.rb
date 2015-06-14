@@ -91,7 +91,8 @@ class DfbBridge
         "wolfgang-puck-cafe" => "wolfgang-puck-dining-room",
         "wolfgang-puck-express" => "wolfgang-puck-express-west-side",
         "tamu-tamu-refreshments" => "tamu-tamu",
-        "main-street-ice-cream-parlor" => "plaza-ice-cream-parlor"
+        "main-street-ice-cream-parlor" => "plaza-ice-cream-parlor",
+        "lartisan-des-glaces" => "lartisan-des-glaces-artisan-ice-cream-sorbet"
       }
   end
   def dfb_name_conversion_hash
@@ -164,8 +165,8 @@ class DfbBridge
         "wolfgang-puck-dining-room" => "wolfgang-puck-cafe",
          "wolfgang-puck-express-west-side" => "wolfgang-puck-express",
          "tamu-tamu" => "tamu-tamu-refreshments",
-         "plaza-ice-cream-parlor" => "main-street-ice-cream-parlor"
-         
+         "plaza-ice-cream-parlor" => "main-street-ice-cream-parlor",
+         "lartisan-des-glaces-artisan-ice-cream-sorbet" => "lartisan-des-glaces"
       }
     
 

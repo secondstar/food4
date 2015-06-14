@@ -452,4 +452,191 @@ describe DfbReviewScanner do
     end
     
   end
+  
+  describe 'edge case fountain-view' do
+    before do
+      params = { path: "fountain-view", yql_css_parse: '.entry-content'}
+      @target = OpenStruct.new(params)
+      # add nokogiri scrape of review to @target
+      dh = DfbHarvester.new(@target)
+      scraped_review_listing_page = dh.scrape_review_listing_page
+      @drs = DfbReviewScanner.new(@target)
+    end
+    
+    describe '#find_tips' do
+      subject { @drs.find_tips }
+    
+      # it 'works' do
+      #   subject.must_equal "something"
+      # end
+
+      it 'is an Array' do
+        subject.must_be_kind_of Array
+      end
+
+      it 'has 2 tips' do
+        subject.length.must_equal 2
+      end
+
+      it 'has an accurate description for the first element' do
+        subject.first["description"].must_equal "<li>If you’re craving you’re favorite Starbucks beverage the way you enjoy it at home, Fountain View is the place to find it in Epcot.</li>"
+      end
+    end
+    describe '#find_affinities' do
+      subject { @drs.find_affinities }
+    
+      # test @target because the method leans on other code that generates the @target
+      # it 'has a @target that contains "You Might also Like:"' do
+      #   @target.doc.css("strong").last.text.must_equal "You Might also Like:"
+      # end
+
+      # it 'has a @target that contains a path' do
+      #   @target.path.must_equal "fountain-view"
+      # end
+    
+      # test the method's code
+
+
+      # it 'works' do
+      #   # show the currently resulting code in the error since this method is not currently fully tested
+      #   subject.must_equal "someting"
+      # end
+      #
+      it 'is an Array' do
+          subject.must_be_kind_of Array
+      end
+
+      it 'is an Array with a length of 4' do
+        subject.length.must_equal 1
+      end
+
+      it 'has a Hash as the first element of the Array' do
+        subject.first.must_be_kind_of Hash
+      end
+
+      it 'has the first element of the Array is a Hash with a length of 4' do
+        subject.first.length.must_equal 4
+      end
+
+      it 'has a hash with the affinity for Main Street Bakery' do
+        subject.first['description'].must_equal "Main Street Bakery"
+      end
+      
+      
+    end
+    
+    describe '#find_bloggings' do
+      subject { @drs.find_bloggings }
+    
+      # it 'works' do
+      #   subject.must_equal "someting"
+      # end
+    
+      it 'is an Array' do
+        subject.must_be_kind_of Array
+      end
+
+      it 'has 7 elements in the array' do
+        subject.length.must_equal 7
+      end
+      
+      it 'has an Hash as the first element in the Array' do
+        subject.first.must_be_kind_of Hash
+      end
+      
+      it 'has a description in the first element in the Array' do
+        subject.first["description"].must_equal "News! Starbucks “You Are Here” Mugs For Sale Again in Epcot"
+      end
+    end
+    
+  end
+  
+  describe 'edge case lartisan-des-glaces' do
+    before do
+      params = { path: "lartisan-des-glaces", yql_css_parse: '.entry-content'}
+      @target = OpenStruct.new(params)
+      # add nokogiri scrape of review to @target
+      dh = DfbHarvester.new(@target)
+      scraped_review_listing_page = dh.scrape_review_listing_page
+      @drs = DfbReviewScanner.new(@target)
+    end
+    
+    describe '#find_tips' do
+      subject { @drs.find_tips }
+
+      # it 'works' do
+      #   subject.must_equal "something"
+      # end
+
+      it 'is an Array' do
+        subject.must_be_kind_of Array
+      end
+
+      it 'has zero tips' do
+        subject.length.must_equal 0
+      end
+
+    end
+    describe '#find_affinities' do
+      subject { @drs.find_affinities }
+      #
+      # test @target because the method leans on other code that generates the @target
+      it 'has a @target that contains "You Might also Like:"' do
+        @target.doc.css("strong").last.text.downcase.gsub(/[^a-z0-9\s]/i, '') == "you might also like"
+      end
+
+      it 'has a @target that contains a path' do
+        @target.path.must_equal "lartisan-des-glaces"
+      end
+
+      # test the method's code
+
+
+      # it 'works' do
+      #   # show the currently resulting code in the error since this method is not currently fully tested
+      #   subject.must_equal "someting"
+      # end
+
+      it 'is an Array' do
+          subject.must_be_kind_of Array
+      end
+
+      it 'is an Array with a length of 1' do
+        subject.length.must_equal 1
+      end
+
+      it 'has a Hash as the first element of the Array' do
+        subject.first.must_be_kind_of Hash
+      end
+
+      it 'has the first element of the Array is a Hash with a length of 4' do
+        subject.first.length.must_equal 4
+      end
+
+      it 'has a hash with the affinity for Main Street Ice Cream Parlor' do
+        subject.first['description'].must_equal "Main Street Ice Cream Parlor"
+      end
+
+
+    end
+    
+    describe '#find_bloggings' do
+      subject { @drs.find_bloggings }
+    
+      # it 'works' do
+      #   subject.must_equal "something"
+      # end
+    
+      it 'is an Array' do
+        subject.must_be_kind_of Array
+      end
+
+      it 'has zero elements in the array' do
+        subject.length.must_equal 0
+      end
+      
+    end
+    
+  end
+  
 end

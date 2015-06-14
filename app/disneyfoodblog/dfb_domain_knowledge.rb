@@ -40,7 +40,11 @@ class DfbDomainKnowledge
       "Java Bar" => "java-bar", 
       "Splash Terrace" => "splash-terrace",
       "Big Top Treats" => "big-top-treats",
-      "Tortuga Tavern"  => "tortuga-tavern"
+      "Tortuga Tavern"  => "tortuga-tavern",
+      "Karamell-Küche"  => "karamell-kuche",
+      "Les Halles Boulangerie Patisserie" => "les-halles-boulangerie-patisserie",
+      "Fountain View" => "fountain-view",
+      "L’Artisan des Glaces" => "lartisan-des-glaces"
       }
   end
 
