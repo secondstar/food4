@@ -64,7 +64,7 @@ class DfbNewReviewArchiver
   end
   
   def _get_eatery_id_for_snapshot
-    @notebook = Notebook.new 
+    @notebook = Notebook.new #Eatery notebook
     eatery_permalink = DfbBridge.new(target).get_eatery_permalink
     puts "eatery_permalink = #{eatery_permalink}"
     # find_by_x is a rails method that @notebook doesn't have.  Foreward a message?

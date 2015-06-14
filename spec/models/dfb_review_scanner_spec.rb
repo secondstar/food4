@@ -453,6 +453,93 @@ describe DfbReviewScanner do
     
   end
   
+  describe 'edge case les-halles-boulangerie-patisserie' do
+    before do
+      params = { path: "les-halles-boulangerie-patisserie", yql_css_parse: '.entry-content'}
+      @target = OpenStruct.new(params)
+      # add nokogiri scrape of review to @target
+      dh = DfbHarvester.new(@target)
+      scraped_review_listing_page = dh.scrape_review_listing_page
+      @drs = DfbReviewScanner.new(@target)
+    end
+    
+    describe '#find_tips' do
+      subject { @drs.find_tips }
+    
+      # it 'works' do
+      #   subject.must_equal "something"
+      # end
+    
+      it 'is an Array' do
+        subject.must_be_kind_of Array
+      end
+
+      it 'has a Hash for its first element' do
+        subject.first.must_be_kind_of Hash
+      end
+      it 'has 3 tips' do
+        subject.length.must_equal 3
+      end
+
+      it 'has an accurate description for the first element' do
+        subject.first["description"].must_equal "<li>Les Halles opens at 9 am – perfect for breakfast!</li>"
+      end
+    end
+    describe '#find_affinities' do
+      subject { @drs.find_affinities }
+      #
+      # # test @target because the method leans on other code that generates the @target
+      # it 'has a @target that contains "You Might also Like:"' do
+      #   @target.doc.css("strong").last.text.must_equal "You Might also Like:"
+      # end
+      #
+      # it 'has a @target that contains a path' do
+      #   @target.path.must_equal "splash-terrace"
+      # end
+    
+      # test the method's code
+
+
+      # it 'works' do
+      #   # show the currently resulting code in the error since this method is not currently fully tested
+      #   subject.must_equal "someting"
+      # end
+
+      it 'is an Array' do
+          subject.must_be_kind_of Array
+      end
+
+      it 'is an Array containing zero elements' do
+        subject.length.must_equal 0
+      end
+
+    end
+    
+    describe '#find_bloggings' do
+      subject { @drs.find_bloggings }
+
+      # it 'works' do
+      #   subject.must_equal "someting"
+      # end
+
+      it 'is an Array' do
+        subject.must_be_kind_of Array
+      end
+      #
+      it 'has 10 elements in the array' do
+        subject.length.must_equal 10
+      end
+
+      it 'has an Hash as the first element in the Array' do
+        subject.first.must_be_kind_of Hash
+      end
+
+      it 'has a description in the first element in the Array' do
+        subject.first["description"].must_equal "Review: Beignet at Les Halles Boulangerie Patisserie in Epcot’s France Pavilion"
+      end
+    end
+  end
+  
   describe 'edge case fountain-view' do
     before do
       params = { path: "fountain-view", yql_css_parse: '.entry-content'}
