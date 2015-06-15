@@ -64,7 +64,7 @@ class DfbReviewScanner
   
   def find_affinities
     results =[]
-    if target.doc.css("div.entry-content strong").last.text == "You Might also Like:"
+    if target.doc.css("div.entry-content strong").last.text.downcase.gsub(/[^a-z0-9\s]/i, '').strip == "you might also like"
 
       links =  target.doc.css("div.entry-content strong").last.parent.css("/a")
 

@@ -6,7 +6,7 @@ require "ostruct"
 describe DfbHarvester do
   before do
     params = {path: permalink, 
-      yql_css_parse: ".entry-content p"     
+      yql_css_parse: ".entry-content"     
     }
     target = OpenStruct.new(params)
     @it = DfbHarvester.new(target)
@@ -24,7 +24,7 @@ describe DfbHarvester do
     it "works" do
       # puts "\n yql_url: #{@it.yql_url} \n"
       
-      subject.must_equal "https://query.yahooapis.com/v1/public/yql?q=select+*+from+data.html.cssselect+where+url%3D%27http%3A%2F%2Fwww.disneyfoodblog.com%2Fwhispering-canyon-cafe%27+AND+css%3D%27.entry-content+p%27&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys"
+      subject.must_equal "https://query.yahooapis.com/v1/public/yql?q=select+*+from+data.html.cssselect+where+url%3D%27http%3A%2F%2Fwww.disneyfoodblog.com%2Fwhispering-canyon-cafe%27+AND+css%3D%27.entry-content%27&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys"
     end
   end
   
@@ -33,7 +33,7 @@ describe DfbHarvester do
     subject { @it.scan_for_tips(doc = Nokogiri::HTML(open(@it.yql_url))) }
     
     it "works" do
-      subject.must_equal [{"source"=>"http://www.disneyfoodblog.com/whispering-canyon-cafe/", "href"=>"", "description"=>"You never know what’s going to happen at WCC — servers are on the lookout for ways to have fun with guests.", "category"=>"tips"}, {"source"=>"http://www.disneyfoodblog.com/whispering-canyon-cafe/", "href"=>"", "description"=>"Surprising things happen when you ask for Ketchup…", "category"=>"tips"}, {"source"=>"http://www.disneyfoodblog.com/whispering-canyon-cafe/", "href"=>"", "description"=>"Try to make a reservation for prime mealtimes. When the restaurant is full is when things are most fun.", "category"=>"tips"}]
+      subject.must_equal [{"source"=>"http://www.disneyfoodblog.com/whispering-canyon-cafe/", "href"=>"", "description"=>"<li>You never know what’s going to happen at WCC — servers are on the lookout for ways to have fun with guests.</li>", "category"=>"tips"}, {"source"=>"http://www.disneyfoodblog.com/whispering-canyon-cafe/", "href"=>"", "description"=>"<li>Surprising things happen when you ask for Ketchup…</li>", "category"=>"tips"}, {"source"=>"http://www.disneyfoodblog.com/whispering-canyon-cafe/", "href"=>"", "description"=>"<li>Try to make a reservation for prime mealtimes. When the restaurant is full is when things are most fun.</li>", "category"=>"tips"}]
 
     end
   end
