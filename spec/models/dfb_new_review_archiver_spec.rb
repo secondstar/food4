@@ -16,7 +16,7 @@ describe DfbNewReviewArchiver do
     subject { @dnra._scanned_in_review }
     
     # it 'works' do
-    #   subject.must_equal "something"
+    #   subject.must_equal "someting"
     # end
     
     it 'must be a Hash' do

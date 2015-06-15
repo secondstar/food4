@@ -16,7 +16,7 @@ class DfbReviewDetails
     doc.css("p").each do |item|
         if item.to_s =~ /<strong>/
           h = Hash.new
-          title = _dfb_item(item).first.first.to_s.downcase.tr(" ", "_")
+          title = _dfb_item(item).first.first.to_s.strip.downcase.tr(" ", "_")
           # strips non-breaking space & whitespace that's leading and trailing 
           title = title.gsub(/\A\p{Space}*|\p{Space}*\z/, '')
           # swap out 'DFB Posts Mentioning' for 'Disney Food Blog Posts Mentioning'
