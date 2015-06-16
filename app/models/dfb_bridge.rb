@@ -108,7 +108,8 @@ class DfbBridge
         "san-angel-inn-restaurante" => "san-angel-inn",
         "erin-mckennas-bakery-nyc" => "erin-mckenna-bakery-nyc",
         "the-boathouse" => "boathouse",
-        "starbucks-at-downtown-disney-west-side" => "starbucks-downtown-disney-west-side"
+        "starbucks-at-downtown-disney-west-side" => "starbucks-downtown-disney-west-side",
+        "crepes-de-chefs-de-france" => "crepes-des-chefs-de-france"
       }
   end
   def dfb_name_conversion_hash
@@ -199,7 +200,9 @@ class DfbBridge
           "san-angel-inn" => "san-angel-inn-restaurante",
           "erin-mckenna-bakery-nyc" => "erin-mckennas-bakery-nyc",
           "boathouse" => "the-boathouse",
-          "starbucks-downtown-disney-west-side" => "starbucks-at-downtown-disney-west-side"
+          "starbucks-downtown-disney-west-side" => "starbucks-at-downtown-disney-west-side",
+          "crepes-des-chefs-de-france" => "crepes-de-chefs-de-france"
+          
           
       }
     
