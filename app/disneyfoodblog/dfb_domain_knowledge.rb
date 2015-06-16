@@ -14,7 +14,7 @@ class DfbDomainKnowledge
   end
   
   def i_know_normal_scrape_does_not_work
-    resulting_array = ["2010 09 30 First Look Epcots New Karamell Kuche", "2013 01 15 Review Epcots Les Halles Bakery", "2013 09 04 First Look Starbucks Opens At Epcots Fountain View Cafe", "2013 05 29 First Look Lartisan Des Glaces Sorbet And Ice Cream Shop In Epcots France Is Open See Full Menu And Photos Here", "Disney Bar And Lounge Menu", "2014 01 21 News And Review The Smokehouse At House Of Blues Opens In Downtown Disney", "Team Spirits Pool Bar", "El Pirata Y El Perico", "Yakitori House", "Http   Disneyfoodblog Com Monsieur Paul Restaurant", "Kouzzina", "Siestas Pool Par", "Aunt Pollys", "Be Our Guest Restaurant", "Tomorrowland Terrace Cafe", "Westward Ho Refreshments", "Bistro De Paris", "La Cava Del Tequila", "Nine Dragons Restaurant", "Rose And Crown Pub", "Tutto Gusto", "Dawa Bar", "Dino Bite Snacks", "Drinkwallah", "Gardens Kiosk", "Harambe Fruit Market", "High Octane Refreshments", "Tune In Lounge", "Atlantic Dance Hall", "Jellyrolls Dueling Piano Bar", "Queen Victorias Room At Victoria And Alberts Restaurant", "The Gurgling Suitcase", "Trader Sams Tiki Terrace", "Garden Gallery", "Manginos", "Trout Pass", "Dockside Margaritas", "Downtown Disney Food Trucks"]
+    resulting_array = ["2010 09 30 First Look Epcots New Karamell Kuche", "2013 01 15 Review Epcots Les Halles Bakery", "2013 09 04 First Look Starbucks Opens At Epcots Fountain View Cafe", "2013 05 29 First Look Lartisan Des Glaces Sorbet And Ice Cream Shop In Epcots France Is Open See Full Menu And Photos Here", "Disney Bar And Lounge Menu", "2014 01 21 News And Review The Smokehouse At House Of Blues Opens In Downtown Disney", "Team Spirits Pool Bar", "El Pirata Y El Perico", "Yakitori House", "Http   Disneyfoodblog Com Monsieur Paul Restaurant", "Kouzzina", "Siestas Pool Par", "Aunt Pollys", "Be Our Guest Restaurant", "Tomorrowland Terrace Cafe", "Westward Ho Refreshments", "Bistro De Paris", "La Cava Del Tequila", "Nine Dragons Restaurant", "Rose And Crown Pub", "Tutto Gusto", "Dawa Bar", "Dino Bite Snacks", "Drinkwallah", "Gardens Kiosk", "Harambe Fruit Market", "High Octane Refreshments", "Tune In Lounge", "Atlantic Dance Hall", "Jellyrolls Dueling Piano Bar", "Queen Victorias Room At Victoria And Alberts Restaurant", "The Gurgling Suitcase", "Trader Sams Tiki Terrace", "Garden Gallery", "Manginos", "Trout Pass", "Dockside Margaritas", "Downtown Disney Food Trucks", "Crêpes de Chefs de France"]
   end
   
   def i_know_these_links_are_not_listed_on_site
@@ -49,8 +49,7 @@ class DfbDomainKnowledge
       "Grandstand Spirits Pool Bar" => "grandstand-spirits-pool-bar",
       "Katsura Grill" => "katsura-grill",
       "Yak and Yeti Local Foods Cafe" => "yak-and-yeti-counter-service",
-      "Spice Road Table" => "spice-road-table",
-      "Crêpes de Chefs de France" => "crepes-des-chefs-de-france"
+      "Spice Road Table" => "spice-road-table"
       }
   end
 
