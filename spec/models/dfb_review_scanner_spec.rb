@@ -246,8 +246,8 @@ describe DfbReviewScanner do
         subject.first.length.must_equal 4
       end
 
-      it 'has a hash with an article for Food Round-Up' do
-        subject.first['description'].must_equal "Disney Food Post Round-Up: March 1, 2015"
+      it 'has a hash with an article for Breakfast Review' do
+        subject.first['description'].must_equal "Review: Breakfast at Whispering Canyon Cafe in Disney’s Wilderness Lodge Resort"
       end
     end
 
@@ -1077,17 +1077,17 @@ describe DfbReviewScanner do
         subject.first.length.must_equal 4
       end
 
-      it 'has a hash with the title for "News! Tickets Now on Sale for Walt Disney World Swan and Dolphin’s Food and Wine Classic"' do
-        subject.first['description'].must_equal "News! Tickets Now on Sale for Walt Disney World Swan and Dolphin’s Food and Wine Classic"
+      it 'has a hash with the title for "News: Full Menus Announced for the 2015 Swan and Dolphin Food and Wine Classic"' do
+        subject.first['description'].must_equal "News: Full Menus Announced for the 2015 Swan and Dolphin Food and Wine Classic"
       end
 
     end
 
   end
 
-  describe 'edge case "crepes-des-chefs-de-france"' do
+  describe 'edge case "chefs-de-france"' do
     before do
-      params = { path: "crepes-des-chefs-de-france", yql_css_parse: '.entry-content'}
+      params = { path: "chefs-de-france", yql_css_parse: '.entry-content'}
       @target = OpenStruct.new(params)
       # add nokogiri scrape of review to @target
       dh = DfbHarvester.new(@target)
@@ -1106,8 +1106,8 @@ describe DfbReviewScanner do
         subject.must_be_kind_of Array
       end
 
-      it 'has 0 tips' do
-        subject.length.must_equal 0
+      it 'has 1 tips' do
+        subject.length.must_equal 1
       end
 
     end
@@ -1122,17 +1122,17 @@ describe DfbReviewScanner do
       # # test the method's code
       #
       #
-      it 'works' do
-        # show the currently resulting code in the error since this method is not currently fully tested
-        subject.must_equal "someting"
-      end
+      # it 'works' do
+      #   # show the currently resulting code in the error since this method is not currently fully tested
+      #   subject.must_equal "someting"
+      # end
 
       it 'is an Array' do
           subject.must_be_kind_of Array
       end
 
-      it 'is an Array with a length of zero' do
-        subject.length.must_equal 0
+      it 'is an Array with a length of 2' do
+        subject.length.must_equal 2
       end
 
 
@@ -1149,8 +1149,8 @@ describe DfbReviewScanner do
         subject.must_be_kind_of Array
       end
 
-      it 'has zero elements in the array' do
-        subject.length.must_equal 0
+      it 'has 10 elements in the array' do
+        subject.length.must_equal 10
       end
 
       

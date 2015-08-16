@@ -133,21 +133,21 @@ describe DfbNewReviewArchiver do
     end
   end
 
-  describe '#store Crêpes de Chefs de France' do
-    let(:permalink) {"crepes-des-chefs-de-france"}
-    let(:eatery_name) {"Crêpes de Chefs de France"}
+  describe '#store Chefs de France' do
+    let(:permalink) {"chefs-de-france"}
+    let(:eatery_name) {"Chefs de France"}
     subject { @dnra.store }
 
-    it 'works' do
-      subject.must_equal "something"
-    end
+    # it 'works' do
+    #   subject.must_equal "something"
+    # end
 
     it 'returns an Array' do
       subject.must_be_kind_of Array
     end
 
-    it 'has 15 elements' do
-      subject.length.must_equal 15
+    it 'has 13 elements' do
+      subject.length.must_equal 13
     end
     
     it 'has a Hash for the first element' do
