@@ -79,6 +79,8 @@ class DfbDomainKnowledge
     on-the-rocks-pool-bar
     monsieur-paul-restaurant
     cool-wash-pizza
+    discovery-island-allergy-friendly-kiosk
+    zuris-sweets-shop
     )
   end
 end
