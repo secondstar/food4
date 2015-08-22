@@ -49,7 +49,8 @@ class DfbDomainKnowledge
       "Grandstand Spirits Pool Bar" => "grandstand-spirits-pool-bar",
       "Katsura Grill" => "katsura-grill",
       "Yak and Yeti Local Foods Cafe" => "yak-and-yeti-counter-service",
-      "Spice Road Table" => "spice-road-table"
+      "Spice Road Table" => "spice-road-table",
+      "Hey Howdy Hey Takeaway" => "hey-howdy-hey-takeaway"
       }
   end
 
@@ -78,6 +79,8 @@ class DfbDomainKnowledge
     on-the-rocks-pool-bar
     monsieur-paul-restaurant
     cool-wash-pizza
+    discovery-island-allergy-friendly-kiosk
+    zuris-sweets-shop
     )
   end
 end

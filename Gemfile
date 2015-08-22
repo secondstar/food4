@@ -46,6 +46,7 @@ group :development, :test do
   gem 'activerecord-nulldb-adapter'
   gem 'database_cleaner', '~> 1.3.0'
   gem 'travis', '~> 1.7.4'
+  gem 'awesome_print', :require => 'ap'
 end
 
 group :production do
