@@ -1,4 +1,4 @@
-class ZurisSweetsShopReviewScan
+class DfbZurisSweetsShopReviewScan
   def initialize(initial_scan)
     @initial_scan = initial_scan
   end
