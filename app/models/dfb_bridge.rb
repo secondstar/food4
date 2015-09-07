@@ -110,7 +110,8 @@ class DfbBridge
         "the-boathouse" => "boathouse",
         "starbucks-at-downtown-disney-west-side" => "starbucks-downtown-disney-west-side",
         "crepes-de-chefs-de-france" => "crepes-des-chefs-de-france",
-        "zuris-sweets-shop" => "zuris"
+        "zuris-sweets-shop" => "zuris",
+        "siestas-pool-par" => "siestas-cantina"
       }
   end
   def dfb_name_conversion_hash
@@ -203,7 +204,8 @@ class DfbBridge
           "boathouse" => "the-boathouse",
           "starbucks-downtown-disney-west-side" => "starbucks-at-downtown-disney-west-side",
           "crepes-des-chefs-de-france" => "crepes-de-chefs-de-france",
-          "zuris" => "zuris-sweets-shop"
+          "zuris" => "zuris-sweets-shop",
+          "siestas-cantina" => "siestas-pool-par"
           
           
       }
