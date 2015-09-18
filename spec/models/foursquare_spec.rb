@@ -39,8 +39,13 @@ describe Foursquare do
       subject.search_venues( "Casey's Corner").first[1][0][:location][:crossStreet].must_include 'Walt Disney World'
     end
     
-    it 'has \'Casey\'s Corner\' as its name' do
+    it 'has \'Casey\'s Corner\' as the name for its first venue' do
       subject.search_venues( "Casey's Corner").first[1].first[:name].must_equal "Casey's Corner"
+    end
+    
+    # Cheshire Cafe is the name in touringplans.com, but not foursquare.com & needs conversion
+    it 'has \'Cheshire Cafe\' as the name of its first venue' do
+      subject.search_venues("Cheshire Cafe").first[1].first[:name].must_equal "Cheshire Café"
     end
   end
 
@@ -54,7 +59,7 @@ describe Foursquare do
       subject.find_venue( "Casey's Corner").must_be_kind_of Hashie::Mash
     end
     
-    it 'has a name' do
+    it 'has the name \'Casey\'s Corner\'' do
       subject.find_venue("Casey's Corner").name.must_equal "Casey's Corner"
     end
     
@@ -69,7 +74,12 @@ describe Foursquare do
     it 'has a longitude' do
       subject.find_venue("Casey's Corner").location["lng"].must_equal -81.58150327616565
     end
-  end
-  
-  
+    
+    # Cheshire Cafe is the name in touringplans.com, but not foursquare.com & needs conversion
+    it 'has the name \'Cheshire Café\'' do
+      subject.find_venue("Cheshire Cafe").name.must_equal "Cheshire Café"
+    end
+
+
+  end  
 end

@@ -20,7 +20,8 @@ class Foursquare
   end
   
   def find_venue(query = "")
-    venues = search_venues(query).first[1].detect {|v| v[:name] == query}
+    query = _get_foursquare_venue_name(query)
+    venue = search_venues(query).first[1].detect {|v| v[:name] == query}
   end
   
   def search_venues(query = "")
@@ -31,13 +32,6 @@ class Foursquare
         )
   end
   
-  
-  def search_wdw_venues(query = "")
-    wdw_search = search_venues(query).first[1]
-    wdw_search.each do |venue|
-      
-    end
-  end
   private
   
   def client
@@ -45,6 +39,9 @@ class Foursquare
         :client_secret => params[:client_secret], 
         :api_version => params[:api_version])
   end
-  
+
+  def _get_foursquare_venue_name(query = "")
+    FoursquareBridge.new({:name=> query}).get_review_name
+  end
   
 end
