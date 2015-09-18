@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.6'
+ruby '2.2.2'
 # #ruby-gemset=wdwfood
 
 gem 'httparty', '~> 0.13.1' # pull json api data from other sites, better than just curl or Nokogiri
@@ -9,10 +9,13 @@ gem 'crack', '~> 0.4.2'  #parsing xml and json, might be needed for a Rails app
 gem 'retries', '~> 0.0.5' # Assists in pulling or pushing to flakey connections and api's
 gem 'resque', '~> 1.25.2' # http://rubygems.org/gems/resque
 gem 'nokogiri', '~> 1.6.2.1' # for scraping sites
+# foursquare api
+gem 'foursquare2', '~> 2.0.2'
+
 # gem 'whenever', '~> 0.9.2', :require => false # cron jobs for updating eatery data, including links to photos
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.1'
+gem 'rails', '4.2.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -35,7 +38,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  # gem 'spring'
   gem 'minitest'
   gem 'passenger'
   gem 'guard'
@@ -47,6 +50,7 @@ group :development, :test do
   gem 'database_cleaner', '~> 1.3.0'
   gem 'travis', '~> 1.7.4'
   gem 'awesome_print', :require => 'ap'
+  gem 'dotenv-rails', '~> 2.0.2'
 end
 
 group :production do
