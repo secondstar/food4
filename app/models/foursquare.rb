@@ -19,17 +19,22 @@ class Foursquare
     "i am foursquare"
   end
   
-  def find_venue(query = "")
+  def find_review(query = "")
     query = _get_foursquare_venue_name(query)
-    venue = search_venues(query).first[1].detect {|v| v[:name] == query}
+    venue = search_reviews(query).first[1].detect {|v| v[:name] == query}
   end
-  
-  def search_venues(query = "")
-    params_ll = "#{params[:center_lat]}, #{params[:center_lng]}"
-    venues = client.search_venues(:ll => params_ll, 
+    
+  def search_reviews(query = "")
+    reviews = client.search_venues(:ll => "#{params[:center_lat]}, #{params[:center_lng]}", 
         :query => query, 
         :radius => params[:search_radius]
         )
+    review = reviews
+  end
+
+  def yield_default_venue(query = "")
+    # venue = self.search_venues.first[1].first
+    search_reviews.first[1].first
   end
   
   private
