@@ -50,29 +50,31 @@ describe Foursquare do
   end
 
   describe '#find_review' do
+    let(:find_review) { subject.find_review( "Casey's Corner") }
+    
     # it 'works' do
     #   subject.find_venue( "Casey's Corner").must_equal "someting"
     #   # subject.search_venues( "Casey's Corner").first[1].detect {|v| v[:name] == "Casey's Corner"}
     #
     # end
     it 'is a kind of Hashie::Mash' do
-      subject.find_review( "Casey's Corner").must_be_kind_of Hashie::Mash
+      find_review.must_be_kind_of Hashie::Mash
     end
     
     it 'has the name \'Casey\'s Corner\'' do
-      subject.find_review("Casey's Corner").name.must_equal "Casey's Corner"
+      find_review.name.must_equal "Casey's Corner"
     end
     
     it 'has a cross street that contains "Walt Disney World"' do
-      subject.find_review("Casey's Corner").location[:crossStreet].must_include "Walt Disney World"
+      find_review.location[:crossStreet].must_include "Walt Disney World"
     end
     
     it 'has a latitude' do
-      subject.find_review("Casey's Corner").location["lat"].must_equal 28.417839714711597
+      find_review.location["lat"].must_equal 28.417839714711597
     end
 
     it 'has a longitude' do
-      subject.find_review("Casey's Corner").location["lng"].must_equal -81.58150327616565
+      find_review.location["lng"].must_equal -81.58150327616565
     end
     
     # Cheshire Cafe is the name in touringplans.com, but not foursquare.com & needs conversion
@@ -84,21 +86,27 @@ describe Foursquare do
 
   describe '#yield_default_venue' do
     let(:default_venue) { subject.yield_default_venue }
+    
     it 'is a kind of Hashie::Mash' do
       default_venue.must_be_kind_of Hashie::Mash
     end
     
-    # it 'has a cross street that contains "Walt Disney World"' do
-    #   subject.yield_default_venue.location[:crossStreet].must_include "Walt Disney World"
-    # end
-    #
+    it 'has a cross street that contains "Walt Disney World"' do
+      default_venue.location[:crossStreet].must_include "Walt Disney World"
+    end
+
     it 'has a latitude' do
-      subject.yield_default_venue.location["lat"].must_be :>, 28.3
+      default_venue.location["lat"].must_be :>, 28.3
     end
     #
     it 'has a longitude' do
-      subject.yield_default_venue.location["lng"].must_be :<, -81.5
+      default_venue.location["lng"].must_be :<, -81.5
     end
+    
+    it 'has "default venue" as its name' do
+      default_venue.name.must_equal "default venue"
+    end
+    
     
   end
 end

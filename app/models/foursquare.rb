@@ -34,7 +34,9 @@ class Foursquare
 
   def yield_default_venue(query = "")
     # venue = self.search_venues.first[1].first
-    search_reviews.first[1].first
+    default_venue = search_reviews(query).first[1].first
+    default_venue.name = "default venue"
+    default_venue
   end
   
   private
