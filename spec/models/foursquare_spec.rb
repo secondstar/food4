@@ -57,6 +57,7 @@ describe Foursquare do
     #   # subject.search_venues( "Casey's Corner").first[1].detect {|v| v[:name] == "Casey's Corner"}
     #
     # end
+
     it 'is a kind of Hashie::Mash' do
       found_review.must_be_kind_of Hashie::Mash
     end
@@ -101,24 +102,16 @@ describe Foursquare do
   end
 
   describe '#find_review using a name foursquare.com does _not_ know and FoursquareBridge does _not_ ' do
-    # Cheshire Cafe is the name in touringplans.com, but not foursquare.com & needs conversion
+    # Famous Dave is not a name in WDW.
     let(:query) { "Famous Dave" }
     let(:found_review) { subject.find_review(query) }
     
     # it 'does something' do
     #   found_review.must_equal "something"
     # end
-    
-    it 'has the name "default venue"' do
-      found_review.name.must_equal "default venue"
-    end
-    
-    it 'has a latitude' do
-      found_review.location["lat"].must_be :>, 28.3
-    end
-    #
-    it 'has a longitude' do
-      found_review.location["lng"].must_be :<, -81.5
+
+    it 'returns nil value' do
+      found_review.must_equal nil
     end
   end
   

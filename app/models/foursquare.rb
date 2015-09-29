@@ -20,10 +20,11 @@ class Foursquare
   end
   
   def find_review(query = "")
+    # if the eatery does not exist w/i WDW or the FoursquareBridge doesn't know it, you get nil value
     query                   = _get_foursquare_venue_name(query)
     review_search_results   = search_reviews(query).first[1]
     # review = review_search_results.first
-    review  = _detect_desired_review(review_search_results, query) || _create_default_review(review_search_results)
+    review  = _detect_desired_review(review_search_results, query)
   end
     
   def search_reviews(query = "")
