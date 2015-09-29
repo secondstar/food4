@@ -49,8 +49,8 @@ describe Foursquare do
     end
   end
 
-  describe '#find_review' do
-    let(:find_review) { subject.find_review( "Casey's Corner") }
+  describe '#find_review using a name foursquare.com knows' do
+    let(:found_review) { subject.find_review( "Casey's Corner") }
     
     # it 'works' do
     #   subject.find_venue( "Casey's Corner").must_equal "someting"
@@ -58,32 +58,70 @@ describe Foursquare do
     #
     # end
     it 'is a kind of Hashie::Mash' do
-      find_review.must_be_kind_of Hashie::Mash
+      found_review.must_be_kind_of Hashie::Mash
     end
     
     it 'has the name \'Casey\'s Corner\'' do
-      find_review.name.must_equal "Casey's Corner"
+      found_review.name.must_equal "Casey's Corner"
     end
     
     it 'has a cross street that contains "Walt Disney World"' do
-      find_review.location[:crossStreet].must_include "Walt Disney World"
+      found_review.location[:crossStreet].must_include "Walt Disney World"
     end
     
     it 'has a latitude' do
-      find_review.location["lat"].must_equal 28.417839714711597
+      found_review.location["lat"].must_equal 28.417839714711597
     end
 
     it 'has a longitude' do
-      find_review.location["lng"].must_equal -81.58150327616565
+      found_review.location["lng"].must_equal -81.58150327616565
     end
-    
-    # Cheshire Cafe is the name in touringplans.com, but not foursquare.com & needs conversion
-    it 'has the name \'Cheshire Café\'' do
-      subject.find_review("Cheshire Cafe").name.must_equal "Cheshire Café"
-    end
-
   end  
 
+  describe '#find_review using a name foursquare.com does _not_ know but FoursquareBridge does' do
+    # Cheshire Cafe is the name in touringplans.com, but not foursquare.com & needs conversion
+    let(:query) { "Cheshire Cafe" }
+    let(:found_review) { subject.find_review(query) }
+    
+    it 'has the name \'Cheshire Café\'' do
+      found_review.name.must_equal "Cheshire Café"
+    end
+    
+    it 'has a cross street that contains "Walt Disney World"' do
+      found_review.location[:crossStreet].must_include "Walt Disney World"
+    end
+    
+    it 'has a latitude' do
+      found_review.location["lat"].must_be :>, 28.3
+    end
+    #
+    it 'has a longitude' do
+      found_review.location["lng"].must_be :<, -81.5
+    end
+  end
+
+  describe '#find_review using a name foursquare.com does _not_ know and FoursquareBridge does _not_ ' do
+    # Cheshire Cafe is the name in touringplans.com, but not foursquare.com & needs conversion
+    let(:query) { "Famous Dave" }
+    let(:found_review) { subject.find_review(query) }
+    
+    # it 'does something' do
+    #   found_review.must_equal "something"
+    # end
+    
+    it 'has the name "default venue"' do
+      found_review.name.must_equal "default venue"
+    end
+    
+    it 'has a latitude' do
+      found_review.location["lat"].must_be :>, 28.3
+    end
+    #
+    it 'has a longitude' do
+      found_review.location["lng"].must_be :<, -81.5
+    end
+  end
+  
   describe '#yield_default_venue' do
     let(:default_venue) { subject.yield_default_venue }
     
@@ -107,6 +145,58 @@ describe Foursquare do
       default_venue.name.must_equal "default venue"
     end
     
-    
   end
+  
+  describe '#_detect_desired_review with good query' do
+    let(:query) { "Aloha Isle" }
+    let(:review_search_results) { subject.search_reviews(query).first[1] }
+    let(:detected_review) { subject._detect_desired_review(review_search_results, query) }
+    
+    it 'has the name "Aloha Isle"' do
+      detected_review.name.must_equal "Aloha Isle"
+    end
+    
+    it 'is a kind of Hashie::Mash' do
+      detected_review.must_be_kind_of Hashie::Mash
+    end
+    
+    it 'has a cross street that contains "Walt Disney World"' do
+      detected_review.location[:crossStreet].must_include "Walt Disney World"
+    end
+
+    it 'has a latitude' do
+      detected_review.location["lat"].must_be :>, 28.3
+    end
+    #
+    it 'has a longitude' do
+      detected_review.location["lng"].must_be :<, -81.5
+    end
+  end
+
+  describe '#_create_default_review' do
+    let(:query) { "Cheshire Cafe" }
+    let(:review_search_results) { subject.search_reviews(query).first[1] }
+    let(:created_default_review) { subject._create_default_review(review_search_results) }
+    
+    it 'has the name "Aloha Isle"' do
+      created_default_review.name.must_equal "default venue"
+    end
+    
+    it 'is a kind of Hashie::Mash' do
+      created_default_review.must_be_kind_of Hashie::Mash
+    end
+    
+    it 'has a cross street that contains "Walt Disney World"' do
+      created_default_review.location[:crossStreet].must_include "Walt Disney World"
+    end
+
+    it 'has a latitude' do
+      created_default_review.location["lat"].must_be :>, 28.3
+    end
+
+    it 'has a longitude' do
+      created_default_review.location["lng"].must_be :<, -81.5
+    end
+  end
+
 end
