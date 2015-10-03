@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141107155154) do
+ActiveRecord::Schema.define(version: 20151003023648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "addendums", force: true do |t|
+  create_table "addendums", force: :cascade do |t|
     t.string   "source"
     t.string   "href"
     t.text     "description"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20141107155154) do
     t.datetime "archived_at"
   end
 
-  create_table "disneyfoodblog_com_reviews", force: true do |t|
+  create_table "disneyfoodblog_com_reviews", force: :cascade do |t|
     t.string   "name"
     t.string   "permalink"
     t.datetime "archived_at"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20141107155154) do
     t.text     "special_treats"
   end
 
-  create_table "districts", force: true do |t|
+  create_table "districts", force: :cascade do |t|
     t.string   "name"
     t.string   "permalink"
     t.boolean  "is_park"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20141107155154) do
   add_index "districts", ["is_park"], name: "index_districts_on_is_park", using: :btree
   add_index "districts", ["name"], name: "index_districts_on_name", using: :btree
 
-  create_table "eateries", force: true do |t|
+  create_table "eateries", force: :cascade do |t|
     t.string   "name"
     t.string   "permalink"
     t.datetime "published_at"
@@ -133,7 +133,20 @@ ActiveRecord::Schema.define(version: 20141107155154) do
     t.string   "dinable_type"
   end
 
-  create_table "photos", force: true do |t|
+  create_table "foursquare_reviews", force: :cascade do |t|
+    t.string   "foursquare_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+    t.string   "address"
+    t.string   "cross_street"
+    t.string   "lat"
+    t.string   "lng"
+    t.string   "alt_venues"
+    t.string   "searched_for"
+  end
+
+  create_table "photos", force: :cascade do |t|
     t.text     "url"
     t.string   "farm"
     t.string   "server"
@@ -150,7 +163,7 @@ ActiveRecord::Schema.define(version: 20141107155154) do
 
   add_index "photos", ["photogenic_id", "photogenic_type"], name: "index_photos_on_photogenic_id_and_photogenic_type", using: :btree
 
-  create_table "snapshots", force: true do |t|
+  create_table "snapshots", force: :cascade do |t|
     t.integer  "eatery_id"
     t.string   "review_type"
     t.integer  "review_id"
@@ -163,8 +176,9 @@ ActiveRecord::Schema.define(version: 20141107155154) do
 
   add_index "snapshots", ["eatery_id"], name: "index_snapshots_on_eatery_id", using: :btree
   add_index "snapshots", ["review_id"], name: "index_snapshots_on_review_id", using: :btree
+  add_index "snapshots", ["review_permalink"], name: "index_snapshots_on_review_permalink", using: :btree
 
-  create_table "touring_plans_com_reviews", force: true do |t|
+  create_table "touring_plans_com_reviews", force: :cascade do |t|
     t.string   "name"
     t.string   "permalink"
     t.datetime "created_at"

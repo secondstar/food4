@@ -27,7 +27,7 @@ guard :minitest do
   # watch(%r{^app/models/(.*)\.rb$})      { |m| "test/unit/#{m[1]}_test.rb" }
 end
 
-guard 'passenger',:cli => '--daemonize --port 3008', :notification => true do
+guard 'passenger',:cli => '--daemonize --port 3009', :notification => true do
   watch(/^lib\/.*\.rb$/)
   watch(/^config\/.*\.rb$/)
 end
