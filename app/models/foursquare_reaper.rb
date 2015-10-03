@@ -45,42 +45,21 @@ def _reformat_foursquare_venue_to_foursquare_review(venue)
   
   def reap_park(park_name="")
     ## ! needs better testing ##
-    
     districts =  fetch_parks(park_name)
-    puts "** districts #{districts}"
-    districts = Array(districts)
-    @harvest = Hash.new
-    # harvest_hash = Hash.new
-    districts.each do |district|
-      puts "-- #{district.name}"
-      district_name = district.name
-      @harvested_eateries = []
-    #   #collect names of eateries per each park
-      eatery_names_array = district.eateries.map { |eatery| eatery.name }
-    #   # seach for each eatery in 4sq by name
-      eatery_names_array.each do |eatery_name|
-        puts "==========="
-        puts "current_eatery: #{eatery_name}"
-        @harvested_eateries << eatery_name
-        # foursquare_venue  = fetch_foursquare_venue(eatery_name).first
-        foursquare_venue  = fetch_foursquare_venue(eatery_name)
-        
-        refomatted        = _reformat_foursquare_venue_to_foursquare_review(foursquare_venue.first)
-        refomatted[:alt_venues] = foursquare_venue[1].join(", ")
-        refomatted[:searched_for] = eatery_name
-        puts "** new entry #{refomatted}"
-        fsq_review        = new_fsq_review(refomatted)
-        add_entry(fsq_review)
-      end
-      @harvest[district_name] = @harvested_eateries
-      # harvest_hash[district_name] = harvested_eateries
-    end
-    @harvest
+    reap(districts)
   end
   
   def reap_disney_springs
     districts = fetch_disney_springs
+    reap(districts)
+  end
+  
+  def reap_resort(resort_name="")
+    districts = fetch_resorts(resort_name)
+    reap(districts)
+  end
 
+  def reap(districts)
     puts "** districts #{districts}"
     districts = Array(districts)
     @harvest = Hash.new
@@ -112,38 +91,6 @@ def _reformat_foursquare_venue_to_foursquare_review(venue)
     @harvest
   end
   
-  def reap_resort(resort_name="")
-    districts = fetch_resorts(resort_name)
-    districts = Array(districts)
-    @harvest = Hash.new
-    # harvest_hash = Hash.new
-    districts.each do |district|
-      puts "-- #{district.name}"
-      district_name = district.name
-      @harvested_eateries = []
-    #   #collect names of eateries per each park
-      eatery_names_array = district.eateries.map { |eatery| eatery.name }
-    #   # seach for each eatery in 4sq by name
-      eatery_names_array.each do |eatery_name|
-        puts "==========="
-        puts "current_eatery: #{eatery_name}"
-        @harvested_eateries << eatery_name
-        # foursquare_venue  = fetch_foursquare_venue(eatery_name).first
-        foursquare_venue  = fetch_foursquare_venue(eatery_name)
-        
-        refomatted        = _reformat_foursquare_venue_to_foursquare_review(foursquare_venue.first)
-        refomatted[:alt_venues] = foursquare_venue[1].join(", ")
-        refomatted[:searched_for] = eatery_name
-        puts "** new entry #{refomatted}"
-        fsq_review        = new_fsq_review(refomatted)
-        add_entry(fsq_review)
-      end
-      @harvest[district_name] = @harvested_eateries
-      # harvest_hash[district_name] = harvested_eateries
-    end
-    @harvest
-  end
-
   def fetch_parks(park_name="")
     parks = District.select(:name, :id).find_by_name(park_name) || District.select(:id, :name).parks
   end
@@ -160,7 +107,6 @@ def _reformat_foursquare_venue_to_foursquare_review(venue)
      park_names = Array(parks.map { |park| park.name })
   end
 
-  
   private
   
   def _fetch_entries
