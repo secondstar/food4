@@ -41,82 +41,27 @@ describe FoursquareReaper do
       entry = stub!
       mock(entry).save
       subject.add_entry(entry)
+    end
+  end
 
+  describe '#reap_park for "Magic Kingdom"' do
+    ## test is somehow broken.  Code works 
+    subject { FoursquareReaper.new(->{entries}) }
+    let(:park) { "Magic Kingdom" }
+    let(:reaper) { subject.reap_park(park) }
+
+
+    it 'does something' do
+      reaper.must_equal "something"
+    end
+
+    it 'is a kind of Hash' do
+      reaper.must_be_kind_of Array
+    end
+
+    it 'is one element long' do
+      reaper.length.must_equal 2
     end
   end
   
-  # describe "#collect_review" do
-  #   subject { FoursquareReaper.new.collect_review }
-  #
-  #   it 'is a Enumerable' do
-  #     subject.must_be_kind_of Enumerable
-  #   end
-  #
-  #   it "returns 1 result" do
-  #     subject.length.must_equal 1
-  #   end
-  #
-  #   it 'has the first result as a hash' do
-  #     subject.first.must_be_kind_of Hash
-  #
-  #   end
-  #
-  #   it 'lists 242 items in the hash' do
-  #     subject.first.length.must_equal 246
-  #   end
-  #
-  # end
-  #
-  # describe "#scan_review_details" do
-  #   let(:permalink) {"cheshire-cafe"}
-  #   let(:eatery_name) {"Cheshire Cafe"}
-  #
-  #   subject { DfbReaper.scan_review_details(permalink)}
-  #   it "is one element in an array" do
-  #     subject.size.must_equal 1
-  #   end
-  #
-  #   it 'has a hash as the first element' do
-  #     subject[0].must_be_kind_of Hash
-  #   end
-  #
-  #   it 'has a hash with 11 elements' do
-  #     subject[0].length.must_equal 12
-  #   end
-  # end
-  #
-  # describe '#archive_new_review' do
-  #   let(:new_review_name) {"The Drop Off Pool Bar"}
-  #   let(:permalink) {"the-drop-off-pool-bar"}
-  #   subject { DfbReaper.archive_new_review(new_review_name, permalink) }
-  #
-  #   # it 'works' do
-  #   #   subject.must_equal "something"
-  #   # end
-  #
-  #   it 'is an Array' do
-  #     subject.must_be_kind_of Array
-  #   end
-  #
-  #   it 'is an Array that contains a Hash' do
-  #     subject.first.must_be_kind_of Hash
-  #   end
-  #
-  #   it 'has 4 elements in in the first Hash' do
-  #     subject.first.length.must_equal 4
-  #   end
-  # end
-  
-  # describe '#list_reviews_to_skip' do
-  #   subject { DfbReaper.list_reviews_to_skip }
-  #
-  #   it 'is an Array' do
-  #     subject.must_be_kind_of Array
-  #   end
-  #
-  #
-  #   it 'has at least one element' do
-  #     subject.size.must_be :>=, 1
-  #   end
-  # end
 end

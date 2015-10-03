@@ -74,7 +74,7 @@ describe FoursquareGuaranteedVenue do
 
   describe '#find WDW eatery that foursquare.com spells differently and FoursquareBridge knows' do
     let(:venue_search) { subject.find("Cheshire Cafe") }
-    
+
     # it 'does something' do
     #   venue_search.must_equal "something"
     # end

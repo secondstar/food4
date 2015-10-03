@@ -25,6 +25,13 @@ class Foursquare
     review_search_results   = search_reviews(query).first[1]
     # review = review_search_results.first
     review  = _detect_desired_review(review_search_results, query)
+    alternate_reviews = review_search_results#
+    @alt_names = []
+    alternate_reviews.each do |review|
+      @alt_names << review.name
+    end
+    # @alt_names
+    return [review, @alt_names]
   end
     
   def search_reviews(query = "")

@@ -59,23 +59,36 @@ describe Foursquare do
     # end
 
     it 'is a kind of Hashie::Mash' do
-      found_review.must_be_kind_of Hashie::Mash
+      found_review.first.must_be_kind_of Hashie::Mash
     end
     
     it 'has the name \'Casey\'s Corner\'' do
-      found_review.name.must_equal "Casey's Corner"
+      found_review.first.name.must_equal "Casey's Corner"
     end
     
     it 'has a cross street that contains "Walt Disney World"' do
-      found_review.location[:crossStreet].must_include "Walt Disney World"
+      found_review.first.location[:crossStreet].must_include "Walt Disney World"
     end
     
     it 'has a latitude' do
-      found_review.location["lat"].must_equal 28.417839714711597
+      found_review.first.location["lat"].must_equal 28.417839714711597
     end
 
     it 'has a longitude' do
-      found_review.location["lng"].must_equal -81.58150327616565
+      found_review.first.location["lng"].must_equal -81.58150327616565
+    end
+    
+    ### altnerate names in the search
+    it 'has an array as the second element' do
+      found_review[1].must_be_kind_of Array
+    end
+    
+    it 'has a string for the first element of the array of alternate names' do
+      found_review[1].first.must_be_kind_of String
+    end
+    
+    it 'has an alternative name' do
+      found_review[1].first.length.must_be  :>, 1
     end
   end  
 
@@ -85,19 +98,19 @@ describe Foursquare do
     let(:found_review) { subject.find_review(query) }
     
     it 'has the name \'Cheshire Café\'' do
-      found_review.name.must_equal "Cheshire Café"
+      found_review.first.name.must_equal "Cheshire Café"
     end
     
     it 'has a cross street that contains "Walt Disney World"' do
-      found_review.location[:crossStreet].must_include "Walt Disney World"
+      found_review.first.location[:crossStreet].must_include "Walt Disney World"
     end
     
     it 'has a latitude' do
-      found_review.location["lat"].must_be :>, 28.3
+      found_review.first.location["lat"].must_be :>, 28.3
     end
     #
     it 'has a longitude' do
-      found_review.location["lng"].must_be :<, -81.5
+      found_review.first.location["lng"].must_be :<, -81.5
     end
   end
 
@@ -111,7 +124,7 @@ describe Foursquare do
     # end
 
     it 'returns nil value' do
-      found_review.must_equal nil
+      found_review.first.must_equal nil
     end
   end
   
