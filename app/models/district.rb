@@ -24,6 +24,10 @@ class District < ActiveRecord::Base
     where(is_park: true)
   end
   
+  def self.disney_springs
+    where("name = ?", ("Downtown Disney" || "Disney Springs"))
+  end
+  
   def publish(clock=DateTime)
     return false unless valid?
     self.published_at = clock.now

@@ -20,8 +20,18 @@ class Foursquare
   end
   
   def find_review(query = "")
-    query = _get_foursquare_venue_name(query)
-    venue = search_reviews(query).first[1].detect {|v| v[:name] == query}
+    # if the eatery does not exist w/i WDW or the FoursquareBridge doesn't know it, you get nil value
+    query                   = _get_foursquare_venue_name(query)
+    review_search_results   = search_reviews(query).first[1]
+    # review = review_search_results.first
+    review  = _detect_desired_review(review_search_results, query)
+    alternate_reviews = review_search_results#
+    @alt_names = []
+    alternate_reviews.each do |review|
+      @alt_names << review.name
+    end
+    # @alt_names
+    return [review, @alt_names]
   end
     
   def search_reviews(query = "")
@@ -32,13 +42,23 @@ class Foursquare
     review = reviews
   end
 
-  def yield_default_venue(query = "")
+  def yield_default_venue
     # venue = self.search_venues.first[1].first
     default_venue = search_reviews.first[1].first
     default_venue.name = "default venue"
     default_venue
   end
   
+  def _detect_desired_review(review_search_results = search_reviews.first[1], query = "")
+    review = review_search_results.detect {|v| v[:name] == query}
+    
+  end
+  
+  def _create_default_review(review_search_results)
+    review = review_search_results.first
+    review.name = "default venue"
+    review
+  end
   private
   
   def client
