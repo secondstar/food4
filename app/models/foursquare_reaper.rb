@@ -50,7 +50,7 @@ def _reformat_foursquare_venue_to_foursquare_review(venue)
     ## ! needs better testing ##
     districts =  fetch_parks(park_name)
     harvest = reap(districts)
-    districts
+    # districts
   end
   
   def reap_disney_springs
@@ -80,12 +80,12 @@ def _reformat_foursquare_venue_to_foursquare_review(venue)
         puts "==========="
         puts "current_eatery: #{eatery.name}"
         @harvested_eateries << eatery.name
-        reap_eatery(eatery)
+        reap_eatery(eatery.id, eatery.name)
       end
       @harvest[district_name] = @harvested_eateries
       # harvest_hash[district_name] = harvested_eateries
     end
-    @harvest
+    return @harvest
   end
   
   def fetch_parks(park_name="")
