@@ -7,7 +7,7 @@ class CreateSnapshots < ActiveRecord::Migration
       t.text       :review_permalink, index: true
       t.boolean    :review_permalink_is_different_than_eatery_permalink, :default => false, :null => false
 
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

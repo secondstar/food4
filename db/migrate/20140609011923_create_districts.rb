@@ -8,7 +8,7 @@ class CreateDistricts < ActiveRecord::Migration
       t.string  :photo_url
       t.string  :flickr_search_term
 
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

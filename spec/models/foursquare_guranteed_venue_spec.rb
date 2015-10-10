@@ -4,23 +4,25 @@ require_relative '../../app/models/foursquare_guaranteed_venue.rb'
 
 
 describe FoursquareGuaranteedVenue do
-  subject { FoursquareGuaranteedVenue }
+  subject { FoursquareGuaranteedVenue.find("unknown venue") }
 
   describe '#find("unknown venue")' do
-    let(:venue_search) { subject.find("unknown venue") }
+    venue_name = "unknown venue"
+    subject { FoursquareGuaranteedVenue.find("unknown venue") }
+    let(:venue_search) { subject.first }
     
     # it 'does something' do
-    #   venue_search.must_equal "something"
+    #   subject.must_equal "something"
     # end
     
     it 'has a name equal to "default venue"' do
       venue_search.name.must_equal "default venue"
     end
-    
+
     it 'has a string as an ID' do
       venue_search.id.must_be_kind_of String
     end
-    
+
     it 'has a string as an address' do
       venue_search.location.formattedAddress.must_be_kind_of Array
     end
@@ -40,20 +42,23 @@ describe FoursquareGuaranteedVenue do
   end
 
   describe '#find eatery that foursquare.com knows of in WDW' do
-    let(:venue_search) { subject.find("Aloha Isle") }
+    venue_name = "Aloha Isle"
+    subject { FoursquareGuaranteedVenue.find(venue_name) }
+    let(:venue_search) { subject.first }
     
     # it 'does something' do
-    #   venue_search.must_equal "something"
+    #   subject.first.must_equal "something"
     # end
     
     it 'has a name equal to "default venue"' do
       venue_search.name.must_equal "Aloha Isle"
+      # subject.name.must_equal "Aloha Isle"
     end
-    
+
     it 'has a string as an ID' do
       venue_search.id.must_be_kind_of String
     end
-    
+
     it 'has a string as an address' do
       venue_search.location.formattedAddress.must_be_kind_of Array
     end
@@ -73,20 +78,21 @@ describe FoursquareGuaranteedVenue do
   end
 
   describe '#find WDW eatery that foursquare.com spells differently and FoursquareBridge knows' do
-    let(:venue_search) { subject.find("Cheshire Cafe") }
-
+    venue_name = "Cheshire Cafe"
+    subject { FoursquareGuaranteedVenue.find(venue_name) }
+    let(:venue_search) { subject.first }
     # it 'does something' do
-    #   venue_search.must_equal "something"
+    #   subject.must_equal "something"
     # end
     
     it 'has a name equal to "default venue"' do
       venue_search.name.must_equal "Cheshire Café"
     end
-    
+
     it 'has a string as an ID' do
       venue_search.id.must_be_kind_of String
     end
-    
+
     it 'has a string as an address' do
       venue_search.location.formattedAddress.must_be_kind_of Array
     end

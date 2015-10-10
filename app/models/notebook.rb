@@ -1,6 +1,6 @@
 class Notebook
   attr_reader :entries
-  attr_writer :eatery_maker, :district_maker, :tpcr_maker, :dfb_review_maker,  :snapshot_maker, :photo_maker
+  attr_writer :eatery_maker, :district_maker, :tpcr_maker, :dfb_review_maker,  :snapshot_maker, :photo_maker, :foursquare_review_maker
   
   def initialize(entry_fetcher=Eatery.public_method(:most_recent))
     @entry_fetcher = entry_fetcher
@@ -41,6 +41,13 @@ class Notebook
       addendum.notebook = self
     end
   end
+
+  def new_foursquare_review(*args)
+    foursquare_review_maker.call(*args).tap do |foursquare_review|
+      foursquare_review.notebook = self
+      # return foursquare_review
+    end
+  end
   
   def new_eatery(*args)
     eatery_maker.call(*args).tap do |eatery|
@@ -59,7 +66,7 @@ class Notebook
       photo.notebook = self
     end
   end
-  
+    
   def find_or_initialize_district(*args)
     district_maker.call(*args).tap do |d|
       d.notebook = self
@@ -103,6 +110,10 @@ class Notebook
   
   def addendum_maker
     @addendum_maker ||= Addendum.public_method(:new)
+  end
+
+  def foursquare_review_maker
+    @foursquare_review_maker ||= FoursquareReview.public_method(:new)
   end
   
 end

@@ -7,7 +7,7 @@ class CreateAddendums < ActiveRecord::Migration
       t.string :category #blogging, tip, affinity
       t.references :portrayed, polymorphic: true
 
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

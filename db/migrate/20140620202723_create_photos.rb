@@ -10,7 +10,7 @@ class CreatePhotos < ActiveRecord::Migration
       t.string :flickr_id
       t.string :title
 
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

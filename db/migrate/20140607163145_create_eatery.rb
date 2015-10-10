@@ -5,7 +5,7 @@ class CreateEatery < ActiveRecord::Migration
       t.string :permalink
       t.datetime :published_at
       
-      t.timestamps
+      t.timestamps  null: true
     end
   end
 end
