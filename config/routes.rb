@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # resources :welcome
   get 'notebook/index'
 
-  resources :districts, :eateries
+  resources :districts, :eateries, :welcome
   
   
   # The priority is based upon order of creation: first created -> highest priority.
