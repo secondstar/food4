@@ -1,12 +1,9 @@
 Rails.application.routes.draw do
-
-  get 'welcome/index'
-  get 'welcome/blog'
-  # resources :welcome
   get 'notebook/index'
 
   resources :districts, :eateries, :welcome
-  
+  resources :welcome, only: [:index, :new]
+  resources :explore, only: [:index, :show]
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
