@@ -81,7 +81,7 @@ class TouringPlansComFeed
   
   # --- Menus at TouringPlans.com --- #
   def get_menu_details_by_permalink
-    # http://touringplans.com/magic-kingdom/dining/aloha-isle/menus/all-day-menu.json
+    # http://touringplans.com/magic-kingdom/dining/aloha-isle-refreshments/menus/all-day-menu.json
     # http://touringplans.com/walt-disney-world/dining/boma-flavors-of-africa/menus/breakfast.json
     link = construct_menu_permalink
     @menu = TouringPlansComFeed.get(link).parsed_response

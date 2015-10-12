@@ -21,8 +21,8 @@ describe TouringPlansComFeed do
       subject.must_be_kind_of Hash
     end
 
-    it "returns 45 items" do
-      subject.length.must_equal 45
+    it "returns more than 40 items" do
+      subject.length.must_be :>, 40
     end
     
     it 'has a permalink' do
