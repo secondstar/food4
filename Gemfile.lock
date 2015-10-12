@@ -156,6 +156,10 @@ GEM
       rack
       rake (>= 0.8.1)
     pg (0.18.3)
+    pg_search (1.0.5)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
+      arel
     pry (0.9.12.6)
       coderay (~> 1.0)
       method_source (~> 0.8)
@@ -300,6 +304,7 @@ DEPENDENCIES
   nokogiri (~> 1.6.2.1)
   passenger
   pg
+  pg_search (~> 1.0.5)
   rails (= 4.2.0)
   rails-assets-bootstrap!
   rails-assets-jquery!

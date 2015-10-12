@@ -1,7 +1,6 @@
 class ExploreController < ApplicationController
   def index
-    @eateries = Notebook.new.entries.first(10)
-    @reviews  = FoursquareReview.take(10)
+    @eateries = Notebook.new.entries.search_by_full_name(params[:query])
     @geojson = Array.new
 
     @eateries.each do |eatery|

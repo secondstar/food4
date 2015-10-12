@@ -2,6 +2,10 @@ require 'date'
 require 'active_record'
 
 class Eatery < ActiveRecord::Base
+  include PgSearch
+  ## scopes
+  pg_search_scope :search_by_full_name, :against => [:name, :type_of_food]
+  
   validates :name, :presence => true
   belongs_to :district
     
@@ -10,6 +14,8 @@ class Eatery < ActiveRecord::Base
   # has_many :reviews, :through => :snapshots  # this relationship should be more like in http://stackoverflow.com/questions/17541277/rails-has-many-through-aliasing-with-source-and-source-type-for-multiple-types and in evernote
   
   attr_accessor :notebook
+  
+  
   
   def self.most_recent
     all
