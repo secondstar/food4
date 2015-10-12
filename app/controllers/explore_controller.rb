@@ -4,12 +4,13 @@ class ExploreController < ApplicationController
     @reviews  = FoursquareReview.take(10)
     @geojson = Array.new
 
-    @reviews.each do |eatery|
+    @eateries.each do |eatery|
+      foursquare_review = eatery.snapshots.foursquare.first.review
       @geojson << {
         type: 'Feature',
         geometry: {
           type: 'Point',
-          coordinates: [eatery.lng, eatery.lat]
+          coordinates: [foursquare_review.lng, foursquare_review.lat]
         },
         properties: {
           name: eatery.name,

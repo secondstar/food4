@@ -136,6 +136,7 @@ https://www.mapbox.com/mapbox.js/example/v1.0.0/listing-markers/ ## show all mar
 
  -->
 <script type="text/javascript">
+    L.mapbox.accessToken = 'pk.eyJ1IjoiY2FwdHByb3RvbiIsImEiOiI3cDFLWWRnIn0.guU68dUaxKCX_MPrZHAesQ';
     var mapboxTiles = L.tileLayer('https://{s}.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png', {
         attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
     });
@@ -145,12 +146,19 @@ https://www.mapbox.com/mapbox.js/example/v1.0.0/listing-markers/ ## show all mar
         .addLayer(mapboxTiles)
         .setView([28.391, -81.55], 13);
 
-    
-      $(document).on("ready", function() {
-          L.mapbox.accessToken = 'pk.eyJ1IjoiY2FwdHByb3RvbiIsImEiOiI3cDFLWWRnIn0.guU68dUaxKCX_MPrZHAesQ';
-      var features = L.mapbox.featureLayer()
-          features.loadURL('/explore.json')
-          features.addTo(map);
-        });
 
+        // Use the loadURL feature to request the .geojson file
+        // inititally.
+        var venues = L.mapbox.featureLayer().loadURL('/explore.json');
+        var geojson = [];
+
+      venues.on('ready', function(l) {
+              venues.eachLayer(function(l) {
+                  var props = l.feature.properties;
+                  props['marker-color'] = '#f86767';
+                  props['title'] = props['name'];
+                  geojson.push(l.feature);
+                 });
+      venues.setGeoJSON(geojson).addTo(map);
+      });
 </script>
