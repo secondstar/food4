@@ -150,7 +150,9 @@ https://www.mapbox.com/mapbox.js/example/v1.0.0/listing-markers/ ## show all mar
 
         // Use the loadURL feature to request the .geojson file
         // inititally.
-        var venues = L.mapbox.featureLayer().loadURL('/explore.json');
+        var queryString = window.location.search;
+        json_url        = "/explore.json" + queryString
+        var venues = L.mapbox.featureLayer().loadURL(json_url);
         var geojson = [];
 
       venues.on('ready', function(l) {
