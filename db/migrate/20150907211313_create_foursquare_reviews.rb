@@ -3,7 +3,7 @@ class CreateFoursquareReviews < ActiveRecord::Migration
     create_table :foursquare_reviews do |t|
       t.string :foursquare_id
 
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

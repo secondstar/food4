@@ -5,7 +5,7 @@ class CreateDisneyfoodblogComReviews < ActiveRecord::Migration
       t.string :permalink
       t.datetime :archived_at
 
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

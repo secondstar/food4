@@ -22,6 +22,10 @@ class Snapshot < ActiveRecord::Base
     where(review_type: "DisneyfoodblogComReview").order("published_at DESC")
   end
   
+  def self.foursquare
+    where(review_type: "FoursquareReview").order("published_at DESC")
+  end
+  
   def publish(clock=DateTime)
     return false unless valid?
     self.published_at = clock.now

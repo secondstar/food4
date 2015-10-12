@@ -24,7 +24,7 @@ describe DfbReaper do
     end
     
     it 'lists 246 items in the hash' do
-      subject.first.length.must_equal 246
+      subject.first.length.must_be :>, 246
     end
 
   end

@@ -7,7 +7,7 @@ class FoursquareReaper
   attr_reader :entries
   attr_writer :fsq_review_source
 
-  def initialize(entry_fetcher = FoursquareReview.public_method(:all))
+  def initialize(entry_fetcher = FoursquareReview.public_method(:most_recent))
     @entry_fetcher = entry_fetcher
     # @params = params
     # @entries  = @params[:entries]
@@ -40,13 +40,17 @@ class FoursquareReaper
 def _reformat_foursquare_venue_to_foursquare_review(venue)
     review_hash = {foursquare_id: venue.id, name: venue.name, address: venue.location.address, 
       cross_street: venue.location.crossStreet, lat: venue.location.lat, lng: venue.location.lng}
-
+  end
+  
+  def archive(eatery_id, foursquare_review_attrs)
+    FoursquareReviewArchiver.new(eatery_id, foursquare_review_attrs).store
   end
   
   def reap_park(park_name="")
     ## ! needs better testing ##
     districts =  fetch_parks(park_name)
-    reap(districts)
+    harvest = reap(districts)
+    # districts
   end
   
   def reap_disney_springs
@@ -62,33 +66,26 @@ def _reformat_foursquare_venue_to_foursquare_review(venue)
   def reap(districts)
     puts "** districts #{districts}"
     districts = Array(districts)
+    # Initialize what will be shown to user at the end of the method
     @harvest = Hash.new
-    # harvest_hash = Hash.new
+    # loop through given districts
     districts.each do |district|
       puts "-- #{district.name}"
       district_name = district.name
       @harvested_eateries = []
-    #   #collect names of eateries per each park
-      eatery_names_array = district.eateries.map { |eatery| eatery.name }
+    #   #collect names of eateries per each district
+      eatery_ids_and_names = district.eateries.select(:id, :name)
     #   # seach for each eatery in 4sq by name
-      eatery_names_array.each do |eatery_name|
+      eatery_ids_and_names.each do |eatery|
         puts "==========="
-        puts "current_eatery: #{eatery_name}"
-        @harvested_eateries << eatery_name
-        # foursquare_venue  = fetch_foursquare_venue(eatery_name).first
-        foursquare_venue  = fetch_foursquare_venue(eatery_name)
-        
-        refomatted        = _reformat_foursquare_venue_to_foursquare_review(foursquare_venue.first)
-        refomatted[:alt_venues] = foursquare_venue[1].join(", ")
-        refomatted[:searched_for] = eatery_name
-        puts "** new entry #{refomatted}"
-        fsq_review        = new_fsq_review(refomatted)
-        add_entry(fsq_review)
+        puts "current_eatery: #{eatery.name}"
+        @harvested_eateries << eatery.name
+        reap_eatery(eatery.id, eatery.name)
       end
       @harvest[district_name] = @harvested_eateries
       # harvest_hash[district_name] = harvested_eateries
     end
-    @harvest
+    return @harvest
   end
   
   def fetch_parks(park_name="")
@@ -102,6 +99,16 @@ def _reformat_foursquare_venue_to_foursquare_review(venue)
     resorts = District.select(:id, :name).find_by_name(resort_name) || District.select(:id, :name).resorts
   end
   
+  def reap_eatery(eatery_id, eatery_name) # eatery is different than entry, just a reminder
+    foursquare_venue  = fetch_foursquare_venue(eatery_name)
+
+    reformatted        = _reformat_foursquare_venue_to_foursquare_review(foursquare_venue.first)
+    reformatted[:alt_venues] = foursquare_venue[1].join(", ")
+    reformatted[:searched_for] = eatery_name
+    puts "** new entry, #{eatery_id} #{reformatted}"
+    archive(eatery_id, reformatted)
+  end
+
   def _list_park_names
      parks = District.where(:is_park => true)
      park_names = Array(parks.map { |park| park.name })

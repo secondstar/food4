@@ -16,8 +16,12 @@ gem 'foursquare2', '~> 2.0.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
+
 # Use postgresql as the database for Active Record
 gem 'pg'
+# Speed up Postgres full-text search
+gem 'pg_search', '~> 1.0.5'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -39,7 +43,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   # gem 'spring'
-  gem 'minitest'
+  # gem 'minitest'
+  gem 'minitest-spec-rails'
   gem 'passenger'
   gem 'guard'
   gem 'guard-minitest'
@@ -69,3 +74,10 @@ gem 'newrelic_rpm'
 
 # app improvement
 # gem 'skylight', '~> 0.5.0'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-jquery'
+  gem 'rails-assets-bootstrap'
+  gem 'rails-assets-leaflet'
+end
+

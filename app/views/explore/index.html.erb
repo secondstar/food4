@@ -1,0 +1,167 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Brand</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Near… <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Magic Kingdom</a></li>
+            <li><a href="#">Animal Kingdom</a></li>
+            <li><a href="#">Resorts</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+      <%= form_tag('/explore', :class =>"navbar-form navbar-left", :role => "search", method: :get) do -%>
+        <div class="form-group">
+          <%= text_field_tag :query, params[:query],  :class =>"form-control", placeholder: "Search" %>
+          
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      <% end %>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav> 
+
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+
+<script>
+// L.mapbox.accessToken = 'pk.eyJ1IjoiY2FwdHByb3RvbiIsImEiOiI3cDFLWWRnIn0.guU68dUaxKCX_MPrZHAesQ';
+// var map = L.mapbox.map('map', 'mapbox.streets')
+//     .setView([40, -74.50], 9);
+</script>
+
+    <div class="container">
+
+      <div class="blog-header"></div>
+
+      <div class="row">
+
+
+        <div class="col-sm-5">
+          <ol class="list-group">
+	  <%= render	:partial => "list_group_item", 
+					collection: @eateries %>
+          </ol>
+          
+        </div><!-- /.blog-sidebar -->
+<!--finish  -->
+        <div class="col-sm-7 blog-main" style="height: 500px">
+			<div id="map">
+            </div>
+<!--start pop-up modal -->
+<!-- Modal HTML -->
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Content will be loaded here from "remote.php" file -->
+        </div>
+    </div>
+</div>
+            
+<!--finish pop-up modal -->
+          <div class="blog-post">
+
+          </div><!-- /.blog-post -->
+
+          <div class="blog-post">
+
+          </div><!-- /.blog-post -->
+
+          <div class="blog-post">
+
+          </div><!-- /.blog-post -->
+
+          <nav>
+            <ul class="pager">
+              <li><a href="#">Previous</a></li>
+              <li><a href="#">Next</a></li>
+            </ul>
+          </nav>
+
+        </div><!-- /.blog-main -->
+<!--finish -->
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <footer class="blog-footer">
+      <p>Footer goes here.</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </footer>
+
+<script src='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.css' rel='stylesheet' />
+<!-- See also:
+http://tristen.ca/presentations/webmaps-and-your-data/#20 **Especially this one
+http://www.bryceholcomb.com/2015/02/10/mapbox-and-rails/
+https://github.com/bryceholcomb/rider_demand/blob/master/app/assets/javascripts/predictor.js
+http://alistapart.com/article/hack-your-maps
+http://vladigleba.com/blog/2013/11/14/using-mapbox-with-ruby-on-rails/
+https://www.mapbox.com/mapbox.js/example/v1.0.0/listing-markers/ ## show all markers listed w/i map
+
+ -->
+<script type="text/javascript">
+    L.mapbox.accessToken = 'pk.eyJ1IjoiY2FwdHByb3RvbiIsImEiOiI3cDFLWWRnIn0.guU68dUaxKCX_MPrZHAesQ';
+    var mapboxTiles = L.tileLayer('https://{s}.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png', {
+        attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
+    });
+
+
+    var map = L.map('map')
+        .addLayer(mapboxTiles)
+        .setView([28.391, -81.55], 13);
+
+
+        // Use the loadURL feature to request the .geojson file
+        // inititally.
+        var queryString = window.location.search;
+        json_url        = "/explore.json" + queryString
+        var venues = L.mapbox.featureLayer().loadURL(json_url);
+        var geojson = [];
+
+      venues.on('ready', function(l) {
+              venues.eachLayer(function(l) {
+                  var props = l.feature.properties;
+                  props['marker-color'] = '#f86767';
+                  props['title'] = props['name'];
+                  geojson.push(l.feature);
+                 });
+      venues.setGeoJSON(geojson).addTo(map);
+      });
+</script>
