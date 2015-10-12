@@ -535,7 +535,7 @@ describe DfbReviewScanner do
       end
 
       it 'has a description in the first element in the Array' do
-        subject.first["description"].must_equal "Review: Beignet at Les Halles Boulangerie Patisserie in Epcot’s France Pavilion"
+        subject.first["description"].must_equal "Review: Apple Turnover and White Chocolate Eclair at Epcot’s France"
       end
     end
   end
