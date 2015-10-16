@@ -1,3 +1,27 @@
 // Place all the styles related to the explore controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "welcome";
+
+.modal-dialog {
+  width: 900px;
+}
+.modal-content {
+  width: 900px;
+  margin-left: -150px;
+}
+
+.modal.modal-wide .modal-dialog {
+  width: 90%;
+}
+.modal-wide .modal-body {
+  overflow-y: auto;
+}
+
+/* irrelevant styling */
+body p { 
+  max-width: 400px; 
+  margin: 20px auto; 
+}
+#tallModal .modal-body p { margin-bottom: 900px }

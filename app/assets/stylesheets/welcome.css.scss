@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "bootstrap";
+@import "leaflet";
+
+
 /*
  * Application level styles
  * (things that dont make sense in a toolkit :)
@@ -78,3 +82,20 @@
 .l img {
   width: 100%;
 }
+
+/*start tall modal*/
+.modal.modal-wide .modal-dialog {
+  width: 400px;
+}
+.modal-wide .modal-body {
+  overflow-y: auto;
+}
+
+/* irrelevant styling */
+.modal-title { text-align: center; }
+body p { 
+  max-width: 400px; 
+  margin: 20px auto; 
+}
+#tallModal .modal-body p { margin-bottom: 900px }
+/*finish tall modal*/
