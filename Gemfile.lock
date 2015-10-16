@@ -185,6 +185,7 @@ GEM
       sprockets-rails
     rails-assets-bootstrap (3.3.5)
       rails-assets-jquery (>= 1.9.1)
+    rails-assets-font-awesome (4.4.0)
     rails-assets-jquery (2.1.4)
     rails-assets-leaflet (0.7.5)
     rails-deprecated_sanitizer (1.0.3)
@@ -307,6 +308,7 @@ DEPENDENCIES
   pg_search (~> 1.0.5)
   rails (= 4.2.0)
   rails-assets-bootstrap!
+  rails-assets-font-awesome!
   rails-assets-jquery!
   rails-assets-leaflet!
   rails_12factor

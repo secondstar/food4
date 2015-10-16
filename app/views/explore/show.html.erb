@@ -1,40 +1,186 @@
+<%= content_for(:title, "#{@eatery.name}") %><br />
+
+<% content_for :title_section do -%>
+	<ul class="cols col1">
+		<% if !@head_photo.blank? %>
+			<li class="last">
+				<div id="head-photo" style="width:310px;">
+					
+				</div>
+				<%= image_tag "http://farm#{@head_photo['farm']}.static.flickr.com/#{@head_photo['server']}/#{@head_photo['flickr_id']}_#{@head_photo['secret']}_m.jpg", :width => '301' %><br />
+				<%= @head_photo.title %><br /><%= link_to "photo credit", "http://www.flickr.com/photos/#{@head_photo['owner']}/#{@head_photo['flickr_id']}" %>
+			</li>
+		<% else %>
+		  <li>no photos found</li>
+		<% end %>
+
+		<!-- <a href="http://shine.yahoo.com/channel/health/how-to-break-a-habit-in-12-steps-2532888/" class="img"><img src="http://l.yimg.com/jn/util/anysize/310*275c-86400,http%3A%2F%2Fl.yimg.com%2Fa%2Fi%2Fus%2Fshine%2Fhealth%2F200382537-001.jpg" alt="Quit your bad habits—for good!" height="275" width="310"></a> -->
+		<div class="attr">
+
+			<h1><a href="" class="lnk"><%= content_for?(:title) ? yield(:title) : "WDW Food" %></a></h1>
+			<p><%= h(@eatery.location.html_safe) if @eatery.location %></p>
+			<p><%= h(@eatery.cuisine) %></p>
+			<p>&nbsp;</p>
+			<cite>This page powered by <strong><a href="http://touringplans.com">TouringPlans.com</a> and <a href="http://disneyfoodblog.com">The Disney Food Blog</a>.</strong> </cite>
+			<p><%= "Friendliness #{@eatery.friendliness_rating};" if !@eatery.friendliness_rating.blank? %> <%= "Overall #{@eatery.overall_rating}" if !@eatery.overall_rating.blank? %><br />
+		    
+		    </p>
+		</div>
+
+		<div class="attr">
+		</div>
+	</ul>
+	
+<% end -%>
+
+
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                 <h4 class="modal-title"><%= @eatery.name %></h4>
+                 <h2 class="modal-title"><%= @eatery.name %></h2>
             </div>			<!-- /modal-header -->
             <div class="modal-body">
                 <div id="square_photos" class="row">
-                    square photos go here.  Click for a modal of photos collage.
+                    <!-- square photos go here.  Click for a modal of photos collage. -->
+                    <% @photos.each do |photo| %>
+                        <%= image_tag "http://farm#{photo['farm']}.static.flickr.com/#{photo['server']}/#{photo['flickr_id']}_#{photo['secret']}_s.jpg" %>
+                    <% end %>
                 </div>
                 <hr />
                 <div id="tip_save_share" class="row" >
-                    buttons to tip, save, share
+                    <!-- buttons to tip, save, share -->
                 </div>
                 <hr />
                 <div id="eatery summary info" class="row">
-                    name, location, price range, open or not, kind of eatery or cuisine, phone number, map in background
+                    <div class="col-md-1">
+                        <i class="fa fa-clock-o"></i>
+                    </div>
+                    <div class="col-md-11">
+                        <%= "#{@eatery.name}" %><br /> <%= "#{@eatery.district.name}" %><br />  
+                        <%# "price range: #{cost_code}" %><br />  
+                        <%= "cuisine: #{@eatery.cuisine}" %><br />
+                        <%= "phone number: #{@eatery.phone_number}" %>
+                        <!-- map in background -->
+                        
+                    </div>
                 </div>
                 <hr />
-                <div id="what_you_need_to_know" class="row">
-                    
+                <!-- <div id="what_you_need_to_know" class="row">
+
                 </div>
-                <hr />
+                <hr /> -->
                 <div id="good_to_know" class="row">
-                    same as good to know section
+                	<div class="hd"><h3 class="modal-title">good to know</h3></div>
+                	<div class="bd">
+                		<ol>
+                			<% if !@eatery_dfb_tips.blank? %>
+                					<% numcount = 0 %>
+                		 	  <% @eatery_dfb_tips.each do |dfb_tip| %>
+                					<% numcount += 1 %>
+                					<li >
+                						<%= dfb_tip.description.html_safe %>
+                					</li>
+                				<% end %>
+                			<% else %>
+                			  <li>No tips yet!</li>
+                		 	<% end %>
+		 	
+                		</ol>
+                	</div>
+                    <div class="ft">
+                        
+                    </div>
                 </div>
                 <hr />
                 <div id="bloggings" class="row">
-                    same as bloggings
+                    	<div class="hd"><h3 class="modal-title">bloggings</h3></div>
+                    	<div class="bd">
+                    		<div class="title">
+                    		</div>
+		
+                    		<ul>
+                    			<% if !@eatery_dfb_bloggings.blank? %>
+                    		 	  <% @eatery_dfb_bloggings.each do |dfb_blogging| %>
+                    			 	    <% if !@eatery_dfb_bloggings.blank? %>
+                    						<li>
+                    							<div class="txt">
+                    								<%= link_to dfb_blogging.description, dfb_blogging.href, :class => 'title' %>
+                    							</div>
+                    						</li>
+                    					<% end %>
+                    				<% end %>
+                    			<% else %>
+                    			  <li>No bloggings yet!</li>
+                    		 	<% end %>
+		 	
+                    		</ul>		
+                    	</div>
+                    	<div class="ft"><a class="more" href=""></a></div>
+                    
                 </div>
                 <hr />
-                <div id="hours" class="row">
-                    same as hours
+                <div id="hours" class="row mod channel ch-C1 line">
+                	<div class="hd"><h3 class="modal-title">hours</h3></div>
+                	<div class="bd">
+				
+                		<div class="title">
+                			<cite> </cite>
+                		</div>
+                		<ul class="blt">
+                			<% if !@eatery.when_to_go.blank? %>
+                				<li><div class="cls">When to go: <%= @eatery.when_to_go %></div></li>
+                			<% else %>
+			  
+                			<% end %>
+                			<li><div class="cls">Breakfast: <%= !@eatery.breakfast_hours.blank? ?  @eatery.breakfast_hours : "Times currently not available"%></div></li>
+                			<li><div class="cls">Lunch: <%= !@eatery.lunch_hours.blank? ?  @eatery.lunch_hours : "Times currently not available" %></div></li>
+                			<li><div class="cls">Dinner: <%= !@eatery.dinner_hours.blank? ?  @eatery.dinner_hours : "Times currently not available" %></div></li>
+                		</ul>
+                	</div>
+                	<div class="ft"><!-- <a class="more" href="">Similar Restaurants »</a> --></div>
+</div>
+                    
                 </div>
                 <hr />
-                <div id="money_and_value" class="row">
-                    same as money + value
+                    	<div class="hd"><h3 class="modal-title">money + value</h3></div>
+                        
+                    	<div class="bd">
+		
+                    		<ul class="thumbs">
+                    			<li>
+                                    <div class="txt"> 
+                                        <i class="fa fa-clock-o fa-3x"></i>
+                                            <%= label = @eatery.requires_pre_payment == 't' ? 
+                                                "Paid reservations required." :
+                                                 "Pay when the check comes" %>
+                                    </div>
+                                </li>
+                    			<li>
+                                    <div class="txt"> 
+                                        <i class="fa fa-clock-o fa-3x"></i> 
+                                        <strong>A Tables in Wonderland Restaurant?</strong> 
+                                        <%= "#{@eatery.tables_in_wonderland}" %>
+                                    </div>
+                                </li>
+                    			<li>
+                                    <div class="txt"> 
+                                        <i class="fa fa-clock-o fa-3x"></i>
+                                        <strong>Entree price range is</strong> 
+                                        <%= !@eatery.entree_range.blank? ? "#{@eatery.entree_range}" : "not stated." %>
+                                    </div>
+                                </li>
+                    			<li>
+                                    <div class="txt">
+                                        <i class="fa fa-clock-o fa-3x"></i>
+                                        <strong>On the Disney Dining Plan?</strong>  
+                                        <%= !@eatery.disney_dining_plan.blank? ? 
+                                            h(@eatery.disney_dining_plan.html_safe) : 
+                                            "Nope, not this year." %>
+                                    </div>
+                                </li>
+                    		</ul>
+                    	</div>
+                    	<div class="ft"><a class="more" href=""></a></div>
                 </div>
-            <p><%= @eatery.name %> Excitavit hic ardor milites per municipia plurima, quae isdem conterminant, dispositos et castella, sed quisque serpentes latius pro viribus repellere moliens, nunc globis confertos, aliquotiens et dispersos multitudine superabatur ingenti.</p>
             </div>			<!-- /modal-body -->
             <div class="modal-footer">
                 <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
