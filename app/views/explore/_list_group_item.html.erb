@@ -6,6 +6,14 @@
               "data-toggle" => "modal", 
               "data-target" => 
               "#tallModal" do %>
+              <% @photos= list_group_item.photos
+                    if @photos.length > 0
+                      @eatery_photo = @photos.first
+                    else
+                      @eatery_photo = Photo.first
+                    end
+                    @eatery_photo_url = "https://farm#{@eatery_photo.farm}.staticflickr.com/#{@eatery_photo.server}/#{@eatery_photo.flickr_id}_#{@eatery_photo.secret}_s.jpg"
+                             %>
               <%= image_tag @eatery_photo_url, :class => "media-object", style: "width:100px" %>
           <% end %>
         </div>

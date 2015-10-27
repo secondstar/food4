@@ -23,8 +23,8 @@ class Eatery < ActiveRecord::Base
   
   def self.find_by_permalink_through_notebook
     @notebook = Notebook.new
-    
   end
+
   def publish(clock=DateTime)
     return false unless valid?
     self.published_at = clock.now
