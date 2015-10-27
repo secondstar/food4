@@ -5,6 +5,9 @@ class ExploreController < ApplicationController
 
     @eateries.each do |eatery|
       foursquare_review = eatery.snapshots.foursquare.first.review
+      @eatery_photo = eatery.photos.select("id",
+        "url", "farm", "server", "flickr_id", "secret").first
+      @eatery_photo_url = "https://farm#{@eatery_photo.farm}.staticflickr.com/#{@eatery_photo.server}/#{@eatery_photo.flickr_id}_#{@eatery_photo.secret}_s.jpg"
       @geojson << {
         type: 'Feature',
         geometry: {

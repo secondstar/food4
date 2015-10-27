@@ -2,15 +2,22 @@
     <ul class="media-list">
       <li class="media">
         <div class="media-left">
-          <a href="#">
-            <img class="media-object" src="https://irs2.4sqi.net/img/general/300x300/19195062_0Gzr7nZrXkGUSi7C66eQn1OUFG1k0kdWgw_tJ-uoWpM.jpg" style="width:100px" alt="boma">
-          </a>
+          <%= link_to explore_path(list_group_item), 
+              "data-toggle" => "modal", 
+              "data-target" => 
+              "#tallModal" do %>
+              <%= image_tag @eatery_photo_url, :class => "media-object", style: "width:100px" %>
+          <% end %>
         </div>
         <div class="media-body">
             <div class="row">
               <div class="col-xs-8 col-sm-6">
           <h4 class="media-heading">
-              <%= link_to list_group_item.name, explore_path(list_group_item), :role => "button", "data-toggle" => "modal", "data-target" => "#tallModal" %>
+              <%= link_to list_group_item.name, 
+                  explore_path(list_group_item), 
+                  :role => "button", 
+                  "data-toggle" => "modal", 
+                  "data-target" => "#tallModal" %>
           </h4>
           <!-- -->
               </div>
