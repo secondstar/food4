@@ -99,3 +99,16 @@ body p {
 }
 #tallModal .modal-body p { margin-bottom: 900px }
 /*finish tall modal*/
+
+/* scrolling left column of index start*/
+#results {
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 488px;
+    
+}
+
+#mapView {
+  height:100%;
+}
+/* scrolling left column of index finish*/

@@ -1,3 +1,9 @@
+<%     @dfb_snapshots = list_group_item.snapshots.dfb
+
+    if @dfb_snapshots.length > 0
+      @eatery_dfb_tips = @dfb_snapshots.first.addendums.where(category: 'tips')
+
+    end %>
 <li class="list-group-item">
     <ul class="media-list">
       <li class="media">
@@ -30,7 +36,7 @@
           <!-- -->
               </div>
               <div class="col-xs-4 col-sm-6">
-                <div class="venueScore positive" title="" style="background-color: #00B551;">9.3</div>
+                <!-- <div class="venueScore positive" title="" style="background-color: #00B551;">9.3</div> -->
                 
               </div>
             </div>
@@ -41,16 +47,18 @@
                   <div class="venueData">
                       <span class="venueDataItem">
                           <span class="categoryName"><%= list_group_item.cuisine %></span>
-                          <span class="delim"> • </span>
+                          <!-- <span class="delim"> • </span> -->
                       </span>
                       <span class="venueDataItem">
                           <span class="price" title="">
-                              <span class="darken" itemprop="priceRange">$ $ $</span> $<%= list_group_item.cost_code %></span>
-                              <span class="delim"> • </span>
+                              <span class="darken" itemprop="priceRange">
+                                  <%= list_group_item.cost_code %>
+                              </span> 
+                              <!-- <span class="delim"> • </span> -->
                           </span>
                           <span class="linkToMenu venueDataItem">
-                              <span class="menuLink link">View Menu</span>
-                              <span class="delim"> • </span>
+                              <!-- <span class="menuLink link">View Menu</span> -->
+                              <!-- <span class="delim"> • </span> -->
                           </span>
                       </div>
                   </div>
@@ -61,14 +69,12 @@
     </ul>
     <ul class="texts">
 		<% if !@eatery_dfb_tips.blank? %>
-				<% numcount = 0 %>
 	 	  <% @eatery_dfb_tips.each do |dfb_tip| %>
-				<% numcount += 1 %>
+                <% if dfb_tip.description.to_s.length > 3 %>
 				<li >
-                    <img src="https://irs1.4sqi.net/img/general/cap/30/justifications_tip_20150825a.png" height="15" width="15">
-                    <span class="entity tip_taste_match"></span>
 					<%= dfb_tip.description.html_safe %>
 				</li>
+                <% end %>
 			<% end %>
 		<% else %>
 		  <li>No tips yet!</li>
