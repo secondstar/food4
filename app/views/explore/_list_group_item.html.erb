@@ -10,8 +10,7 @@
         <div class="media-left">
           <%= link_to explore_path(list_group_item), 
               "data-toggle" => "modal", 
-              "data-target" => 
-              "#tallModal" do %>
+              "data-target" => "#tallModal" do %>
               <% @photos= list_group_item.photos
                     if @photos.length > 0
                       @eatery_photo = @photos.first

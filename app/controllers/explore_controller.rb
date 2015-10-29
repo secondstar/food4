@@ -14,7 +14,8 @@ class ExploreController < ApplicationController
         },
         properties: {
           name: eatery.name,
-          # address: eatery.street,
+          address: eatery.permalink,
+          id: eatery.id,
           :'marker-color' => '#00607d',
           :'marker-symbol' => 'circle',
           :'marker-size' => 'medium'

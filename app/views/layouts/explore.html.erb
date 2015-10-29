@@ -4,13 +4,25 @@
   <title>Food 4.5</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag    'welcome', media: 'all', 'data-turbolinks-track' => true %>
+  <link href='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.css' rel='stylesheet' />
+  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= yield :styles %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
     <%= yield %>
 
+
+      <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js',
+           "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" ,
+           'https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.js', 
+           'explore', 
+           'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'explore', :cache => true %>
+    <%= javascript_include_tag 'welcome', :cache => true %>
+
+<%= yield :javascripts %>
 </body>
 </html>

@@ -4,15 +4,17 @@
 
 ## when .modal-wide opened, set content-body height based on browser height; 200 is appx height of modal padding, modal title and button bar
 
-###
-# Welcome to the new js2coffee 2.0, now
-# rewritten to use the esprima parser.
-# try it out!
-###
+centerModal = ->
+  $(this).css 'display', 'block'
+  $dialog = $(this).find('.modal-dialog')
+  # offset = ($(window).height() - $dialog.height()) / 16
+  # Center modal vertically in window
+  $dialog.css 'margin-top' #, offset
+  return
 
-$('.modal-wide').on 'show.bs.modal', ->
-  height = $(window).height() - 200
-  $(this).find('.modal-body').css 'max-height', height
+$('.modal').on 'show.bs.modal', centerModal
+$(window).on 'resize', ->
+  $('.modal:visible').each centerModal
   return
 
 # ---
