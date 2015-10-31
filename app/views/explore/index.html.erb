@@ -14,35 +14,6 @@
         https://www.mapbox.com/mapbox.js/example/v1.0.0/listing-markers/ ## show all markers listed w/i map
 
          -->
-        <script type="text/javascript">
-            // L.mapbox.accessToken = 'pk.eyJ1IjoiY2FwdHByb3RvbiIsImEiOiI3cDFLWWRnIn0.guU68dUaxKCX_MPrZHAesQ';
-            // var mapboxTiles = L.tileLayer('https://{s}.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png', {
-            //     attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
-            // });
-            //
-            //
-            // var map = L.map('map')
-            //     .addLayer(mapboxTiles)
-            //     .setView([28.391, -81.55], 13);
-            //
-            //
-            //     // Use the loadURL feature to request the .geojson file
-            //     // inititally.
-            //     var queryString = window.location.search;
-            //     json_url        = "/explore.json" + queryString
-            //     var venues = L.mapbox.featureLayer().loadURL(json_url);
-            //     var geojson = [];
-            //
-            //   venues.on('ready', function(l) {
-            //           venues.eachLayer(function(l) {
-            //               var props = l.feature.properties;
-            //               props['marker-color'] = '#f86767';
-            //               props['title'] = props['name'];
-            //               geojson.push(l.feature);
-            //              });
-            //   venues.setGeoJSON(geojson).addTo(map);
-            //   });
-        </script>
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -54,7 +25,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="/welcome">WDW Hub Food</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -65,13 +36,15 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Near… <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Magic Kingdom</a></li>
+<!--WOEID should be used for nearby -->
+            <li><a href="#">Magic Kingdom</a></li> 
             <li><a href="#">Animal Kingdom</a></li>
+            <li><a href="#">Disney Studios</a></li>
+            <li><a href="#">Epcot</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Disney Springs</a></li>
+            <li role="separator" class="divider"></li>
             <li><a href="#">Resorts</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
           </ul>
         </li>
       </ul>
@@ -98,6 +71,7 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav> 
+
 
 <style>
   body { margin:0; padding:0; }

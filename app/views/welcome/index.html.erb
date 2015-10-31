@@ -8,181 +8,91 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="/welcome">WDW Hub Food</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Near… <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Magic Kingdom</a></li>
-            <li><a href="#">Animal Kingdom</a></li>
-            <li><a href="#">Resorts</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
       </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav> 
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2" id="district-nav-button">
+        		<div class="image"  style="width: 100%">
+                    <%= image_tag "welcome/6040278081_beb996db20_m.jpg", width: "128px" %>
+
+        		      <h2><span>Magic</span><span><br /></span><span>Kingdom</span></h2>
+        		</div>
+            </div>
+            <div class="col-sm-2" id="district-nav-button">
+        		<div class="image" style="width: 100%">
+                    <%= image_tag "welcome/4813509233_7105676fa0_m.jpg", width: "128px" %>
+
+        		      <h2><span>Animal</span><span><br /></span><span>Kingdom</span></h2>
+        		</div>
+            </div>
+            <div class="col-sm-2" id="district-nav-button">
+        		<div class="image" style="width: 100%">
+                    <%= image_tag "welcome/19265632828_e022c44617_m.jpg", width: "128px" %>
+
+        		      <h2><span>Epcot</span></h2>
+        		</div>
+            </div>
+            <div class="col-sm-2" id="district-nav-button">
+        		<div class="image" style="width: 100%">
+                    <%= image_tag "welcome/14561586296_abc1e25170_m.jpg", width: "128px" %>
+
+        		      <h2><span>Disney</span><span><br /></span><span>Studios</span></h2>
+        		</div>
+            </div>
+            <div class="col-sm-2" id="district-nav-button">
+        		<div class="image" style="width: 100%">
+                    <%= image_tag "welcome/18254354173_82523d7eb8_m.jpg", width: "128px" %>
+
+        		      <h2><span>Disney</span><span><br /></span><span>Springs</span></h2>
+        		</div>
+            </div>
+
+            <div class="col-sm-2" id="district-nav-button">
+        		<div class="image" style="width: 100%">
+                    <%= image_tag "welcome/18254354173_82523d7eb8_m.jpg", width: "128px" %>
+
+        		      <h2><span>Resorts</span></h2>
+        		</div>
+            </div>
+
+        </div>
+    </div>
 
 <script src='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.js'></script>
 <link href='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.css' rel='stylesheet' />
 <style>
   body { margin:0; padding:0; }
-  #map { position:absolute; top:0; bottom:0; width:100%; }
+  #map { position:absolute; top:0; bottom:0; width:100%; height:500px;}
 </style>
 
-<script>
-L.mapbox.accessToken = 'pk.eyJ1IjoiY2FwdHByb3RvbiIsImEiOiI3cDFLWWRnIn0.guU68dUaxKCX_MPrZHAesQ';
-var map = L.mapbox.map('map', 'mapbox.streets')
-    .setView([40, -74.50], 9);
-</script>
-
     <div class="container">
-
-      <div class="blog-header">
-        <h1 class="blog-title">The Bootstrap Blog</h1>
-        <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
-      </div>
-
-      <div class="row">
-
-
-        <div class="col-sm-5">
-          <ul class="list-group">
-            <li class="list-group-item">
-                <ul class="media-list">
-                  <li class="media">
-                    <div class="media-left">
-                      <a href="#">
-                        <img class="media-object" src="https://irs2.4sqi.net/img/general/300x300/19195062_0Gzr7nZrXkGUSi7C66eQn1OUFG1k0kdWgw_tJ-uoWpM.jpg" style="width:100px" alt="boma">
-                      </a>
-                    </div>
-                    <div class="media-body">
-                      <h4 class="media-heading">Boma Flavors of Africa</h4>
-                      <!-- -->
-                      <div class="venueMeta"><div class="venueScore positive" title="" style="background-color: #00B551;">9.3</div><div class="venueAddressData"><div class="venueAddress">Jambo House, Disney's Animal Kingdom Lodge (Walt Disney World)</div><div class="venueData"><span class="venueDataItem"><span class="categoryName">African</span><span class="delim"> • </span></span><span class="venueDataItem"><span class="price" title=""><span class="darken" itemprop="priceRange">$ $ $</span> $</span><span class="delim"> • </span></span><span class="linkToMenu venueDataItem"><span class="menuLink link">View Menu</span><span class="delim"> • </span></span></div></div></div>
-                      <!-- -->
-                    </div>
-                  </li>
-                </ul>
-                <ul class="texts"><li class="insight"><img src="https://irs1.4sqi.net/img/general/cap/30/justifications_tip_20150825a.png" height="15" width="15"> <span class="entity tip_taste_match"></span>"Zebra domes are delicious but I preferred the tropical fruit custa" (15 tips)</li><li class="insight"><img src="https://irs1.4sqi.net/img/general/cap/30/justifications_tip_20150825a.png" height="15" width="15"> <span class="entity tip_taste_match"></span>"Breakfast and dinner buffets are both delicious." (25 tips)</li></ul>
-            </li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-          </ul>
+      <div class="row" >
+          <%= form_tag('/explore', :class =>"navbar-form navbar-left", :role => "search", method: :get) do -%>
+            <div class="form-group" >
+              <%= text_field_tag :query, params[:query],  :class =>"form-control", placeholder: "I am looking for …", style:"align:center" %>
           
-        </div><!-- /.blog-sidebar -->
-<!--finish  -->
-        <div class="col-sm-7 blog-main">
-			<div id="map">
             </div>
-          <div class="blog-post">
-            <h2 class="blog-post-title">Sample blog post</h2>
-            <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-
-            <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-            <hr>
-            <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
-            <blockquote>
-              <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            </blockquote>
-            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-            <h2>Heading</h2>
-            <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-            <h3>Sub-heading</h3>
-            <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-            <pre><code>Example code block</code></pre>
-            <p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-            <h3>Sub-heading</h3>
-            <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <ul>
-              <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
-              <li>Donec id elit non mi porta gravida at eget metus.</li>
-              <li>Nulla vitae elit libero, a pharetra augue.</li>
-            </ul>
-            <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
-            <ol>
-              <li>Vestibulum id ligula porta felis euismod semper.</li>
-              <li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
-              <li>Maecenas sed diam eget risus varius blandit sit amet non magna.</li>
-            </ol>
-            <p>Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.</p>
-          </div><!-- /.blog-post -->
-
-          <div class="blog-post">
-            <h2 class="blog-post-title">Another blog post</h2>
-            <p class="blog-post-meta">December 23, 2013 by <a href="#">Jacob</a></p>
-
-            <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
-            <blockquote>
-              <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            </blockquote>
-            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-            <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-          </div><!-- /.blog-post -->
-
-          <div class="blog-post">
-            <h2 class="blog-post-title">New feature</h2>
-            <p class="blog-post-meta">December 14, 2013 by <a href="#">Chris</a></p>
-
-            <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <ul>
-              <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
-              <li>Donec id elit non mi porta gravida at eget metus.</li>
-              <li>Nulla vitae elit libero, a pharetra augue.</li>
-            </ul>
-            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-            <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
-          </div><!-- /.blog-post -->
-
-          <nav>
-            <ul class="pager">
-              <li><a href="#">Previous</a></li>
-              <li><a href="#">Next</a></li>
-            </ul>
-          </nav>
-
-        </div><!-- /.blog-main -->
-<!--finish -->
-      </div><!-- /.row -->
+            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i>
+&nbsp;Search</button>
+          <% end %>
+          
+      </div>
 
     </div><!-- /.container -->
 
     <footer class="blog-footer">
-      <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-      <p>
-        <a href="#">Back to top</a>
-      </p>
+        <p>footer here</p>
     </footer>
 
 <script src='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.js'></script>
