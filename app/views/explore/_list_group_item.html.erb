@@ -70,10 +70,8 @@
 		<% if !@eatery_dfb_tips.blank? %>
 	 	  <% @eatery_dfb_tips.each do |dfb_tip| %>
                 <% if dfb_tip.description.to_s.length > 3 %>
-				<li >
 					<%= dfb_tip.description.html_safe %>
-				</li>
-                <% end %>
+                    <% end %>
 			<% end %>
 		<% else %>
 		  <li>No tips yet!</li>
