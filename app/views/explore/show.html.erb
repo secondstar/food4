@@ -76,12 +76,8 @@
                 	<div class="bd">
                 		<ol>
                 			<% if !@eatery_dfb_tips.blank? %>
-                					<% numcount = 0 %>
                 		 	  <% @eatery_dfb_tips.each do |dfb_tip| %>
-                					<% numcount += 1 %>
-                    					<li >
                     						<%= dfb_tip.description.html_safe %>
-                    					</li>
                 				<% end %>
                 			<% else %>
                 			  <li>No tips yet!</li>
