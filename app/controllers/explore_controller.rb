@@ -1,6 +1,20 @@
 class ExploreController < ApplicationController
   def index
-    @eateries = Notebook.new.entries.search_by_full_name(params[:query])
+    if params[:near].to_s.length < 1
+      @eateries = Notebook.new.entries.search_by_full_name(params[:query])
+    else
+      if params[:near] == "Resorts"
+        @eateries = Eatery.all_at_resorts
+      else
+        if params[:near] == "Disney Springs"
+          @eateries = Eatery.all_at_disney_springs
+        else
+          @district = District.find_by(name: params[:near])
+          @eateries = @district.eateries
+        end
+      end
+    end
+    
     @geojson = Array.new
 
     @eateries.each do |eatery|
@@ -24,7 +38,7 @@ class ExploreController < ApplicationController
     end
     
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # index.html.erb
       format.json { render json: @geojson }
     end
     

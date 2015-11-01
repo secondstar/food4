@@ -23,47 +23,60 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-2" id="district-nav-button">
+                <%= link_to explore_index_path(near: "Magic Kingdom") do %>
         		<div class="image"  style="width: 100%">
                     <%= image_tag "welcome/6040278081_beb996db20_m.jpg", width: "128px" %>
 
         		      <h2><span>Magic</span><span><br /></span><span>Kingdom</span></h2>
         		</div>
+                <% end %>
             </div>
             <div class="col-sm-2" id="district-nav-button">
+                <%= link_to explore_index_path(near: "Animal Kingdom") do %>
         		<div class="image" style="width: 100%">
                     <%= image_tag "welcome/4813509233_7105676fa0_m.jpg", width: "128px" %>
 
         		      <h2><span>Animal</span><span><br /></span><span>Kingdom</span></h2>
         		</div>
+                <% end %>
             </div>
             <div class="col-sm-2" id="district-nav-button">
+                <%= link_to explore_index_path(near: "Epcot") do %>
         		<div class="image" style="width: 100%">
                     <%= image_tag "welcome/19265632828_e022c44617_m.jpg", width: "128px" %>
 
         		      <h2><span>Epcot</span></h2>
         		</div>
+                <% end %>
             </div>
             <div class="col-sm-2" id="district-nav-button">
+                <%= link_to explore_index_path(near: "Disney's Hollywood Studios") do %>
         		<div class="image" style="width: 100%">
                     <%= image_tag "welcome/14561586296_abc1e25170_m.jpg", width: "128px" %>
 
-        		      <h2><span>Disney</span><span><br /></span><span>Studios</span></h2>
+        		      <h2><span>Disney's Hollywood</span><span><br /></span><span>Studios</span></h2>
         		</div>
+                
+                <% end %>
             </div>
             <div class="col-sm-2" id="district-nav-button">
+                <%= link_to explore_index_path(near: "Disney Springs") do %>
         		<div class="image" style="width: 100%">
                     <%= image_tag "welcome/18254354173_82523d7eb8_m.jpg", width: "128px" %>
 
         		      <h2><span>Disney</span><span><br /></span><span>Springs</span></h2>
         		</div>
+                <% end %>
             </div>
 
             <div class="col-sm-2" id="district-nav-button">
+                <%= link_to explore_index_path(near: "Resorts") do %>
         		<div class="image" style="width: 100%">
                     <%= image_tag "welcome/18254354173_82523d7eb8_m.jpg", width: "128px" %>
 
         		      <h2><span>Resorts</span></h2>
         		</div>
+                <% end %>
             </div>
 
         </div>

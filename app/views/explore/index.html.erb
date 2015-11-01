@@ -30,24 +30,7 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Near… <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-<!--WOEID should be used for nearby -->
-            <li><a href="#">Magic Kingdom</a></li> 
-            <li><a href="#">Animal Kingdom</a></li>
-            <li><a href="#">Disney Studios</a></li>
-            <li><a href="#">Epcot</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Disney Springs</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Resorts</a></li>
-          </ul>
-        </li>
-      </ul>
+
       <%= form_tag('/explore', :class =>"navbar-form navbar-left", :role => "search", method: :get) do -%>
         <div class="form-group">
           <%= text_field_tag :query, params[:query],  :class =>"form-control", placeholder: "Search" %>
@@ -55,19 +38,6 @@
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       <% end %>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
-      </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav> 
@@ -94,7 +64,10 @@
             <div id="resultsView">
             <div class="col-sm-5" id="results">
               <ul class="list-group" id="recommendationList">
-                  <%= render	:partial => "list_group_item", 
+                  <% @eateries.each do |eatery| %>
+                     <%= render "list_group_item", list_group_item: eatery %>
+                  <% end %>
+                  <%# render	:partial => "list_group_item", 
                       collection: @eateries %>
                   <!-- <li class="card"><p>Don't see the place you're looking for? <span class="link" data-action="addVenue">Add a new place to foursquare.</span></p></li> -->
               </ul>
