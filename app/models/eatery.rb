@@ -81,21 +81,29 @@ class Eatery < ActiveRecord::Base
     eateries.each do |eatery|
       self.update_with_review(permalink= eatery.permalink,
         review_type="TouringPlansComReview")
-      # self.update_with_review(permalink= eatery.permalink,
-      #   review_type=TouringPlansComReview)
-       #  puts "permalink is #{eatery.permalink}"
-       # @notebook = Notebook.new
-       # eatery = @notebook.entries.where(permalink: eatery.permalink).first
-       # latest_snapshot = eatery.snapshots.where(review_type: "TouringPlansComReview").order("updated_at DESC").first
-       # return if latest_snapshot.blank?
-       # latest_review = latest_snapshot.review
-       # puts "hi there #{eatery.permalink}"
-       # update_params = latest_review.attributes
-       # update_params.delete('archived_at')
-       # update_params.delete("id")
-       # eatery.update(update_params)
-        
     end
+  end
+  
+  def self.all_at_resorts
+    @eateries   = Array.new
+    @resorts    = District.resorts
+    @resorts.each do |resort|
+      resort.eateries.each do |eatery|
+        @eateries <<  eatery
+      end
+    end
+    @eateries
+  end
+  
+  def self.all_at_disney_springs
+    @eateries   = Array.new
+    @disney_springs_districts = District.disney_springs
+    @disney_springs_districts.each do |dsdd|
+      dsdd.eateries.each do |eatery|
+        @eateries <<  eatery
+      end
+    end
+    @eateries
   end
   
 end
